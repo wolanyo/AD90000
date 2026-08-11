@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+         <record id="form_releve_cassier_tresorier" model="ir.ui.view">
+            <field name="name">Consultation</field>
+            <field name="model">benin_petro.releve_cassier_tresorier</field>
+            <field name="arch" type="xml">
+                <form string="Consultation"  create="false" edit="false">
+                <center ><h1 style="color:red">Relevé des opérations par trésoriers et caissiers</h1></center>
+                    <group col="2">
+                        <group>
+                            <field name="start_date" />
+                        </group>
+                        <group>
+                            <field name="end_date" />
+                        </group>
+                    </group>
+                    <notebook>
+                    <page string="Par trésorier">
+                 
+                        <group col="2">
+                            <group>
+                                <field name="tresorier"/>
+                            </group>
+                            <group>
+                                <field name="type_affect"/>
+                            </group>
+                            <group>
+                                <button name="print_report_tresorier_pdf" string="Imprimer en PDF"  class="oe_highlight" type="object" />
+                                <button name="print_excel_tresorier_report" string="Imprimer en EXCEL"  class="oe_highlight" type="object" />
+                            </group>
+                        </group>
+
+                        
+                        <field name="list_releve" readonly="1">
+                        <tree limit="15">
+                                <field name="date_releve" />
+                                <field name="libelle" />
+                                <field name="solde_initial" sum="Solde initial"/> 
+                                <field name="debit" sum="Total"/>
+                                <field name="credit" sum="Total"/> 
+                                <field name="solde" sum="Solde"/> 
+                            </tree>
+                        </field>
+                    </page>
+                    <page string="Par caissier">
+                 
+                        <group col="2">
+                            <group>
+                                <field name="caissier"/>
+                            </group>
+                            <group>
+                                <button name="print_report_caissier_pdf" string="Imprimer en PDF"  class="oe_highlight" type="object" />
+                                <button name="print_excel_caissier_report" string="Imprimer en EXCEL"  class="oe_highlight" type="object" />
+                            </group>
+                        </group>
+
+                        
+                        <field name="list_releve_client" readonly="1">
+                        <tree limit="15">
+                                <field name="date_releve" />
+                                <field name="libelle" />
+                                <field name="solde_initial" sum="Solde initial"/> 
+                                <field name="debit" sum="Total"/>
+                                <field name="credit" sum="Total"/> 
+                                <field name="solde" sum="Solde"/> 
+                            </tree>
+                        </field>
+                    </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+        <record id="releve_cassier_tresorier_action_form" model="ir.actions.act_window">
+            <field name="name">Consultation des recharges</field>
+            <field name="res_model">benin_petro.releve_cassier_tresorier</field>
+            <field name="view_mode">form</field>
+            <field name="help">Recharge ...</field>
+            <field name="target">inline</field>
+        </record>
+
+        <menuitem action="releve_cassier_tresorier_action_form" id="menu_releve_cassier_tresorier_form"
+            parent="menu_tabeal_bord_client" sequence="2"
+            name="Relevé des opérations par trésoriers et caissiers" groups="group_benin_petro_manager,group_benin_petro_adminn,base.group_system"/>
+    </data>
+</odoo>

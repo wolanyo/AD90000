@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+                id="suivie_compte_client_xlsx"
+                model="benin_petro.releve_compte"
+                string="Relevé des comptes client"
+                report_type="xlsx"
+                name="suivie_compte_client.xlsx"
+                file="suivie_compte_client.xlsx"
+                attachment_use="False"
+        />
+    </data>
+</odoo>

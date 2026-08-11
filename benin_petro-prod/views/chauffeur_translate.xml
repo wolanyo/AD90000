@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+        
+        <!-- fleet.vehicle inherit form view -->
+       
+        <record id="view_id_Chauffeur" model="ir.ui.view">
+            <field name="name">hr.employee.inherit.view.form</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="tms.view_employee_form_tms"/>
+            <field name="arch" type="xml">
+             <!-- Add your xpath here -->
+              
+              <field name="driver" position="attributes">
+               <attribute name="string">Chauffeur</attribute>
+                </field>
+
+                
+                 <field name="outsourcing" position="attributes">
+                <attribute name="string">Sous traité</attribute>
+                </field>
+                <!-- Add your xpath here -->
+                 <!-- <field name="operating_unit_id" position="attributes">
+               
+                <attribute name="string">hello</attribute>
+                </field> -->
+                  
+                 <field name="license_type" position="attributes">
+               
+                <attribute name="string">Type de permis</attribute>
+                </field>
+                 <field name="license_valid_from" position="attributes">
+               
+                <attribute name="string">Permis valide depuis</attribute>
+                </field>
+                <!--string="General Information"-->
+               <field name="license_expiration" position="attributes">
+               
+                <attribute name="string">Date d'expiration du permis </attribute>
+                </field>
+
+               
+                <field name="days_to_expire" position="attributes">
+               
+                <attribute name="string">jours avant expiration</attribute>
+                </field>
+
+                
+                 <xpath expr="//notebook/page[4]"  position="attributes">
+                             <attribute name="string">Transport</attribute>
+                
+                </xpath>
+                <xpath expr="//button[@name='get_driver_license_info']" position="attributes">
+           <attribute name="string">Obtenir des informations sur la licence </attribute>
+        </xpath>
+                  
+                  
+
+
+
+
+
+
+
+
+
+
+
+
+                
+            </field>
+        </record>
+        
+      
+        <record model="ir.ui.menu" id="tms.menu_tms_open_view_employee_list">
+     <field name="name">Chauffeurs</field>
+</record>
+    <record model="ir.ui.menu" id="tms.menu_tms">
+     <field name="name">Transport</field>
+</record>
+ 
+<record id="tms.tms_open_view_employee_list" model="ir.actions.act_window">
+
+      <field name="name">Chauffeurs</field>
+
+</record>
+   
+    </data>
+    </odoo>
+     

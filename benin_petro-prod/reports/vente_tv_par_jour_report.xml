@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="benin_petro.vente_tv_par_jour_report">
+           <t t-call="report.html_container">
+		   		<t t-set="data_report_margin_top" t-value="0" />
+		   		<t t-set="data_report_margin_bottom" t-value="12" />
+                <t t-set="data_report_header_spacing" t-value="9" />
+                <t t-set="data_report_dpi" t-value="110" />
+				<!-- <t t-call="report.internal_layout"> -->
+				
+				<div class="page" >
+					<div  style="width:100%;min-height:100px;margin-top:0px;;padding:0;">
+						<img class="img img-responsive" src="/benin_petro/static/img/entete.jpg" />
+					</div>
+					
+					<style>
+
+						.table_info tr td{
+							border:1px solid black;
+							padding:5px 5px;
+							font-size:13px
+						}
+						ul {margin:0px;}
+						
+						ul {
+						padding:0;
+						margin:0;
+						list-style-type:none;
+						}
+						.table tr td {
+						font-size:17px
+						}
+					</style>
+                    
+					<div class="row" style="margin-top:40px;margin-bottom:20px;padding-left:20px;">
+							
+					 <div class="row" style="margin-top:40px;">
+							<div class="col-xs-6">
+								<table style="width:100%" class="table_info">
+
+								<tr >
+									<td><strong>Point de vente</strong></td>
+									<td><span t-esc="data['form']['point_vente']" /></td>
+								</tr>
+								</table>
+							</div>
+					</div>
+					<div class="row" style="margin-top:40px;margin-bottom:20px;padding-left:20px;">
+						<table style="width:100%;" class="table table-condensed">
+							<tr>
+								<td colspan="2" style="text-align:center"><strong>VENTE PAT TV POINT DU JOUR : <span t-esc="data['form']['date']" ></span> </strong></td>
+							</tr>
+							<tr>
+								<td><strong>CLIENT</strong></td>
+								<td><strong>MONTANT</strong></td>
+							</tr>
+							<t t-foreach="data['form']['transactions']" t-as="line" style="page-break-inside: avoid;">
+							<tr>
+								<td><span t-esc="line_value['name']"></span></td>
+								<td><span t-esc="line_value['sum_total_vente']"></span></td>
+							</tr>
+							</t>
+							<tr>
+								<td><strong>Total</strong></td>
+								<td><strong><span t-esc="data['form']['total']['sum_total_vente']"></span></strong></td>
+							</tr>
+							
+						</table>
+						<p style="page-break-before:always;">
+                            </p>
+							
+					</div>
+                            
+                    </div>
+				
+                     <div class="footer"   style="width:100%;margin-top:-150px;">
+                            <strong>Date d'édition : <span t-esc="data['form']['print_date']"></span></strong>
+                            <img class="img img-responsive" src="/benin_petro/static/img/pied.jpg"  />
+                    </div>
+					
+				</div>
+			</t>
+		
+		</template>
+		<report
+			id="vente_tv_par_jour_report_form"
+			string="Ventes journalières de tickets valeurs"
+			model="benin_petro.wizard.vente_tv_par_jour"
+			report_type="qweb-pdf"
+			file="benin_petro.vente_tv_par_jour_report"
+			name="benin_petro.vente_tv_par_jour_report"
+			paperformat="paperformat_euro_landscape"/>
+    </data>
+</odoo>

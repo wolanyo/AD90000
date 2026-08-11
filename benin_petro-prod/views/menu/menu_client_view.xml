@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+    <!-- <menuitem id="menu_client_demande_pfi"
+		parent="benin_petro_crm.menu_outils_parent_crm"
+		name="DEMANDE DE PFI"
+		groups="group_benin_petro_client"
+		action="agent_creation_credit_historique_tree2" sequence="5"/>
+
+    <menuitem id="menu_client_demande_pfi_carte"
+		parent="menu_client_demande_pfi"
+		name="Demande de PFI crédit Carte I"
+		groups="group_benin_petro_client"
+		action="agent_creation_credit_historique_tree2" sequence="5"/>
+    <menuitem id="menu_client_demande_pfi_tv"
+		parent="menu_client_demande_pfi"
+		name="Demande de PFI TV"
+		groups="group_benin_petro_client"
+		action="agent_creation_credit_historique_tree2" sequence="5"/> -->
+
+
+
+<!-- 
+    <menuitem id="menu_client_achat_credit_carte"
+		parent="menu_client_achat_credit"
+		name="Achat de crédit Carte "
+		groups="group_benin_petro_client"
+		action="vente_credit_historique_client_sublim_tree3" sequence="6"/>
+
+    <menuitem id="menu_client_achat_credit_tv"
+		parent="menu_client_achat_credit"
+		name="Achat de TV"
+		groups="group_benin_petro_client"
+		action="vente_credit_historique_client_tv_tree3" sequence="6"/> -->
+
+
+
+
+    <!-- <menuitem id="menu_client_suivi_carte"
+		parent="menu_client_suivi"
+		name="Consommation (recharge) Carte"
+		groups="group_benin_petro_client"
+		action="carte_transaction_action_tree_client_carte" sequence="7"/>
+
+    <menuitem id="menu_client_suivi_tv"
+		parent="menu_client_suivi"
+		name="Consommation de TV"
+		groups="group_benin_petro_client"
+		action="carte_transaction_action_tree_client_tv" sequence="7"/> -->
+
+
+
+
+    </data>
+</odoo>

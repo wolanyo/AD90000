@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+        <!-- Form -->
+        <record id="fleet_vehicle_view_form_inherit" model="ir.ui.view">
+            <field name="name">Vehicle</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
+            <field name="arch" type="xml">
+                 <!-- <xpath expr="//field[@name='operating_unit_id']" position="attributes">
+                 
+                              <attribute name="modificateurs">{}</attribute>
+                            
+                </xpath>
+                 -->
+                
+                <xpath expr="/form/sheet/group/group[1]" position="inside">
+                 
+                            <field name="capacite" />
+                            <field name="conteneur_type"/>
+                             <field name="libelle" invisible='1' />
+                            
+                </xpath>
+
+                
+                
+                 <xpath expr="//sheet/group[2]"  position="inside">
+                            
+                <notebook>
+                    <page string="Conteneurs" name="conteneurs" attrs="{'invisible':[('conteneur_type','=','non divisee')]}" >
+                                    <field name="conteneurs_ids">
+                                    <tree  editable='top'>
+                                        
+                                    <field name="libelle"/>
+                                    
+                                    <field name="capacite"/>    
+                                    </tree>  
+                                    </field>                      
+                                </page> 
+                </notebook>
+                </xpath>
+            </field>
+        </record>
+        <!-- fleet.vehicle inherit form view -->
+       
+        <record id="view_id2" model="ir.ui.view">
+            <field name="name">fleet.vehicle.inherit.view.form</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="inherit_id" ref="tms.fleet_vehicle_form_inherit_tms"/>
+            <field name="arch" type="xml">
+                <!-- Add your xpath here -->
+                   <xpath expr="//notebook/page[3]"  position="replace">
+                            
+                    <page string="Conteneurs" name="conteneurs" attrs="{'invisible':[('conteneur_type','=','non divisee')]}" >
+                                    <field name="conteneurs_ids">
+                                    <tree  editable='top'>
+                                        
+                                    <field name="libelle" required='1'/>
+                                    
+                                    <field name="capacite" required='1'/>    
+                                    </tree>  
+                                    </field>                      
+                                </page> 
+                </xpath>
+                 <field name="operating_unit_id" position="attributes">
+               
+                <attribute name="required">0</attribute>
+                </field>
+                 <field name="employee_id" position="attributes">
+               
+                <attribute name="required">1</attribute>
+                </field>
+               
+                
+            </field>
+        </record>
+        <delete model="ir.ui.view" id="tms.fleet_vehicle_search_inherit_tms" />
+   
+<record id="fleet_vehicle_search_inherit_tms2" model="ir.ui.view">
+        <field name="name">fleet.vehicle.tms.search</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_view_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+                <field filter_domain="['|', ('name','ilike',self), ('license_plate','ilike',self)]" name="name" string="Vehicle"/>
+                <field name="year_model"/>
+                <field name="serial_number"/>
+                <field name="registration"/>
+                <group expand="1" string="Group By">
+                    <filter context="{'group_by' : 'year_model'}" name="groupby_year_model" string="Year Model"/>
+                    <filter context="{'group_by' : 'registration'}" name="groupby_registration" string="Registration"/>
+                    <filter context="{'group_by' : 'fleet_type'}" name="groupby_fleet_type" string="Fleet Type"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+   
+    </data>
+    </odoo>
+     

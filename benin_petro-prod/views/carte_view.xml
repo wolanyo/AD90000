@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+
+<!-- ********************************************** Form ********************************************* -->
+        <record id="form_benin_petro_carte" model="ir.ui.view">
+            <field name="name">Carte</field>
+            <field name="model">benin_petro.carte</field>
+            <field name="arch" type="xml">
+                <form string="Carte" >
+<header>
+<button name="setToBrouillon" string="staaar B =>"  class="oe_highlight" type="object" invisible="1"/>
+
+<button name="setToActivee" string="staaar A =>"  class="oe_highlight" type="object" invisible="1"/>
+
+<!-- cas noremale -->
+<button name="setToGenere" string="Réactiver"  class="oe_highlight" type="object" confirm="Voulez-vous vraiment réactiver cette carte ?" attrs="{'invisible':[('state','in',['generee','activee'])]}" groups="benin_petro.group_benin_petro_adminn"/>
+
+<button name="setToAnnule" string="Annuler cette carte"  class="oe_highlight" type="object" confirm="Voulez-vous vraiment annuler cette carte ?" attrs="{'invisible':['|',('state','!=','brouillon'),('id','=',False)]}" groups="benin_petro.group_benin_petro_adminn"/>
+
+<button name="setToEnd" string="Fin de service"  class="oe_highlight" type="object" confirm="Voulez-vous vraiment la mettre au fin service ?" attrs="{'invisible':[('state','not in',['generee','activee','suspendu'])]}" groups="benin_petro.group_benin_petro_adminn"/>
+
+<!-- cas extrem -->
+<button name="setToSuspendu" string="Suspendre cette carte"  class="oe_highlight" type="object" confirm="Voulez-vous vraiment suspendre cette carte ?" attrs="{'invisible':[('state','!=','activee')]}" groups="benin_petro.group_benin_petro_adminn"/>
+
+<button name="setToPerdu" string="Carte perdu"  class="oe_highlight" type="object" confirm="Vous être sûr que cette carte est perdu ?" attrs="{'invisible':[('state','!=','generee')]}" groups="benin_petro.group_benin_petro_adminn"/>
+
+<button name="setCodePine" string="Générer code PIN"  class="oe_highlight" type="object" confirm="Vous être sûr que vous voulez créer un autre code PIN" attrs="{'invisible':[('state','!=','generee')]}" groups="benin_petro.group_benin_petro_adminn,benin_petro.group_benin_petro_client"/>
+
+
+<field name="state" widget="statusbar" statusbar_visible="brouillon,generee,activee,expiree,perdu,terminee"/>
+</header>
+
+<field name="id" invisible="1"/>
+ <field name="compute_field" invisible="1"/>
+ <field name="compute_admin" invisible="1"/>
+                    <h2 style="margin-top: 5px;width: 350px;float: left;">Client : <field name="owner_id" readonly="1"/></h2>
+			
+                    <field name="num_serie" attrs="{'readonly': [('compute_admin', '=', False)]}" style="width: 365px;float: right;text-align: right;font-weight: bold;margin-top: 6px;"/>
+                    <group>
+                        <group>
+                            <field name="libelle" attrs="{'readonly': [('compute_field', '=', True)]}"/>
+                            <field name="type_carte_id" attrs="{'readonly': [('compute_field', '=', True)]}"/>
+                            <field name="code_pin" invisible="0" attrs="{'readonly': [('compute_admin', '=', False)]}"/>
+                            <field name="qrcode" invisible="0" attrs="{'readonly': [('compute_admin', '=', False)]}"/>
+                            <field name="solde" widget='monetary' attrs="{'readonly': [('compute_admin', '=', False)]}"/>
+                            <field name="kilometrage" />
+                        </group>
+
+                        <group>
+                            <field name="create_date" readonly="1" string="Date de création"   />
+                            <field name="date_expiration" readonly="1"  />
+                            <field name="date_perte" readonly="1"  attrs="{'invisible':[('state','!=','perdu')]}"/>
+                            <field name="date_suspension" readonly="1"  attrs="{'invisible':[('state','!=','suspendu')]}"/>
+                            <field name="date_termine" readonly="1"  attrs="{'invisible':[('state','!=','terminee')]}"/>
+                            <field name="date_annulation" readonly="1"  attrs="{'invisible':[('state','!=','annule')]}"/>
+                            <field name="type_carte" readonly="1"/>
+                        </group>
+                    </group>
+
+<notebook>
+	<page string="Historique transactions">
+	    <field name="carte_consommation_ids" nolabel="1">
+		<tree decoration-danger="state in ('annuler')">
+                 <field name="point_vente_id" />
+                 <field name="agent_id" />
+                 <field name="product_ids" />
+		         <field name="create_date" string="Date transaction"  />
+                 <field name="montant" sum="Motant total"/>
+                 <field name="state" invisible="1"/>
+		</tree>
+	    </field>
+	</page>
+	<!-- <page string="Historique des recharges">
+	    <field name="log_ids" nolabel="1" create="false">
+		<tree>
+                 <field name="acteur_name" />
+                 <field name="champ" />
+                 <field name="old_version" />
+                 <field name="new_version" />
+                 <field name="create_date" string="Date de modification" />
+		</tree>
+		<form>
+		<group>
+			<group>
+                 <field name="acteur_name" />
+                 <field name="champ" />
+                 <field name="create_date" string="Date de modification" />
+			</group>
+			<group>
+                 <field name="old_version" />
+                 <field name="new_version" />
+			</group>
+		</group>
+		</form>
+	    </field>
+	    
+	</page> -->
+    
+    <page string='HISTORIQUE  SUBLIME CARTE' >
+        <field name="historique_sublim">
+            <tree string="HISTORIQUE  SUBLIME CARTE">
+                <field name="create_date" string='Date de la recharge'/>
+                <field name="type_op"/>
+                <field name="debit" string="Débit"/>
+                <field name="credit" string="Crédit" sum="Motant total"/>
+                <field name="solde_carte" string="Solde"/>
+            </tree>
+        </field>
+    </page>
+    <page string="Liste des produits">
+        <field name="product_ids" nolabel="1" create="false">
+            <tree>
+                <field name="name" />
+                <field name="categories_consomable" />
+            </tree>
+        </field>
+    </page>
+    <page string="Liste des points de ventes">
+        <field name="point_vente_ids" nolabel="1" create="false">
+            <tree>
+                <field name="name" />
+            </tree>
+        </field>
+    </page>
+    <page string="Rapport du kilométrage">
+        <field name="kilometrage_ids" nolabel="1" create="false">
+            <tree>
+                <field name="create_date"  string="Date consommation"/>
+                <field name="client" />
+                <field name="carte_id" />
+                <field name="point_vente" />
+                <field name="produit" />
+                <field name="type_operation" />
+                <field name="kilometrage" />
+                <field name="quantite" />
+            </tree>
+        </field>
+    </page>
+	<!--
+pas maintenent
+
+<page string="Produits">
+	    <field name="" nolabel="1">
+		<tree>
+                 <field name="" />
+                 <field name="" />
+		</tree>
+	    </field>
+	    
+	</page>-->
+</notebook>
+                </form>
+            </field>
+        </record>
+
+
+<!-- ********************************************** tree ********************************************* -->
+
+
+        <record id="tree_benin_petro_carte" model="ir.ui.view">
+            <field name="name">Liste des Cartes</field>
+            <field name="model">benin_petro.carte</field>
+            <field name="arch" type="xml">
+		<tree string="Cartes" create="false"  delete="true" decoration-success="state in ('brouillon','generee','activee')" decoration-danger="state in ('suspendu','perdu','expiree','terminee','annule')">
+                    <field name="owner_id" />
+	    	    <field name="num_serie" readonly="1" />
+		    <field name="libelle"/>
+		    <field name="solde" widget='monetary'/>
+                    <field name="type_carte_id"/>
+		    <field name="create_date" string="Date de création"  />
+		    <field name="state" />
+		</tree>
+            </field>
+        </record>
+
+
+
+        <record id="view_carte_search" model="ir.ui.view">
+			  <field name="name">carte.search</field>
+			  <field name="model">benin_petro.carte</field>
+              <field name="type">search</field>
+			  <field name="arch" type="xml">
+                  <searh>
+                      <field name="libelle"></field>
+                      <group expand="0" string="Type">
+						<filter string="Type" domain="[]" context="{'group_by':'type_carte_id'}"/>
+                      </group>
+                      <group expand="0" string="Client">
+						<filter string="Client" domain="[]" context="{'group_by':'owner_id'}"/>
+                      </group>
+                      <filter string="Activée" domain="[('state','=','activee')]"/>
+                      <filter string="Suspendu" domain="[('state','=','suspendu')]"/>
+                      <filter string="Annulée" domain="[('state','=','annule')]"/>
+                      <filter string="Brouillon" domain="[('state','=','brouillon')]"/>
+                      <filter string="Générée" domain="[('state','=','generee')]"/>
+                      <filter string="Perdu" domain="[('state','=','perdu')]"/>
+                      <filter string="Expirée" domain="[('state','=','expiree')]"/>
+                      <filter string="Terminée" domain="[('state','=','terminee')]"/>
+                  </searh>
+			  </field>
+    	</record>
+
+
+
+
+
+<!-- ********************************************** action ********************************************* -->
+
+        <record id="carte_action_tree" model="ir.actions.act_window">
+            <field name="name">Cartes</field>
+            <field name="res_model">benin_petro.carte</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help">Carte ...</field>
+        </record>
+
+
+
+
+    </data>
+</odoo>

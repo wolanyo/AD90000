@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Form -->
+        <record id="wizard_tv_station_payment_view" model="ir.ui.view">
+            <field name="name">Payment</field>
+            <field name="model">benin_petro.point_vente_payment_wizard</field>
+            <field name="arch" type="xml">
+                <form string="Impression">
+                    <group>
+                        
+                        <group>
+                            <field name="type_payment"/>
+                            <field name="type_commission"/>
+                            <field name="montant_paye"/>
+                        </group>
+                        <group>
+                            <field name="type_vente"/>
+                            <field name="numero_cheque"  attrs="{'invisible':[('type_payment','!=','cheque')]}"/>
+                            <field name="produit" attrs="{'invisible':['|',('type_commission','=','Sans commission'),('type_commission','=',False)],'required':[('type_commission','=','Avec commission')]}"/>
+                            <field name="montant_commission" attrs="{'invisible':['|',('type_commission','=','Sans commission'),('type_commission','=',False)]}"/>
+                            <field name="montant"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="savePayment" string="Sauvegarde" type="object" class="oe_highlight"/>
+                        <button string="Annuler" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+
+            </field>
+        </record>
+
+
+        <act_window id="wizard_tv_station_payment_action"
+                    name="Ajouter un paiement"
+                    res_model="benin_petro.point_vente_payment_wizard"
+                    src_model="benin_petro.point.vente"
+                    key2="client_action_multi"
+                    view_mode="form"
+                    target="new"
+                    view_type="form"
+			/>
+    </data>
+</odoo>
+    

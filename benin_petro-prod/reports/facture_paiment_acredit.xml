@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+            
+
+		<template id="facture_paiment_acredit">
+            <t t-call="report.html_container">
+				<t t-foreach="docs" t-as="doc">
+										
+					<div class="page" style="margin-top:20px;">
+                    <style>
+                        .table_montant{
+                            width:100%;
+                        }
+                        .table_montant tr td{
+                            border: 1px solid black;
+                            padding:0px 0px;
+                        }
+                        .table_facture tr th{
+                            border: 1px solid black;
+                            padding:5px 10px;
+                        }
+                        .table_facture tr td{
+                            border: 1px solid black;
+                            padding:5px 10px;
+                        }
+                        .table_facture{
+                            margin-top:10px;
+                            margin-bottom:10px;
+                            width:100%;
+                        }
+                        .table_taxe tr td{
+                            
+                            padding : 5px 10px!important;
+                            margin : 0px!important
+                        }
+                        .table_taxe tr{
+                            margin : 0px!important
+                        }
+                        .table_taxe{margin:0px;padding:0px;}
+						.table_produit{margin:0px;padding:0px;width:100%}
+						.table_produit tr td{
+                            border: 1px solid black;
+                            padding:5px 10px;
+                        }
+                    </style>
+                    <div class="header" style="width:100%;min-height:100px;margin-top:20px;;padding:0;">
+						<img class="img img-responsive" src="/benin_petro/static/img/entete.jpg"/>
+					</div>
+                    <div class="row" style="padding:10px 80px">
+                        <div class="col-xs-12">
+                            <div class="col-xs-4"></div>
+                            <div class="col-xs-8">
+                                <table class="table_facture">
+                                    <tr>
+                                        <td><strong>Reçu de caisse</strong></td>
+                                        <td><span t-esc="doc.historique_id.facture_num" ></span> </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Mode de paiement</strong></td>
+                                        <td><span t-esc="doc.moyen_de_paiement" ></span> </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Date</strong></td>
+                                        <td><span t-esc="doc.create_date" ></span> </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="col-xs-6" style="margin:0px;padding:0px;">
+                                <table class="table_facture">
+                                    <tr>
+                                        <td><strong>CLIENT</strong></td>
+                                        <td><span t-esc="doc.historique_id.client_id.name" ></span> </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>TELEPHONE</strong></td>
+                                        <td></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-xs-6"></div>
+                        </div>
+                        <div t-if="doc.historique_id.type_op == 'Recharge compte client'" class="col-xs-12" style="width:80%;margin-bottom:40px!important;margin-top:30px!important;margin-left:100px!important;font-size:16px;height:60px;border:1px solid black;text-align:center;line-height:60px;font-weight:bold;">
+                            RECHARGE DE COMPTE CLIENT SUBLIM CARTE
+                        </div>
+                        
+                        <div t-if="doc.historique_id.type_op == 'T.V'" class="col-xs-12" style="width:80%;margin-bottom:40px!important;margin-top:30px!important;margin-left:100px!important;font-size:16pxheight:60px;border:1px solid black;text-align:center;line-height:60px;font-weight:bold;">
+                            ACHAT DE TICKET VALEUR 
+                        </div>
+                        <div class="col-xs-12">
+                        <table class="table_facture">
+                            <tr>
+                                <th>DESIGNATION</th>
+                                <th>MONTANT</th>
+                            </tr>
+                            <tr>
+                                <td t-if="doc.historique_id.type_op == 'Recharge compte client'" style="height:30px;text-align:left;line-height:30px;font-size:16px;">Paiement pour recharge de compte SUBLIME CARTE </td>
+                                <td t-if="doc.historique_id.type_op == 'T.V'" style="height:30px;text-align:left;line-height:30px;font-size:16px;">Paiement pour achat de tv </td>
+                                <td style="height:30px;text-align:left;line-height:30px;font-size:16px"><span t-esc="doc.historique_id.diff" ></span> </td>
+                            </tr>
+                            <tr>
+                            <td></td>
+                            <td style="padding:0">
+                                <table class="table_montant">
+                                    <tr>
+                                        <td style="border-left:none;border-top:none;font-size:16px"><strong>Montant payé </strong></td>
+                                        <td style="border-right:none;border-top:none;"><span t-esc="doc.montant_credit" ></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border-top:none;border-left:none;"><strong>Total paiement </strong></td>
+                                        <td style="border-top:none;border-right:none;"><span t-esc="doc.montant_deja_paye" ></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border-bottom:none;border-left:none;"><strong>Reste à payer </strong></td>
+                                        <td style="border-bottom:none;border-right:none;"><span t-esc="doc.montant_reste" ></span></td>
+                                    </tr>
+                                </table>
+                            </td>
+                            </tr>
+                        </table>
+                        </div>
+                        
+                        <div  class="col-xs-12" style="width:80%;padding:5px 20px!important;margin-top:40px!important;margin-left:100px!important;font-size:16px;;border:1px solid black;font-weight:bold;text-align:center;border-bottom:none;">
+                           Arrêtée la présente Facture à la somme TTC de francs CFA :
+                        </div>
+                        <div class="col-xs-12" style="width:80%;height:auto;font-size:16px;border:1px solid black;margin-left:100px!important;text-align:center;">
+                           <span t-esc="doc.getMontantWords()" ></span>
+                        </div>
+
+                        <div class="col-xs-12" style="margin-top:40px;margin-bottom:60px;" >
+                            <div class="col-xs-4" >
+                                
+                            </div>
+                            <div class="col-xs-3"></div>
+                            <div class="col-xs-5" style="border:1px solid black;height:200px;margin:0px;padding:0px;">
+                                <div  class="col-xs-12" style="height:40px;border-bottom:1px solid black;margin:0px;padding:0px;text-align:center;line-height:40px;"><strong>La caisse </strong></div>
+                                <div  class="col-xs-12" style="height:120px;border-bottom:1px solid black;margin:0px;padding:0px;"></div>
+                                <div  class="col-xs-12"  style="height:40px;margin:0px;padding:0px;text-align:center;line-height:40px;"><strong><span t-esc="doc.create_uid.name" ></span> </strong></div>
+                            </div>
+                        </div>
+
+                        
+
+                    </div>
+
+                    <div class="footer" style="width:100%;min-height:80px;position:absolute:bottom:0px">
+                        <img class="img img-responsive" src="/benin_petro/static/img/pied.jpg"  />
+                    </div>	
+                    </div>
+				</t>
+			</t>
+		</template>
+
+
+
+
+			<report
+			id="report_facture_facture_paiment_acredit"
+			string="FACTURE PAIMENT A CREDIT"
+			model="benin_petro.paiement_reste_client"
+			report_type="qweb-pdf"
+			file="benin_petro.facture_paiment_acredit"
+			name="benin_petro.facture_paiment_acredit"
+			paperformat="paperformat_euro_landscape"/>
+    </data>
+</odoo>

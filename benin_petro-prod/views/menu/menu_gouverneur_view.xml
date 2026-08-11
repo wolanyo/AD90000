@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- ///////// Menu Gouverneur //////// -->
+
+		<menuitem id="menu_demende_creation_credit"
+		parent="menu_outils_parent"
+		name="Demande de Crédit Trésorier"
+		groups="group_benin_petro_president,group_benin_petro_chargeur"
+		action="benin_petro_demande_credit_par_treso_action_tree" sequence="6"/>
+
+        <menuitem id="menu_demende_creation_credit_carte"
+		parent="menu_demende_creation_credit"
+		name="Liste des demandes de Crédit"
+		groups="group_benin_petro_president,group_benin_petro_chargeur"
+		action="benin_petro_demande_credit_par_treso_action_tree" sequence="6"/>
+
+        <!-- <menuitem id="menu_demende_creation_credit_tv"
+		parent="menu_demende_creation_credit"
+		name="Demande de credit TV"
+		groups="group_benin_petro_president,group_benin_petro_chargeur"
+		action="benin_petro_demande_credit_par_treso_action_tree" sequence="6"/> -->
+
+		<menuitem id="menu_reception_demande_credit"
+		parent="menu_outils_parent"
+		name="Réception des demandes de crédit"
+		groups="group_benin_petro_president,group_benin_petro_chargeur"
+		action="creation_credit_historique_tree2" sequence="7"/>
+
+        <menuitem id="menu_reception_credit_carte"
+		parent="menu_reception_demande_credit"
+		name="Réception de crédit CARTE"
+		groups="group_benin_petro_president,group_benin_petro_chargeur"
+		action="creation_credit_historique_tree2" sequence="7"/>
+
+        <menuitem id="menu_reception_credit_tv"
+		parent="menu_reception_demande_credit"
+		name="Réception de crédit TV"
+		groups="group_benin_petro_president,group_benin_petro_chargeur"
+		action="creation_credit_historique_tree3" sequence="7"/>
+
+
+
+        <menuitem id="menu_suivi_tresorerie"
+		parent="menu_outils_parent"
+		name="Suivi de la trésorerie"
+		groups="group_benin_petro_president,group_benin_petro_chargeur"
+		action="releve_cassier_tresorier_action_form" sequence="11"/>
+		
+		<menuitem id="menu_suivi_compte_carte"
+		parent="menu_suivi_tresorerie"
+		name="Suivi du compte Carte"
+		groups="group_benin_petro_president,group_benin_petro_chargeur"
+		action="releve_cassier_tresorier_action_form" sequence="12"/>
+
+		<menuitem id="menu_suivi_compte_tv"
+		parent="menu_suivi_tresorerie"
+		name="Suivi du compte Tickets Valeurs"
+		groups="group_benin_petro_president,group_benin_petro_chargeur"
+		action="releve_cassier_tresorier_action_form" sequence="13"/>
+
+		<menuitem id="menu_gestion_recharge"
+		parent="menu_outils_parent"
+		name="Gestion du département trésorerie"
+		groups="group_benin_petro_president,group_benin_petro_chargeur"
+		action="benin_petro_chargeur_tree" sequence="14"/>
+
+		<menuitem id="menu_liste_chargeur"
+		parent="menu_gestion_recharge"
+		name="Liste des trésoriers"
+		groups="group_benin_petro_president,group_benin_petro_chargeur"
+		action="benin_petro_chargeur_tree" sequence="14"/>
+
+        <menuitem id="menu_tableau_de_bord"
+		parent="menu_outils_parent"
+		name="Tableaux de bord"
+		groups="group_benin_petro_president,group_benin_petro_chargeur"
+		action="base.action_partner_form" sequence="17"/> 
+
+
+
+        
+    </data>
+</odoo>

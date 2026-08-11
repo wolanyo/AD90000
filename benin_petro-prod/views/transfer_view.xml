@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+    <!-- benin_petro.transfert form view -->
+    <record id="stock_transfer_view_form" model="ir.ui.view">
+        <field name="name">Transfert</field>
+        <field name="model">benin_petro.transfert</field>
+        <field name="arch" type="xml">
+            <form string="Transfert">
+           
+            <header>
+
+<!--<button name="Valider" string="Valider" class="oe_highlight" type="object"
+ confirm="Vous être sûr que vous voulez Valider ce Transfer"
+ attrs="{'invisible':['|',('transfer_type','!=','d'),'|',('id','=',False),'|',('states','=','Valider'),'|',('states','=','Annuler'),('states','=','partiellementv')]}"/>-->
+
+<button name="action_cancel" string="Annuler" class="oe_highlight" type="object"
+ confirm="Vous être sûr que vous voulez Annuler ce Transfer"
+  attrs="{'invisible':['|',('id','=',False),'|',('states','=','Valider'),'|',('states','=','Annuler'),('states','=','partiellementv')]}" />
+  <field name="states" widget="statusbar" statusbar_visible="test,brouillon,Annuler,partiellementv,Valider"/>
+<button name="%(report_charggement_benin_petro)d" string="Order de chargement" type="action" attrs="{'invisible': ['|',('transfer_type','not in',['a']),('id','=',False)]}"/>
+
+<button name="Check_qty" string="Valider la Commande" class="oe_highlight" type="object"
+ confirm="Vous être sûr que vous voulez Valider cette commande"
+ groups="benin_petro.group_benin_petro_stock_niv2"
+ attrs="{'invisible':['|',('id','=',False),'|',('states','=','Valider'),'|',('states','=','Annuler'),'|',('states','=','partiellementv'),('client','=',False)]}"/>
+
+<button name="Valider2" string="Confirmer" class="oe_highlight" type="object"
+ confirm="Vous être sûr que vous voulez confirmer ce Transfer"
+ groups="benin_petro.group_benin_petro_stock_niv2"
+ attrs="{'invisible':['|',('states','=','test'),'|',('id','=',False),('states','!=','test2')]}"/>
+
+</header>
+
+                 <sheet>
+                 <field name="num" style="font-size:30px;font-weight:bold" class="oe_read_only" />
+                 <field name="progress" invisible='1' widget="progressbar"   attrs="{'invisible':[('transfer_type','=','a')]}" readonly='1' />
+                <field name="id" invisible='1'/>
+                <field name="stock_picking_id"  invisible='1' />
+                  <field name="hide" invisible='1'/>
+                    <group>
+                    <field name="unit_qty"  invisible='1'  />
+                      
+                        <field name="typeDesProuduit" required='1' attrs="{'readonly':['|',('states','=','Valider'),'|',('states','=','Annuler'),('states','=','partiellementv')]}"/>
+                       <field name="transfer_type" attrs="{'readonly':['|',('states','=','Valider'),'|',('states','=','Annuler'),('states','=','partiellementv')]}"/>
+                       <field name="Date_prevue" attrs="{'readonly':['|',('states','=','Valider'),'|',('states','=','Annuler'),('states','=','partiellementv')]}"/>
+                       <field name="location_id"  
+                       attrs="{'invisible':[('transfer_type','=','c')],'readonly':['|',('states','=','Valider'),'|',('states','=','Annuler'),('states','=','partiellementv')],
+                       'required':[('transfer_type','!=','c')]}"
+                        domain="[('id','!=',location_dest_depot_id)]" options="{'no_create': True, 'no_create_edit':True}"/>
+                        <field name="location_id_for_view" invisible='1' />
+                        <field name="client"  attrs="{'invisible':[('client','=',False)]}"/>
+                       <field name="location_dest_depot_id" options="{'no_create': True, 'no_create_edit':True}" 
+                        attrs="{'required':[('transfer_type', '=', 'd')],'invisible':[('transfer_type','!=','d')],
+                        'readonly':['|',('states','=','Valider'),'|',('states','=','Annuler'),'|',('states','=','partiellementv'),('client','!=',False)]}"
+                        domain="[('typedeEmp','=','depot'),('id','!=',location_id)]"  />
+                        <field name="location_dest_id" invisible='1' domain="[('typedeEmp','=','depot')]" />
+                       <field name="camion_id"  attrs="{'readonly':['|',('states','=','Valider'),'|',('states','=','Annuler'),('states','=','partiellementv')],
+                      }" required='1'
+                        options="{'no_create': True, 'no_create_edit':True}"   />
+
+                       <field name="chauffeur_id"  readonly='1'  options="{'no_create': True, 'no_create_edit':True}"   attrs="{'invisible':[('camion_id', '=', False)]}"  class="oe_edit_only"/>
+                       <field name="current_qty"  invisible='1' readonly='1'  class="oe_edit_only" />
+                       </group>
+                       <notebook>
+                       
+                       <page string="Programme du camion" name="camion_id_Planification"   attrs="{'invisible':[('camion_id', '=', False)]}"  >
+                         <field name="camion_id_Planification" >
+                            <tree  create='false' edite='false' delete="false"  editable='top' >
+                              
+                               <field name="source"/>
+                              <field name="Destinations"/>
+                                <field name="Date_prevue"/>
+                               
+                             
+                               </tree>
+                           </field>
+                       </page>
+                        
+                        
+                           <page string="Produits à Livrer" name="produits" attrs="{'invisible':['|',('transfer_type','=','b'),('transfer_type','=','c')]}">
+                               
+                          <field name="move_lines"  
+                          context="{'default_source':location_id,'default_destinations':location_dest_id,
+                          'default_location_id_for_view':location_id,'default_Date_prevue':Date_prevue,'default_typeDesProuduit':typeDesProuduit}" 
+                             attrs="{'readonly':['|',('states','=','Valider'),('states','=','Annuler')]}" >
+                          <tree editable='top'>
+                          <field name="source" invisible='1' />
+                            <field name="Date_prevue" invisible='1'/>
+                           <field name="location_id_for_view"   invisible='1' />
+                          <field name="destinations" invisible='1' />
+                           <field name="typeDesProuduit" invisible='1' />
+                          <field name="product_id"  options="{'no_quick_create': True, 'no_create_edit' : True}" 
+                           />
+                          <field name="no_edit"   invisible='1' />
+                            <field name="qty_unitv"/>
+                            
+                            
+                          <field name="qty"   />
+                          
+                          </tree>
+                          <form >
+                          <group>
+                        
+                          <field name="product_id"  />
+                          <field name="qty"/>
+                           <field name="no_edit" invisible='1' />
+                          </group>
+                          </form>
+                          </field >
+                               
+                           </page>
+                           <page string="Points de ventes à livrer" name="Stations" attrs="{'invisible':['|',('transfer_type','=','a'),('transfer_type','=','d')]}">
+                               
+                            <field name="station_move_lines" context="{'default_source':location_dest_id,'default_location_id_for_view':location_id,
+                            'default_Date_prevue':Date_prevue,'default_current_qty':current_qty,'default_typeDesProuduit':typeDesProuduit}}" 
+                             attrs="{'readonly':['|',('states','=','Valider'),'|',('states','=','Annuler'),('states','=','partiellementv')]}">
+                            <form >
+                            <header>
+
+
+
+                        <field name="states" widget="statusbar" statusbar_visible="brouillon,Annuler,Valider"/>
+                        </header>
+                            <group>
+                          
+                            <field name="stock_picking_id"  invisible='1' />
+                            <field name="id" invisible='1'/>
+                            
+                            <field name="source" invisible='1'/>
+                           
+                             <field name="point_vente_id"  options="{'no_create': True, 'no_create_edit':True}"  attrs="{'readonly':['|',('states','=','Valider'),('states','=','Annuler')]}"/>
+                             <field name="Date_prevue" invisible='1'/>
+                            <field name="current_qty"    invisible='1' />
+                              <field name="typeDesProuduit"    invisible='1' />
+                              <field name="location_id_for_view" invisible='1' />
+                            <field name="location_dest_id" invisible='1' />
+                           
+                           
+                           </group>
+                            <notebook>
+                                <page string="Produits à Livrer" name="Produit">
+
+                                 <field name="move_lines"  context="{'default_destinations':location_dest_id,
+                                 'default_source':source,'default_location_id_for_view':location_id_for_view,'default_typeDesProuduit':typeDesProuduit}" 
+                                  attrs="{'readonly':['|',('states','=','Valider'),('states','=','Annuler')]}">
+                                        <tree editable='top'  >
+                                        <field name="location_id_for_view" invisible='1' />
+                                        <field name="source" invisible='1' />
+                                        <field name="destinations" invisible='1' />
+                                        <field name="no_edit" invisible='1' />
+                                         <field name="typeDesProuduit" invisible='1' />
+                                        <field name="product_id"  options="{'no_quick_create': True, 'no_create_edit' : True}" />
+                                         <field name="qty_unitv" />
+                                          <field name="qty_pointv"/>
+                                        <field name="qty" />
+                                            
+                           
+                                        </tree>
+                                        <form >
+                                                <group>
+                                                 <field name="no_edit" invisible='1' />
+                                               
+                                                    <field name="product_id"  />
+                                                    <field name="qty"/>
+                                                </group>
+                                        </form>
+                                </field>
+                               
+                                </page>
+                            </notebook>
+
+                           
+
+                            </form>
+
+                             <tree colors="#31708f:states=='brouillon';#919191:states=='Annuler'">
+                            
+                             <field name="point_vente_id"/>
+                            <field name="libelle"/>
+                             <field name="states"/>
+                              
+                           
+                            </tree>
+                            
+
+                            </field >
+                           </page>
+                       </notebook>
+                    
+               </sheet>
+            </form>
+        </field>
+    </record>
+    <!-- benin_petro.transfert tree view -->
+    <record id="stock_transfer_view_tree" model="ir.ui.view">
+        <field name="name">Transfert</field>
+        <field name="model">benin_petro.transfert</field>
+        <field name="arch" type="xml">
+            <tree  colors="#31708f:states=='brouillon';#919191:states=='Annuler';#208f58:states=='partiellementv'">
+                <!-- Add your fields here -->
+                <field name="transfer_type"/>
+                       <field name="location_id"/>
+                        <field name="camion_id" invisible='1'/>
+					
+                        <field name="states"/>
+                        <field name="Date_prevue"/>
+                         <field name="create_date"   string='Créer le'    />
+                        <field name="progress"  widget="progressbar"     />
+            </tree>
+        </field>
+    </record>
+    <!-- benin_petro.transfert action window -->
+    <record id="stock_transfer_action" model="ir.actions.act_window">
+        <field name="name">Transfert</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">benin_petro.transfert</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                <!-- Add Text Here -->
+            </p><p>
+                <!-- More details about what a user can do with this object will be OK --> 
+            </p>
+        </field>
+    </record>
+    <!-- Search View for Trensfer  Information -->
+    
+        <record id="transfert_search_view" model="ir.ui.view">
+            <field name="name">Transfert.search.view</field>
+            <field name="model">benin_petro.transfert</field>
+            <field name="arch" type="xml">
+                <search string="Transfert ">
+                    <field name="location_id"/>
+                    <field name="camion_id"/>
+                    
+                    <group  string="Group By">
+                    <filter name="groupby_location" string="Source"  context="{'group_by':'location_id'}"
+                            />
+                        <filter name="groupby_Camion" string="Camion"  context="{'group_by':'camion_id'}"
+                        />
+                        <filter name="groupby_year" context="{'group_by': 'Date_prevue:year'}" string="année"
+                            help="Group Students by Year" />
+                        <filter name="groupby_month" context="{'group_by': 'Date_prevue:month'}" string="Mois"/>
+                    </group>
+                    
+                </search>
+            </field>
+        </record>
+
+<!-- This benin_petro.transfert.move view -->
+<!-- benin_petro.transfert.move form view -->
+
+
+
+
+
+</data>
+    </odoo>

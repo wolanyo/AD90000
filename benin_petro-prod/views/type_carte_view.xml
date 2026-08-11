@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+        <!-- Form -->
+        <record id="form_benin_petro_type_carte" model="ir.ui.view">
+            <field name="name">Type de carte</field>
+            <field name="model">benin_petro.type.carte</field>
+            <field name="arch" type="xml">
+                <form string="Type de carte" >
+<header>
+<!--
+<button name="setToBrouillon" string="staaar B =>"  class="oe_highlight" type="object" />
+ statusbar_visible="activee,expiree,terminee"
+-->
+<field name="state" widget="statusbar"/>
+</header>
+
+<field name="id" invisible="1"/>
+
+              
+                    <group>
+                        <group>
+                            <field name="libelle"/>
+                        </group>
+
+                        <group>
+                            <field name="front_carte" filename="front_carte_name"/>
+                            <field name="back_carte"  filename="back_carte_name"/>
+                        </group>
+                    </group>
+
+
+<field name="front_carte_name" invisible="1"/>
+<field name="back_carte_name" invisible="1"/>
+
+                </form>
+            </field>
+        </record>
+
+
+        <!-- tree -->
+        <record id="tree_benin_petro_type_carte" model="ir.ui.view">
+            <field name="name">Liste des types de carte</field>
+            <field name="model">benin_petro.type.carte</field>
+            <field name="arch" type="xml">
+<tree string="Les types de carte" create="false" update="false" decoration-success="state in ('activee')" decoration-danger="state in ('suspendu','annule')">
+    <field name="libelle"/>
+    <field name="front_carte"/>
+    <field name="back_carte"/>
+    <field name="state" />
+</tree>
+            </field>
+        </record>
+
+
+        <record id="benin_petro_type_carte_action_tree" model="ir.actions.act_window">
+            <field name="name">Type de carte</field>
+            <field name="res_model">benin_petro.type.carte</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help">Agent ...</field>
+        </record>
+
+<!--<record id="account_account_view_id" model="ir.ui.view">
+        <field name="name">account.account.inherit.view.form</field>
+        <field name="model">account.account</field>
+        <field name="inherit_id" ref="account.view_account_form"/>
+        <field name="arch" type="xml">
+
+              <xpath expr="//field[@name='user_type_id']" position="attributes">
+                    
+                 <attribute name="widget"> </attribute>
+                 
+                </xpath>
+        </field>
+    </record>-->
+
+            	<record id="akad_inh_account_form_view" model="ir.ui.view">
+		<field name="name">account.inh.form</field>
+		<field name="model">account.account</field>
+		<field name="inherit_id" ref="account.view_account_form"/>
+		<field name="arch" type="xml">
+            <xpath expr="//field[@name='code']" position="after">
+                <field name="is_true"/>
+            </xpath>
+		</field>
+	</record>
+    <record id="view_inh_account_search" model="ir.ui.view">
+			  <field name="name">account_search</field>
+			  <field name="model">account.account</field>
+              <field name="type">search</field>
+              <field name="inherit_id" ref="account.view_account_search"/>
+			  <field name="arch" type="xml">
+                      <xpath expr="//search" position="inside">
+
+                      <filter string="Vrais" domain="[('is_true','=','True')]"/>
+                      <filter string="Terminée" domain="[('is_true','=','False')]"/>
+                      </xpath>
+			  </field>
+    	</record>
+
+
+    </data>
+</odoo>

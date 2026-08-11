@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>    
+         <record id="form_benin_petro_chargeur1" model="ir.ui.view">
+            <field name="name">Sous Chargeur</field>
+            <field name="model">benin_petro.sous_chargeur</field>
+            <field name="arch" type="xml">
+            <form string="Sous-Chargeur" edit="false">
+                 <field name="id" invisible="1"/>
+                    <center><h1 style="color:red">Plafond  de la dotation SUBLIME CARTE du trésorier : <field name="montant_super" widget='monetary'/></h1></center>
+                    <center><h1 style="color:red">Plafond  de la dotation T.V du trésorier : <field name="montant_super_tv" widget='monetary'/></h1></center>
+                    <group>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <group> <field name="access" options="{'no_create': True}" domain="[('id','!=',uid)]"/></group>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="row">
+                                    <div class="col-md-6" ><label string="Plafond de la dotation T.V agent monétique" style="font-weight:bold;" /></div>
+                                    <div class="col-md-6" ><field name="montant_plafond_tv" widget='monetary' string="Plafond de la dotation T.V agent monétique"/></div>
+                                </div> 
+                                <div class="row">
+                                    <div class="col-md-6" ><label string="Plafond de la dotation SUBLIME CARTE agent monétique" style="font-weight:bold;"  /></div>
+                                    <div class="col-md-6" ><field name="montant_plafond" widget='monetary' string="Plafond de la dotation SUBLIME CARTE  agent monétique"/></div>
+                                </div>
+                            </div>
+                        </div>
+                    </group>
+                    <!-- <group>
+                    <field name="rest" readonly='1' />
+                    </group> -->
+
+                     <notebook>
+                        <page string="Historique TV" >
+                                <field name="historique_tv" >
+                                        <tree create='false'>
+                                            <field name="create_date" string='Date de la recharge'/>
+                                            <field name="type_op"/>
+                                            <field name="debit" string="Débit"/>
+                                            <field name="credit" string="Crédit"/>
+                                            <field name="montant_fin" string="Solde"/>
+                                            
+                                        </tree>
+                                    
+                                </field>
+                        </page>
+                        <page string="Historique sublime carte" >
+                                <field name="historique_sublim" >
+                                        <tree create='false'>
+                                            <field name="create_date" string='Date de la recharge'/>
+                                            <field name="type_op"/>
+                                            <field name="debit" string="Débit"/>
+                                            <field name="credit" string="Crédit" sum="solde total"/>
+                                            <field name="montant_fin" string="Solde"/>
+                                            
+                                        </tree>
+                                    
+                                </field>
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+         </record>
+
+
+        <!-- tree -->
+        <record id="tree_benin_petro_sous_chargeur" model="ir.ui.view">
+            <field name="name">Liste des agents monétique </field>
+            <field name="model">benin_petro.sous_chargeur</field>
+            <field name="arch" type="xml">
+                <tree string="Agents monétique"  >
+                <!-- create='false' edit='false' -->
+                     <!-- <field name="name" string="Nom complet"/> -->
+                     <field name="access"/>
+                     <field name="montant_plafond" widget='monetary' string="Plafond de la dotation SUBLIME CARTE "/>
+                     <field name="montant_plafond_tv" widget='monetary' string="Plafond de la dotation T.V"/>
+                     <field name="superv" invisible='1'/> 
+                     <field name="write_date" string="Date modification"/> 
+                     <!-- <field name='rest'/> -->
+                </tree>
+            </field>
+        </record>
+        <record id="benin_petro_sous_chargeur_tree1" model="ir.actions.act_window">
+            <field name="name">Caissiers</field>
+            <field name="res_model">benin_petro.sous_chargeur</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help">Caissiers ...</field>
+	    <field name="context">{'readonly_by_pass': True}</field>
+        </record>
+
+
+    </data>
+</odoo>

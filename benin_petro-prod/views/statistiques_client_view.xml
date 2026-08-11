@@ -1,0 +1,144 @@
+<odoo>
+    <data>
+
+<!-- //////////////////////////////////////////////////////////////////////////////////  -->
+	<record id="accueil_client_index" model="ir.ui.view" >
+            <field name="name">Accueil</field>
+            <field name="model">benin_petro.statistique_client</field>
+            <field name="arch" type="xml">
+		 <form string="" >
+			<field name="call_statistique_widgett" widget="statistique_stat_client" class="oe_highlight" />
+			
+			<fieldset style="border: 1px solid #008cba;padding: 10px;padding-top: 3px;margin-bottom:15px;">
+			<legend style="margin-bottom: 0px;border: none;text-align: center;width: 220px;padding-bottom: 5px;color:#008cba;">
+				<span valeur='nombre'  class='modeGraph'>Critères de recherches</span>
+			</legend>
+			<div id="test">
+			<table class="table_critere" style='width: 100%%;min-width: 700px;margin:0px auto;'>
+				<tr style="text-align: center;">
+					<td>Points de ventes</td>
+					<td style='border-bottom: 1px solid #d2caca;'>
+						<select id='pointVente' class= "select_consommation" style="padding: 5px;width: 150px;margin: 5px;height: 30px;padding-bottom: 3px;">
+						 
+						</select>
+					</td>
+					<td class=""><span for="pr">Résultat par produit</span><input type="radio"  value="par produit" name="bb" id="pr"/></td>
+					<td  class=""><span for="crt">Résultat par carte</span><input type="radio" value="par carte"  checked="checked" name="bb" id="crt"/></td>
+				</tr>
+				<tr style="text-align: center;">
+					<td style='text-align: center;padding: 10px;font-size: 16px;border-radius:5px 0 0 5px;border-bottom: 1px solid #d2caca;padding-bottom: 3px;'>Année</td>
+					<td style='border-bottom: 1px solid #d2caca;'>
+						<select id='yearValue' class= "select_consommation" style="padding: 5px;width: 150px;margin: 5px;height: 30px;padding-bottom: 3px;">
+						  <option value='All' selected='true'>Tous</option>
+						</select>
+					</td>
+					<td style='text-align: center;padding: 10px;font-size: 16px;border-radius:5px 0 0 5px;border-bottom: 1px solid #d2caca;padding-bottom: 3px;'>Mois</td>
+					<td style='border-bottom: 1px solid #d2caca;'>
+						<select id='monthValue' class= "select_consommation" style="padding: 5px;width: 150px;margin: 5px;height: 30px;padding-bottom: 3px;">
+						  <option value='All' selected='true'>Tous</option>
+						</select>
+					</td>
+					<td style='text-align: center;padding: 10px;font-size: 16px;border-radius:5px 0 0 5px;border-bottom: 1px solid #d2caca;padding-bottom: 3px;'>Date début</td>
+					<td style='border-bottom: 1px solid #d2caca;'>
+						<input type="date" id="datedebut"  />
+					</td>
+					<td style='text-align: center;padding: 10px;font-size: 16px;border-radius:5px 0 0 5px;border-bottom: 1px solid #d2caca;padding-bottom: 3px;'>Date fin</td>
+					<td style='border-bottom: 1px solid #d2caca;'>
+						<input type="date" id="datefin" />
+					</td>
+				</tr>
+			</table>
+			</div>
+
+</fieldset>
+		<div id="table_result"></div>
+
+
+
+
+
+
+		</form>
+           </field>
+        </record>
+
+
+	<record id="accueil_index_akad_client_action" model="ir.actions.act_window">
+            <field name="name">Tableau de bord</field>
+            <field name="res_model">benin_petro.statistique_client</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="accueil_client_index"></field>
+			<field name="target">inline</field>
+	    <field name="context">{}</field>
+	</record>
+
+<!-- //////////////////////////////////////////////////////////////////////////////////  -->
+
+
+	<record id="accueil_index_client_recharge" model="ir.ui.view" >
+            <field name="name">Accueil</field>
+            <field name="model">benin_petro.statistique_client</field>
+            <field name="arch" type="xml">
+		 <form string="" version="7.0">
+			<field name="call_statistique_widgett" widget="statistique_recharge_client" class="oe_highlight" />
+			<fieldset style="border: 1px solid #008cba;padding: 10px;padding-top: 3px;margin-bottom:15px;">
+			<legend style="margin-bottom: 0px;border: none;text-align: center;width: 220px;padding-bottom: 5px;color:#008cba;">
+				<span valeur='nombre'  class='modeGraph'>Critères de recherches</span>
+			</legend>
+			<div id="test">
+			<table class="table_critere" style='width: 100%%;min-width: 700px;margin:0px auto;'>
+				<tr style="text-align: center;">
+					<td style='text-align: center;padding: 10px;font-size: 16px;border-radius:5px 0 0 5px;border-bottom: 1px solid #d2caca;padding-bottom: 3px;'>Date début</td>
+					<td style='border-bottom: 1px solid #d2caca;'>
+						<input type="date" id="datedebut"  />
+					</td>
+					<td style='text-align: center;padding: 10px;font-size: 16px;border-radius:5px 0 0 5px;border-bottom: 1px solid #d2caca;padding-bottom: 3px;'>Date fin</td>
+					<td style='border-bottom: 1px solid #d2caca;'>
+						<input type="date" id="datefin" />
+					</td>
+				</tr>
+				<tr style="text-align: center;">
+					<td style='text-align: center;padding: 10px;font-size: 16px;border-radius:5px 0 0 5px;border-bottom: 1px solid #d2caca;padding-bottom: 3px;'>Année</td>
+					<td style='border-bottom: 1px solid #d2caca;'>
+						<select id='yearValue' class= "select_recharge"  style="padding: 5px;width: 150px;margin: 5px;height: 30px;padding-bottom: 3px;">
+						  <option value='All' selected='true'>Tous</option>
+						</select>
+					</td>
+					<td style='text-align: center;padding: 10px;font-size: 16px;border-radius:5px 0 0 5px;border-bottom: 1px solid #d2caca;padding-bottom: 3px;'>Mois</td>
+					<td style='border-bottom: 1px solid #d2caca;'>
+						<select id='monthValue' class= "select_recharge"  style="padding: 5px;width: 150px;margin: 5px;height: 30px;padding-bottom: 3px;">
+						  <option value='All' selected='true'>Tous</option>
+						</select>
+					</td>
+				</tr>
+			</table>
+			</div>
+
+</fieldset>
+			<div id="table_result_recharge"></div>
+
+
+
+
+
+
+		</form>
+           </field>
+        </record>
+
+
+	<record id="accueil_index_akad_recharge_client_action" model="ir.actions.act_window">
+            <field name="name">Tableau de bord</field>
+            <field name="res_model">benin_petro.statistique_client</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="accueil_index_client_recharge"></field>
+			<field name="target">inline</field>
+	    <field name="context">{}</field>
+	</record>
+<!-- //////////////////////////////////////////////////////////////////////////////////  -->
+    </data>
+</odoo>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+	<record id="akad_product_product_qte_form_view" model="ir.ui.view">
+		<field name="name">product.templateqte.form</field>
+		<field name="model">product.template</field>
+		<field name="inherit_id" ref="stock.product_template_form_view_procurement_button"/>
+		<field name="arch" type="xml">
+			
+		<xpath expr="//header/button[2]" position="attributes">
+			<attribute name="groups">benin_petro.group_benin_petro_stock</attribute>              
+		</xpath>
+		<xpath expr="//header/button[last()]" position="attributes">
+			<attribute name="groups">benin_petro.group_benin_petro_commercial</attribute>              
+		</xpath>
+		<xpath expr="//field[@name='sale_ok']" position="attributes">
+            <attribute name="groups">benin_petro.group_benin_petro_stock</attribute>  
+        </xpath>
+		<xpath expr="//label[@for='sale_ok']" position="attributes">
+            <attribute name="groups">benin_petro.group_benin_petro_stock</attribute>  
+        </xpath>
+		<xpath expr="//field[@name='purchase_ok']" position="attributes">
+            <attribute name="groups">benin_petro.group_benin_petro_stock</attribute>  
+        </xpath>
+		<xpath expr="//label[@for='purchase_ok']" position="attributes">
+            <attribute name="groups">benin_petro.group_benin_petro_stock</attribute>  
+        </xpath>
+        <!-- TYPE -->
+        <xpath expr="//field[@name='type']" position="attributes">
+            <attribute name="groups">benin_petro.group_benin_petro_stock</attribute>  
+        </xpath>
+        <!-- categorie interne -->
+        <xpath expr="//field[@name='categ_id']" position="attributes">
+            <attribute name="groups">benin_petro.group_benin_petro_comptable,benin_petro.group_benin_petro_adminn</attribute>  
+        </xpath>
+
+        <!-- PRIX DE VENTE -->
+        <xpath expr="//field[@name='list_price']" position="attributes">
+            <attribute name="groups">benin_petro.group_benin_petro_commercial</attribute>  
+        </xpath>
+
+        <!-- COUT -ACHAT -->
+        <xpath expr="//field[@name='standard_price']" position="attributes">
+            <attribute name="groups">benin_petro.group_benin_petro_commercial</attribute>  
+        </xpath>
+        <xpath expr="//label[@for='standard_price']" position="attributes">
+            <attribute name="groups">benin_petro.group_benin_petro_commercial</attribute>  
+        </xpath>
+        <!-- CONTROLE FACTURE -->
+        <xpath expr="//field[@name='purchase_method']" position="attributes">
+            <attribute name="groups">benin_petro.group_benin_petro_commercial</attribute>  
+        </xpath>
+
+         <!-- Routes -->
+        <xpath expr="//field[@name='route_ids']" position="attributes">
+            <attribute name="groups">benin_petro.group_benin_petro_stock</attribute>  
+        </xpath>
+        <!-- POIDS -->
+        <xpath expr="//field[@name='weight']" position="attributes">
+            <attribute name="groups">benin_petro.group_benin_petro_stock</attribute>  
+        </xpath>
+        <xpath expr="//label[@for='weight']" position="attributes">
+            <attribute name="groups">benin_petro.group_benin_petro_stock</attribute>  
+        </xpath>
+        <!-- VOLUME -->
+        <xpath expr="//field[@name='volume']" position="attributes">
+            <attribute name="groups">benin_petro.group_benin_petro_stock</attribute>  
+        </xpath>
+        <xpath expr="//label[@for='volume']" position="attributes">
+            <attribute name="groups">benin_petro.group_benin_petro_stock</attribute>  
+        </xpath>
+        <!-- EMPLACEMENT -->
+        <xpath expr="//field[@name='property_stock_procurement']" position="attributes">
+            <attribute name="groups">benin_petro.group_benin_petro_stock</attribute>  
+        </xpath>
+        <xpath expr="//field[@name='property_stock_production']" position="attributes">
+            <attribute name="groups">benin_petro.group_benin_petro_stock</attribute>  
+        </xpath>
+        <xpath expr="//field[@name='property_stock_inventory']" position="attributes">
+            <attribute name="groups">benin_petro.group_benin_petro_stock</attribute>  
+        </xpath>
+        <!-- FOURNISSEUR -->
+        <xpath expr="//separator[1]" position="attributes">
+            <attribute name="groups">benin_petro.group_benin_petro_commercial</attribute>  
+        </xpath>
+        <xpath expr="//field[@name='seller_ids']" position="attributes">
+            <attribute name="groups">benin_petro.group_benin_petro_commercial</attribute>  
+        </xpath>
+
+        <!-- FACTURATION -->
+        <!-- 1 -->
+        <xpath expr="//field[@name='property_account_income_id']" position="attributes">
+            <attribute name="groups">benin_petro.group_benin_petro_comptable</attribute>  
+        </xpath>
+        <xpath expr="//field[@name='taxes_id']" position="attributes">
+            <attribute name="groups">benin_petro.group_benin_petro_comptable</attribute>  
+        </xpath>
+        <xpath expr="//field[@name='property_account_expense_id']" position="attributes">
+            <attribute name="groups">benin_petro.group_benin_petro_comptable</attribute>  
+        </xpath>
+        <xpath expr="//field[@name='supplier_taxes_id']" position="attributes">
+            <attribute name="groups">benin_petro.group_benin_petro_comptable</attribute>  
+        </xpath>
+        <xpath expr="//field[@name='property_account_creditor_price_difference']" position="attributes">
+            <attribute name="groups">benin_petro.group_benin_petro_comptable</attribute>  
+        </xpath>
+        <!-- 2 -->
+        <xpath expr="//field[@name='invoice_policy']" position="attributes">
+            <attribute name="groups">benin_petro.group_benin_petro_commercial</attribute>  
+        </xpath>
+        <!-- NOTES -->
+        <xpath expr="//group[@name='description']/separator[1]" position="attributes">
+            <attribute name="groups">benin_petro.group_benin_petro_commercial</attribute>  
+        </xpath>
+        <xpath expr="//field[@name='description_sale']" position="attributes">
+            <attribute name="groups">benin_petro.group_benin_petro_commercial</attribute>  
+        </xpath>
+
+
+        <xpath expr="//group[@name='description']/separator[2]" position="attributes">
+            <attribute name="groups">benin_petro.group_benin_petro_commercial</attribute>  
+        </xpath>
+        <xpath expr="//field[@name='description_purchase']" position="attributes">
+            <attribute name="groups">benin_petro.group_benin_petro_commercial</attribute>  
+        </xpath>
+        
+        <xpath expr="//group[@name='description']/separator[last()]" position="attributes">
+            <attribute name="groups">benin_petro.group_benin_petro_stock</attribute>  
+        </xpath>
+        <xpath expr="//field[@name='description_picking']" position="attributes">
+            <attribute name="groups">benin_petro.group_benin_petro_stock</attribute>  
+        </xpath>
+
+        <xpath expr="//notebook/page[2]" position="attributes">
+            <attribute name="groups">benin_petro.group_benin_petro_stock,benin_petro.group_benin_petro_commercial</attribute>  
+        </xpath>
+        <xpath expr="//notebook/page[last()]" position="attributes">
+            <attribute name="groups">benin_petro.group_benin_petro_stock,benin_petro.group_benin_petro_commercial</attribute>  
+        </xpath>
+        
+        
+		</field>
+	</record>
+    </data>
+</odoo>

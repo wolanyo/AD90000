@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="benin_petro.chiffre_affaire_report">
+           <t t-call="report.html_container">
+							
+					<div class="page" style="position:relative;height:600px;">
+					<style>
+
+						.table_info tr td{
+							border:1px solid black;
+							padding:5px 5px;
+							font-size:15px;
+						}
+						ul {margin:0px;}
+						
+						ul {
+						padding:0;
+						margin:0;
+						list-style-type:none;
+						}
+						li {
+						float:left; /*pour IE*/
+						border:1px solid black;
+						height:30px;
+						padding:5px 5px;
+						margin:0px;
+						font-size:15px;
+						}
+					</style>
+						
+					<div class="header" style="width:100%;min-height:100px;margin-top:0px;;padding:0;">
+						<img class="img img-responsive" src="/benin_petro/static/img/entete.jpg" />
+					</div>
+						<table style="width:100%;margin-top:40px;" >
+							<tr style="text-align:center">
+								<td><h2 style="margin:5px;">Chiffres d'affaires par client provenant des points de vente</h2></td>
+							</tr>
+							<tr style="text-align:center">
+								<td><h3 style="margin:5px;"><span t-esc="data['form']['type_vente']" /></h3></td>
+							</tr>
+						</table>
+						<table style="width:100%;margin-top:40px;font-size:16px;" >
+							<tr >
+								<td><strong>Date début :</strong></td>
+								<td><span t-esc="data['form']['date_debut']" /></td>
+								<td><strong>Date Fin :</strong></td>
+								<td><span t-esc="data['form']['date_fin']" /></td>
+							</tr>
+						</table>
+                        <div class="row" style="margin-top:40px;">
+							<div class="col-xs-6">
+								<table style="width:100%" class="table_info">
+
+								<tr >
+									<td><strong>GERANT</strong></td>
+									<td><span t-esc="data['form']['promoteur']" /></td>
+								</tr>
+								<tr >
+									<td><strong>ADRESSE</strong></td>
+									<td><span t-esc="data['form']['adresse']" /></td>
+								</tr>
+								<tr >
+									<td><strong>reference</strong></td>
+									<td><span t-esc="data['form']['point_vente']" /></td>
+								</tr>
+								<tr >
+									<td><strong>PRODUIT</strong></td>
+									<td><span t-esc="data['form']['produit']" /></td>
+								</tr>
+							</table>
+							</div>
+							<div class="col-xs-2">
+							
+							</div>
+							<div class="col-xs-4">
+								<table style="width:100%" class="table_info">
+
+								<tr >
+									<td><strong>Email</strong></td>
+									<td><span t-esc="data['form']['email']" /></td>
+								</tr>
+								<tr >
+									<td><strong>Telephone</strong></td>
+									<td><span t-esc="data['form']['telephone']" /></td>
+								</tr>
+							</table>
+							</div>
+						</div>
+						<div class="row" style="margin-top:40px;">
+							<div class="col-xs-12" style="height:500px;">
+								
+								<div style="margin-left:5px;margin:0px;padding:0px;">
+                                    <ul >
+                                        <li  style="width:100px"><strong>Produit</strong></li>
+                                        <li style="width:210px"><strong>Clients</strong></li>
+                                        <li style="width:100px"><strong>Quantité</strong></li>
+                                        <li style="width:130px"><strong>Montant HT</strong></li>
+                                        <li style="width:100px"><strong>TVA</strong></li>
+                                        <li style="width:150px"><strong>MONTANT TTC</strong></li>
+								    </ul>
+								</div>
+								<t t-set="i" t-value="1"/>
+								<t t-foreach="data['form']['transactions']" t-as="line">
+									
+									<div style="margin-left:5px;margin:0px;padding:0px;">
+                                    <ul >
+                                        <li  style="width:100px"><span t-esc="line"></span></li>
+                                        <li style="width:210px"><strong></strong></li>
+                                        <li style="width:100px"><strong>total prod</strong></li>
+                                        <li style="width:130px"><strong>total</strong></li>
+                                        <li style="width:100px"><strong>total</strong></li>
+                                        <li style="width:150px"><strong>total</strong></li>
+								    </ul>
+									</div>
+									<t t-foreach="line_value" t-as="v">
+										<t t-if="i == 13">
+											<div style="margin-left:5px;margin:0px;padding:0px;">
+											 <ul style="margin-top:400px!important;display:inline-block">
+												<li style="width:100px"></li>
+												<li style="width:210px"><span t-esc="v_value['client']"></span></li>
+												<li style="width:100px"><span t-esc="v_value['qte']"></span></li>
+												<li style="width:130px"><span t-esc="v_value['montant_horstaxe']" t-esc-options='{"widget": "monetary", "display_currency": "currency"}'></span></li>
+												<li style="width:100px"><span t-esc="v_value['tva']"></span></li>
+												<li style="width:150px"><span t-esc="v_value['montant_ttc']"></span></li>
+											</ul>
+											</div>
+										</t>
+										<t t-if="i == 36">
+											<div style="margin-left:5px;margin:0px;padding:0px;">
+											 <ul  style="margin-top:400px!important;display:inline-block">
+												<li style="width:100px"></li>
+												<li style="width:210px"><span t-esc="v_value['client']"></span></li>
+												<li style="width:100px"><span t-esc="v_value['qte']"></span></li>
+												<li style="width:130px"><span t-esc="v_value['montant_horstaxe']"></span></li>
+												<li style="width:100px"><span t-esc="v_value['tva']"></span></li>
+												<li style="width:150px"><span t-esc="v_value['montant_ttc']"></span></li>
+											</ul>
+											<t t-set="i" t-value="13"/>
+											</div>
+											<p style="page-break-after:always;">   </p>
+										</t>
+                                       <t t-if="i != 36 and i != 13">
+											<div style="margin-left:5px;margin:0px;padding:0px;">
+											 <ul >
+												<li style="width:100px"></li>
+												<li style="width:210px"><span t-esc="v_value['client']"></span></li>
+												<li style="width:100px"><span t-esc="v_value['qte']"></span></li>
+												<li style="width:130px"><span t-esc="v_value['montant_horstaxe']"></span></li>
+												<li style="width:100px"><span t-esc="v_value['tva']"></span></li>
+												<li style="width:150px"><span t-esc="v_value['montant_ttc']"></span></li>
+											</ul>
+											</div>
+											<p style="page-break-after:always;">   </p>
+										</t>
+										<t t-set="i" t-value="i+1"/>
+                                    </t>
+									<div style="page-break-after:auto;"></div>
+                                </t>
+                                <ul>
+									<li colspan="2" style="text-align:center;width:310px"><strong>Total</strong></li>
+									<li style="width:100px"><strong><span t-esc="data['form']['total']['qte']"></span></strong></li>
+									<li style="width:130px"><strong><span t-esc="data['form']['total']['sum_montant_horstaxe']" ></span></strong></li>
+									<li style="width:100px"><strong><span t-esc="data['form']['total']['sum_tva']"></span></strong></li>
+									<li style="width:150px"><strong><span t-esc="data['form']['total']['sum_montant_ttc']"></span></strong></li>
+								</ul>
+								
+							</div>
+
+						</div>
+						<div style="margin-top:-10px"><strong>Date d'édition : <span t-esc="data['form']['print_date']"></span></strong></div>
+					
+					<div class="footer" style="width:100%;min-height:80px;margin-top:20px;">
+                        <img class="img img-responsive" src="/benin_petro/static/img/pied.jpg"  />
+                    </div>
+                    </div>
+                    
+                
+                
+					
+			</t>
+		
+		</template>
+		<report
+			id="chiffre_affaire_report_form"
+			string="Chiffres d'affaires par PDV"
+			model="benin_petro.wizard.chiffre_affaire"
+			report_type="qweb-pdf"
+			file="benin_petro.chiffre_affaire_report"
+			name="benin_petro.chiffre_affaire_report"
+			paperformat="paperformat_euro_landscape"/>
+    </data>
+</odoo>

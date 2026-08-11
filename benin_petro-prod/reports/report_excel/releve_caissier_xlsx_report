@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+                id="releve_tresorier_xlsx_report_xlsx"
+                model="benin_petro.releve_cassier_tresorier"
+                string="Relevé des comptes client"
+                report_type="xlsx"
+                name="releve_tresorier.xlsx"
+                file="releve_tresorier.xlsx"
+                attachment_use="False"
+        />
+    </data>
+</odoo>

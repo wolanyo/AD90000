@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="facture_hir_form" model="ir.ui.view">
+            <field name="name">Factures fournisseur</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='purchase_id']" position="after">
+                
+                    <field name="transfert_id" domain="[('is_done','=',False),('location_id','=',25)]" attrs="{'invisible': [('partner_id', '!=', 636)],'required': [('partner_id', '=', 636)]}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

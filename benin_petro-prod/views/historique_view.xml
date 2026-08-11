@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="form_benin_petro_recharge" model="ir.ui.view">
+            <field name="name">Recharge</field>
+            <field name="model">benin_petro.historique</field>
+            <field name="arch" type="xml">
+            <form string="Recharge" >
+            <header>
+            <!--<button name="annuler_recharge" string="Annuler" class="oe_highlight" type="object"
+                            confirm="Vous être sûr que vous voulez annuler ce recharge"
+                            attrs="{'invisible':['|',('verse_validate','=',True),'|',('state','=','annule'),('tres_validate','=',True)]}"
+                            />    -->     
+
+                    <!-- groups="benin_petro.group_benin_petro_chargeur,benin_petro.group_benin_petro_sous_chargeur"
+                        attrs="{'invisible':['|',('state','=','valide'),'|',('state','=','annule'),('id','=',False)]}" -->
+                 <field name="state" widget="statusbar" />
+            </header>
+                 <field name="id" invisible="1"/>
+                 <field name="verse_validate" invisible="1"/>
+                 <field name="tres_validate" invisible="1"/>
+                 <!-- <field name="flag" invisible="1" /> -->
+                    <group>
+                        <field name="sous_chargeur" string='Caissier' attrs="{'invisible':[('sous_chargeur','=',False)]}"/> 
+                        <field name="num_recharge"/>    
+                        <field name="diff" widget='monetary' />
+                        <field name="reste" widget='monetary' attrs="{'invisible':[('moyen_de_paiement','!=','A credit')]}" />
+                        <field name="create_date" string="Date de recharge"/>
+                        <field name="client_id" string='Client'  attrs="{'invisible':[('demande_credit','!=',None)]}"/>
+                        <field name="moyen_de_paiement"  attrs="{'invisible':[('demande_credit','!=',None)]}"/>
+                        <field name='produit'  attrs="{'invisible':[('demande_credit','!=',None)]}"/>
+                        <field name='facture_num'  attrs="{'invisible':[('demande_credit','!=',None)]}"/>
+                        <field name="document"  attrs="{'invisible':[('demande_credit','!=',None)]}"/>
+                        <field name="detail_id"  attrs="{'invisible':[('demande_credit','!=',None)]}"/>
+                        <field name="demande_credit"  attrs="{'invisible':[('demande_credit','=',False)]}"/>
+                        <!-- <field name="detail_id" string='Produit'> -->
+                        <!-- <field name='produit'/>                             -->
+                        <!-- </field> -->
+
+                        
+                    </group>
+                    <notebook attrs="{'invisible':[('moyen_de_paiement','!=','A credit')]}">
+                            <page string="Historique de paiement" >
+                                <field name="liste_paiement" >
+                                <tree>  
+                                    <field name="montant_credit" />
+                                    <field name="montant_reste" />
+                                    <field name="moyen_de_paiement" />
+                                    <field name="journal_id" />
+                                    <field name="create_date" string="Date"  />
+                                    <button type='object' name='print_report' string='Imprimer la facture' />
+                                </tree>
+                                </field>
+                            </page>
+                        </notebook>
+            </form>
+            </field>
+        </record>
+        <!-- TREE -->
+        <record id="historique_form" model="ir.ui.view">
+            <field name="name">Liste des recharges</field>
+            <field name="model">benin_petro.historique</field>
+            <field name="arch" type="xml">
+                <tree string="Recharges" create='false' edit='false' >
+                    <field name="num_recharge"/>      
+                    <field name="moyen_de_paiement"/>                  
+                    <field name="sous_chargeur" string='Caissier'/>                
+                    <field name="type_op" string="Type d'epération"/> 
+                    <!-- <field name="montant_init" widget='monetary' /> -->
+                    <field name="diff" widget='monetary' />
+                    <!-- <field name="montant_fin" widget='monetary'/> -->
+                    <field name="client_id" string='Client'/>
+                    <field name="create_date" string="Date de recharge"/>
+                </tree>
+            </field>
+           
+        </record>
+        <record id="view_recharge_search" model="ir.ui.view">
+			  <field name="name">recharge.search</field>
+			  <field name="model">benin_petro.historique</field>
+              <field name="type">search</field>
+			  <field name="arch" type="xml">
+                  <searh>
+                      <field name="sous_chargeur"></field>
+                      <group expand="0" string="Caissier">
+						<filter string="Caissier" domain="[]" context="{'group_by':'sous_chargeur'}"/>
+                      </group>
+                  </searh>
+			  </field>
+    	</record>
+        <record id="benin_petro_recharges_tree" model="ir.actions.act_window">
+            <field name="name">Liste des recharges</field>
+            <field name="res_model">benin_petro.historique</field>
+            <field name="domain">[('sous_chargeur','!=',False)]</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="historique_form" />
+        </record>
+
+        
+        
+    </data>
+</odoo>

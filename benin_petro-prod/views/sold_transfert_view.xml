@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Form -->
+        <record id="form_benin_petro_sold_transfert" model="ir.ui.view">
+            <field name="name">Transfert</field>
+            <field name="model">benin_petro.sold_transfert</field>
+             <field name="context">
+                {'readonly_by_pass': ['sold_compte', 'sold_carte_source','sold_carte_dis']}
+            </field>
+            <field name="arch" type="xml">
+                <form string="Transfert de Solde" >
+                <header>
+                    <button name="setValide" string="Valider"  class="oe_highlight" type="object" attrs="{'invisible':['|',('state','in',['annule','valide']),('id','=',False)]}" confirm="Voulez-vous vraiment valider ce transfert" />
+                    <button name="setAnnule" string="Annuler"  class="oe_highlight" type="object" confirm="Voulez-vous vraiment annuler ce transfert" attrs="{'invisible':['|',('state','in',['annule','valide']),('id','=',False)]}" />
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <field name="id" invisible="1"/>
+                        <group>
+                            <group>
+                                <field name="type_transfert" attrs="{'readonly':[('id','!=',False)]}"/>
+                                <field name="carte_sr"  domain="[('owner_id','=',compte),('id','!=',carte_di)]" attrs="{'invisible':[('type_transfert','not in',['carte-compte','carte-carte'])],'required':[('type_transfert','in',['carte-compte','carte-carte'])],'readonly':[('id','!=',False)]}"/>
+                                <field name="sold_carte_source" attrs="{'invisible':[('carte_sr','=',False),('type_transfert','not in',['carte-compte','carte-carte'])],'readonly': True}"/>
+                                <field name="carte_di" string="Carte Destinataire" domain="[('owner_id','=',compte),('id','!=',carte_sr)]" attrs="{'invisible':[('type_transfert','not in',['compte-carte','carte-carte'])],'required':[('type_transfert','in',['compte-carte','carte-carte'])],'readonly':[('id','!=',False)]}"/>
+                                <field name="sold_carte_dis" attrs="{'invisible':[('type_transfert','not in',['compte-carte','carte-carte']),('carte_di','=',False)],'readonly': True}"/>
+                                <field name="montant" required="1"  attrs="{'invisible':[('type_transfert','=',False)],'readonly':[('id','!=',False)]}"/>
+                            </group>
+                            <group>
+                                <field name="sold_comptee" readonly="1"/>
+                                <field name="compte" invisible="1" required="1"/>
+                            </group>
+                        
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- tree -->
+        <record id="tree_benin_petro_sold_transfert" model="ir.ui.view">
+            <field name="name">Liste des Transferts</field>
+            <field name="model">benin_petro.sold_transfert</field>
+            <field name="arch" type="xml">
+                <tree string="Liste des Transferts">
+                    <field name="code_tran"/>
+                    <field name="type_transfert"/>
+                    <field name="state"/>
+                    <field name="create_date" string="Date du transfert"/>
+                    <field name="montant" />
+                </tree>
+            </field>
+        </record>
+        <record id="benin_petro_sold_transfert_action_tree" model="ir.actions.act_window">
+            <field name="name">Liste des Transferts</field>
+            <field name="res_model">benin_petro.sold_transfert</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help">Transferts...</field>
+            <field name="context">{'readonly_by_pass': True}</field>
+        </record>
+        <record id="benin_petro_sold_transfert_action_form" model="ir.actions.act_window">
+            <field name="name">Ajoute Transfert</field>
+            <field name="res_model">benin_petro.sold_transfert</field>
+            <field name="view_mode">form</field>
+            <field name="help">Transferts...</field>
+            <field name="context">{'readonly_by_pass': True}</field>
+        </record>
+    </data>
+</odoo>

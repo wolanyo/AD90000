@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+
+    <template id="repport_tv_print_s2">
+    <t t-call="report.html_container">
+        <t t-foreach="docs" t-as="doc">
+        <div class="header" style="min-height:100px;margin:0;padding:0;">
+						<img class="img img-responsive" src="/benin_petro/static/img/ent.jpg"/>
+		</div>	
+        <div class="page">
+<style>
+
+* {
+margin: 0;
+padding: 0;
+}
+.page{
+margin: 10px;
+}
+
+body {
+	margin: 0;
+	background-color: transparent;
+}
+
+.mb-5, .my-5 {
+    margin-bottom: 3rem!important;
+}
+.mb-4, .my-4 {
+    margin-bottom: 3rem!important;
+}
+mt-2, .my-2 {
+    margin-top: .5rem!important;
+}
+
+.bg-light{
+background-color: #f8f9fa!important;
+}
+.ml-auto, .mx-auto{
+    margin: auto!important;
+}
+.table td, .table th {
+    padding: .75rem;
+    vertical-align: middle;
+    border-top: 1px solid #dee2e6;
+}
+
+</style>
+            <div class="container">
+                <!-- Content here -->
+             <t t-set="i" t-value="1"/>
+             <t t-foreach="doc.remise_ids.getRepportData()" t-as="d">
+                    <t t-set="i" t-value="i+1"/>
+        </t>
+    <h5 class="text-md-left mt-5">PARAKOU , Le 18/10/2018</h5>
+    <h6 class="text-sm-left mt-4"  ><u>BORDERAUX DE LIVRAISON remise RELATIF  A SON ACHAT</u></h6>
+    <h4  class="font-weight-bold text-lg-left mt-2  mb-5"> <span > <u> CLIENT : </u> </span> <span t-field="doc.client" />   </h4>
+    <table  class="table table-bordered">
+        <tr>
+
+            <td  class="font-weight-bold p-3 mb-2 bg-light text-dark" >COUPURE</td>
+            <td  class="font-weight-bold p-3 mb-2 bg-light text-dark">NBRE DE FEUILLETS</td>
+            <td t-att-rowspan="i"  class="align-middle" ><span class="align-self-center ml-auto"><span t-field="doc.client" ></span></span></td>
+            <td t-att-rowspan="i"   class="align-middle p-3 mb-2 bg-light text-dark ml-auto"><span class="font-weight-bold" ><span t-field="doc.remise_ids.montant_print" ></span></span></td>
+        </tr>
+        
+        <t t-foreach="doc.remise_ids.getRepportData()" t-as="d">
+        <tr>
+            
+                <td><span t-esc="d" /></td>
+                <td><span t-esc="d_value" /></td>
+        </tr>
+        </t>
+       
+
+
+
+    </table>
+    <div class="mx-auto text-center" style="width:500px,margin:20px;">
+            Arrêter le présent BL à la somme de quinze mille de francs CFA
+          </div>
+    
+       
+   
+            <div class="container"  style='margin:10px'>
+                    <div class="row font-weight-bold ">
+                      <div class="col-xs-6">
+                            Le livreur
+                      </div>
+                      <div class="col-xs-6 font-weight-bold ">
+                            La réceptionnaire
+                      </div>
+                     
+                    </div>
+                    <div class="row">
+                            <div class="col-xs-6">
+                                    SIGNATER
+                            </div>
+                            <div class="col-xs-6">
+                                    SIGNATER
+                            </div>
+                           
+                     </div>
+            </div>
+        </div>
+         </div>
+         <div class="footer" style="min-height:300px;">
+                	<img class="img img-responsive" src="/benin_petro/static/img/pd3.jpg"  /> 
+             </div>
+            </t>
+             </t>
+        </template>
+        <report
+                id="report_ss2"
+                string="BORDERAUX DE LIVRAISON remise"
+                model="benin_petro.tv_print"
+                report_type="qweb-pdf"
+                file="repport_tv_print_s2"
+                name="benin_petro.repport_tv_print_s2"
+                paperformat="paperformat_euro_landscape"
+        />
+    </data>
+</odoo>

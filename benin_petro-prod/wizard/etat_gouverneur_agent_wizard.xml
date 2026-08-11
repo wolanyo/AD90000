@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Form -->
+        <record id="etat_gouverneur_agent_wizard_formm" model="ir.ui.view">
+            <field name="name">FLUX DES AGENTS MONÉTIQUE</field>
+            <field name="model">benin_petro.wizard.etat_gouverneur_agent</field>
+            <field name="arch" type="xml">
+                <form string="Etat">
+                    <group col="2">
+                        <group string="Date début">
+                            <field name="start_date" />
+                        </group>
+                        <group string="Date fin">
+                            <field name="end_date" />
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="print_report" string="PDF" type="object" class="oe_highlight"/>
+                        <button string="Annuler" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+
+            </field>
+        </record>
+
+
+       <record model="ir.actions.act_window" id="etat_gouverneur_agent_wizard_form">
+            <field name="name">FLUX DES AGENTS MONÉTIQUE</field>
+            <field name="res_model">benin_petro.wizard.etat_gouverneur_agent</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="etat_gouverneur_agent_wizard_formm" />
+            <field name="target">new</field>
+        </record>
+
+         
+        
+</data>
+</odoo>

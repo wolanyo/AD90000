@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="benin_petro.etat_releve_compte_client_carte">
+           <t t-call="report.html_container">
+		   		<t t-set="data_report_margin_top" t-value="0" />
+		   		<t t-set="data_report_margin_bottom" t-value="12" />
+                <t t-set="data_report_header_spacing" t-value="9" />
+                <t t-set="data_report_dpi" t-value="110" />
+				<!-- <t t-call="report.internal_layout"> -->
+				
+				<div class="page" >
+					<div  style="width:100%;min-height:100px;margin-top:0px;;padding:0;">
+						<img class="img img-responsive" src="/benin_petro/static/img/entete.jpg" />
+					</div>
+					<style>
+						.table_info tr th{
+							font-size:14px;
+							border:1px solid black;
+							padding:5px 5px;
+						}
+						.table_info tr td{
+							border:1px solid black;
+							padding:5px 5px;
+							font-size:18px;
+							font-weight:normal!important;
+						}
+
+						.top_table tr td{
+							padding:10px 5px;
+						}
+
+					</style>
+					
+						
+					<div style="width:100%;text-align:center;font-size:20px;"><strong>Relevé des comptes clients par carte</strong></div>
+					<table class="top_table" style="width:100%;margin-top:40px;font-size:18px;" >
+						<tr>
+							<td><strong>Date début :</strong></td>
+							<td><span t-esc="data['form']['date_debut']" /></td>
+							<td><strong>Date Fin :</strong></td>
+							<td><span t-esc="data['form']['date_fin']" /></td>
+						</tr>
+						<tr>
+							<td><strong>Consommateur :</strong></td>
+							<td><span t-esc="data['form']['consommateur']" /></td>
+						</tr>
+					</table>
+
+					<div class="row" style="margin-top:40px;margin-bottom:20px;padding-left:20px;">
+						<table style="width:100%;" class="table table-condensed">
+							<tr>
+								<th><strong>Date d'exécution</strong></th>
+								<th><strong>Libelle</strong></th>
+								<th><strong>Débit</strong></th>
+								<th><strong>Crédit</strong></th>
+								<th><strong>Solde final</strong></th>
+							</tr>
+							<t t-foreach="data['form']['transactions']" t-as="line">
+								<tr>
+									<th><span t-esc="line['date_releve']"></span></th>
+									<th><span t-esc="line['libelle']"></span></th>
+									<th><span t-esc="line['debit']"></span></th>
+									<th><span t-esc="line['credit']"></span></th>
+									<th><span t-esc="line['solde']"></span></th>
+								</tr>
+							</t>
+							<tr>
+								<th colspan="2" style="text-align:center">Total</th>
+								<th><span t-esc="data['form']['total']['debit']"></span></th>
+								<th><span t-esc="data['form']['total']['credit']"></span></th>
+								<th><span t-esc="data['form']['total']['solde']"></span></th>
+							</tr>
+						</table>
+							
+                        <p style="page-break-before:always;">
+                        </p>
+					</div>
+				
+                     <div class="footer"   style="width:100%;margin-top:-150px;">
+                            <strong>Date d'édition : <span t-esc="data['form']['print_date']"></span></strong>
+                            <img class="img img-responsive" src="/benin_petro/static/img/pied.jpg"  />
+                    </div>
+
+                    </div>
+                    
+                
+                
+					
+			</t>
+		
+		</template>
+		<report
+			id="etat_releve_compte_client_carte_form"
+			string="Relevé des recharges sur cartes"
+			model="benin_petro.releve_compte"
+			report_type="qweb-pdf"
+			file="benin_petro.etat_releve_compte_client_carte"
+			name="benin_petro.etat_releve_compte_client_carte"
+			paperformat="paperformat_euro_landscape"/>
+
+
+        <template id="benin_petro.etat_releve_compte_client">
+           <t t-call="report.html_container">
+					
+							
+					<div class="page" style="position:relative;height:850px;">
+					<div class="header" style="width:100%;min-height:100px;margin-top:0px;;padding:0;">
+						<img class="img img-responsive" src="/benin_petro/static/img/entete.jpg" />
+					</div>
+					<style>
+						.table_info tr th{
+							font-size:14px;
+							border:1px solid black;
+							padding:5px 5px;
+						}
+						.table_info tr td{
+							border:1px solid black;
+							padding:5px 5px;
+							font-size:14px;
+							font-weight:normal!important;
+						}
+
+						.top_table tr td{
+							padding:10px 5px;
+						}
+
+					</style>
+					
+						
+					<div style="width:100%;text-align:center;font-size:20px;"><strong>Relevé des comptes clients</strong></div>
+					<table class="top_table" style="width:100%;margin-top:40px;font-size:18px;" >
+						<tr>
+							<td><strong>Date début :</strong></td>
+							<td><span t-esc="data['form']['date_debut']" /></td>
+							<td><strong>Date Fin :</strong></td>
+							<td><span t-esc="data['form']['date_fin']" /></td>
+						</tr>
+						<tr>
+							<td><strong>Client :</strong></td>
+							<td><span t-esc="data['form']['client']" /></td>
+						</tr>
+					</table>
+
+					
+					<div class="row" style="margin-top:40px;">
+						<div class="col-xs-12" style="height:630px;">
+						<table style="width:100%;" class="table_info">
+							<tr>
+								<th><strong>Date d'exécution</strong></th>
+								<th><strong>Libelle</strong></th>
+								<th><strong>Débit</strong></th>
+								<th><strong>Crédit</strong></th>
+								<th><strong>Solde final</strong></th>
+							</tr>
+							<t t-foreach="data['form']['transactions']" t-as="line">
+								<tr>
+									<th><span t-esc="line['date_releve']"></span></th>
+									<th><span t-esc="line['libelle']"></span></th>
+									<th><span t-esc="line['debit']"></span></th>
+									<th><span t-esc="line['credit']"></span></th>
+									<th><span t-esc="line['solde']"></span></th>
+								</tr>
+							</t>
+							<tr>
+								<th colspan="2" style="text-align:center">Total</th>
+								<th><span t-esc="data['form']['total']['debit']"></span></th>
+								<th><span t-esc="data['form']['total']['credit']"></span></th>
+								<th><span t-esc="data['form']['total']['solde']"></span></th>
+							</tr>
+						</table>
+					</div>
+					</div>
+					<div class="footer" style="width:100%;min-height:80px;margin-top:60px;">
+                        <img class="img img-responsive" src="/benin_petro/static/img/pied.jpg"  />
+                    </div>
+
+                    </div>
+                    
+                
+                
+					
+			</t>
+		
+		</template>
+		<report
+			id="etat_releve_compte_client_form"
+			string="Relevé des recharges sur cartes"
+			model="benin_petro.releve_compte"
+			report_type="qweb-pdf"
+			file="benin_petro.etat_releve_compte_client"
+			name="benin_petro.etat_releve_compte_client"
+			paperformat="paperformat_euro_landscape"/>
+    </data>
+</odoo>

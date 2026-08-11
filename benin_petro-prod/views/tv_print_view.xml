@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- model.name form view -->
+        <record id="benin_petro_tv_print_view_form" model="ir.ui.view">
+            <field name="name">benin_petro.tv_print.view.form</field>
+            <field name="model">benin_petro.tv_print</field>
+            <field name="arch" type="xml">
+                <form string="Impression">
+                    <header>
+                    <!--<button name='createPrints' type='object' string='create prints' groups="base.group_system"></button>
+                    <button name="createTypes" string='create types' type='object'   groups="base.group_system"></button>
+                    <button name='connnectToMySql' string='connect' type="object"   groups="base.group_system"></button>
+                    <button name='createClients' type='object' string='create clients'  groups="base.group_system"></button>-->
+                        <button name="setValide" string="Valider" class="oe_highlight btn btn-primary" type="object" attrs="{'invisible':[('state','=','valide')]}" confirm="Voulez-vous vraiment valider cet achat ?"/>
+                        <field name="state" widget="statusbar" />
+                    </header>
+                    <div style="padding:20px">
+                    <field name="id" invisible='1' />
+                    <h2><field name="ref" readonly='1'  attrs="{'invisible':[('id','=',False)]}" /></h2>
+                        <group>
+                            <group>
+                                <field name="client" required='1' attrs="{'readonly':[('state','=','valide')]}"/>
+                                <field name="quitance_tva" attrs="{'readonly':[('state','=','valide')]}"/>
+                                <field name="affiche_client" attrs="{'readonly':[('state','=','valide')]}"/>
+                                <field name="numero_quitance_tva" attrs="{'invisible':[('quitance_tva','=','NON')],'required':[('quitance_tva','=','OUI')]}"/>
+                                <field name="remise_type" attrs="{'readonly':[('state','=','valide')]}"/>
+                                <field name="document" />
+<!--                                <field name="plage_from" attrs="{'invisible':[('plage_from','=',False)],'readonly':[('state','=','valide')]}"/>-->
+<!--                                <field name="plage_to" attrs="{'invisible':[('plage_to','=',False)],'readonly':[('state','=','valide')]}"/>-->
+                            </group>
+                            <group>
+                                <field name="product" attrs="{'readonly':[('state','=','valide')]}"/>
+                                <field name="moyen_de_paiement" attrs="{'readonly':[('state','=','valide')]}"/>
+                                <field name="numero_cheque"  attrs="{'invisible':[('moyen_de_paiement','!=','cheque')],'readonly':[('state','=','valide')]}"/>
+                                <field name="numero_virement"  attrs="{'invisible':[('moyen_de_paiement','!=','virement')],'readonly':[('state','=','valide')]}"/>
+                                <field name="numero_versement"  attrs="{'invisible':[('moyen_de_paiement','!=','versement')],'readonly':[('state','=','valide')]}"/>
+                                <field name="journal_id" domain="[('type','=','cash')]" attrs="{'readonly':[('state','=','valide')]}"/>
+                                <field name="ref_nav" />
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="TV par coupure">
+                                <field name="details" attrs="{'readonly':[('state','=','valide')]}">
+                                    <tree editable="top">
+                                        <field name="tv_type" required='1' string="Coupure"/>
+                                        <field name="nbr_tv" sum='Totale Tickes' required='1'/>
+                                        <field name="imprime" readonly='1'/>
+                                        <field name="reste" readonly='1'/>
+                                        <field name="montant" sum='Totale a payer' readonly='1'/>
+                                        <field name="plage_from" readonly='1'/>
+                                        <field name="plage_to" readonly='1'/>
+                                        <button name="%(wizard_print_tv_action)d" type="action"  class='btn btn-primary' string="Générer le PDF d'impression" ></button>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string='Impressions des TV'>
+                                <field name="print_hestory_ids" readonly='1'>
+                                    <tree decoration-danger="state == 'imprime'">
+                                        <field name="tv_type"/>
+                                        <field name="nb_tv"/>
+                                        <field name="montant"/>
+                                        <field name="state" invisible='1'/>
+                                        <button type="object" name='print_tv' string="Imprimer" >
+                                        </button>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Remise à accorder en TV">
+                                    <field name="remise_ids"  readonly='1'>
+                                        <tree>
+                                            <field name="montant"/>
+                                            <field name="montant_rest"/>
+                                            <button name="%(wizard_print_tv_remise_action)d" type="action"  class='btn btn-primary' string="Générer" ></button>
+                                            <button type="object" name='print_tv' string="Imprimer" />
+                                        </tree>
+                                    </field>
+                            </page>
+                        </notebook>
+                        </div>
+                </form>
+            </field>
+        </record>
+        <!-- model.name tree view -->
+        <record id="benin_petro_tv_print_view_tree" model="ir.ui.view">
+            <field name="name">Achats de T.V</field>
+            <field name="model">benin_petro.tv_print</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="ref"/>
+                    <field name="client"/>
+                    <field name="total_tv"/>
+                    <field name="montant"/>
+                    <field name="create_date" string='Date de création'/>
+                </tree>
+            </field>
+        </record>
+        <!-- model.name action window -->
+        <record id="benin_petro_tv_prints_action" model="ir.actions.act_window">
+            <field name="name">Achats de T.V</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">benin_petro.tv_print</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_type">form</field>
+        </record>
+    </data>
+</odoo>

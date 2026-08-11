@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+		<template id="repport_template_blt_ticket">
+            <t t-call="report.html_container">
+				<t t-foreach="docs" t-as="doc">
+										
+					<div class="page" style="margin-top:20px;position:relative;height:900px;">
+                    <style>
+                        .table_facture tr th{
+                            border: 1px solid black;
+                            padding:5px 10px;
+                        }
+                        .table_facture tr td{
+                            border: 1px solid black;
+                            padding:5px 10px;
+                        }
+                        .table_facture{
+                            margin-top:10px;
+                            margin-bottom:10px;
+                            width:100%;
+                        }
+                        .table_taxe tr td{
+                            
+                            padding : 5px 10px!important;
+                            margin : 0px!important
+                        }
+                        .table_taxe tr{
+                            margin : 0px!important
+                        }
+                        .table_taxe{margin:0px;padding:0px;}
+						.table_produit{margin:0px;padding:0px;width:100%}
+						.table_produit tr td{
+                            border: 1px solid black;
+                            padding:5px 10px;
+                        }
+                        .table_facture_coupure{
+                            margin-top:10px;
+                            margin-bottom:10px;
+                            width:100%;
+                        }
+                        .table_facture_coupure tr th{
+                            border: 1px solid black;
+                            padding:10px 10px;
+                        }
+                        .table_facture_coupure tr td{
+                            border: 1px solid black;
+                            padding:10px 10px;
+                        }
+                    </style>
+                    <div class="header" style="width:100%;min-height:100px;margin-top:20px;;padding:0;">
+						<img class="img img-responsive" src="/benin_petro/static/img/entete.jpg"/>
+					</div>
+                    <div class="row" style="padding:10px 80px">
+                        <div class="col-xs-12">
+                            <div class="col-xs-6"></div>
+                            <div class="col-xs-6">
+                                <table class="table_facture">
+                                    <tr>
+                                        <td><strong>BORDERAU DE LIVRAISON N°</strong></td>
+                                        <td><span t-field='doc.historique_id.facture_num' ></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Date</strong></td>
+                                        <td><span t-field='doc.create_date' t-options='{"widget": "date"}' ></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>VILLE</strong></td>
+                                        <td>COTONOU</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="col-xs-6" style="margin:0px;padding:0px;">
+                                <table class="table_facture">
+                                    <tr>
+                                        <td><strong>Client</strong></td>
+                                        <td> <span t-field='doc.client' ></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Téléphone</strong></td>
+                                        <td><span t-field='doc.client.mobile' ></span></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-xs-6"></div>
+                        </div>
+                        <div class="col-xs-12" style="padding-left:10px;margin-top:50px;height:350px;border:1px solid balck">
+                            <table class="table_facture_coupure">
+                                <tr>
+                                    <th><strong>COUPURE </strong></th>
+                                    <th><strong>PLAGE </strong></th>
+                                    <th><strong>NOMBRE FEUILLES</strong></th>
+                                    <th><strong>MONTANT</strong></th>
+                                </tr>
+                                <t t-foreach="doc.details" t-as="d">
+                                <tr>
+                                        <td><span t-field="d.tv_type" /></td>
+                                        <td><span t-field="d.plage_from" /> à <span t-field="d.plage_to" /></td>
+                                        <td><span t-field="d.nbr_tv" /></td>
+                                        <td><span t-field="d.montant" /></td>
+                                </tr>
+                                </t>
+                                <tr>
+                                    <td style="border-left:none;border-right:none;border-bottom:none;"></td>
+                                    <td style="border-left:none;border-bottom:none;"></td>
+                                    <td>MONTANT TOTAL</td>
+                                    <td><span t-field="doc.montant" /></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-xs-12" style="margin-top:0px;margin-bottom:60px;" >
+                            <div class="col-xs-5" style="border:1px solid black;height:200px;margin:0px;padding:0px;">
+                                <div  class="col-xs-12" style="height:40px;border-bottom:1px solid black;margin:0px;padding:0px;text-align:center;line-height:40px;"><strong>LE RECEPTIONAIRE</strong></div>
+                                <div  class="col-xs-12" style="height:120px;border-bottom:1px solid black;margin:0px;padding:0px;"></div>
+                                <div  class="col-xs-12"  style="height:40px;margin:0px;padding:0px;text-align:center;line-height:40px;"><strong></strong></div>
+                            </div>
+                            <div class="col-xs-2"></div>
+                            <div class="col-xs-5" style="border:1px solid black;height:200px;margin:0px;padding:0px;">
+                                <div  class="col-xs-12" style="height:40px;border-bottom:1px solid black;margin:0px;padding:0px;text-align:center;line-height:40px;"><strong>LE LIVREUR</strong></div>
+                                <div  class="col-xs-12" style="height:120px;border-bottom:1px solid black;margin:0px;padding:0px;"></div>
+                                <div  class="col-xs-12"  style="height:40px;margin:0px;padding:0px;text-align:center;line-height:40px;"><strong><span t-field='doc.historique_id.sous_chargeur.access.name' ></span></strong></div>
+                            </div>
+                        </div>
+
+                        
+
+                    </div>
+
+                    <div class="footer" style="width:100%;height:80px;position:absolute:bottom:0px">
+                        <img class="img img-responsive" src="/benin_petro/static/img/pied.jpg"  />
+                    </div>	
+                    </div>
+				</t>
+			</t>
+		</template>
+
+
+
+
+			<report
+			id="report_bl_ticket"
+			string="Générer BL"
+			model="benin_petro.tv_print"
+			report_type="qweb-pdf"
+			file="repport_template_blt_ticket"
+			name="benin_petro.repport_template_blt_ticket"
+			paperformat="paperformat_euro_landscape"/>
+    </data>
+</odoo>

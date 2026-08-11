@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+        <!-- Form -->
+        <record id="form_benin_petro_commercial" model="ir.ui.view">
+            <field name="name">Commercial</field>
+            <field name="model">benin_petro.commercial</field>
+            <field name="arch" type="xml">
+                <form string="Commercial" >
+                <group>
+                    <field name="commercial"/>
+                </group>
+                    
+
+                    <notebook>
+	                    <page string="Liste des clients">
+                            <field name="clients_ids" readonly="1"/>
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+
+                <!-- tree -->
+        <record id="tree_benin_petro_commercial" model="ir.ui.view">
+            <field name="name">Liste des commercials</field>
+            <field name="model">benin_petro.commercial</field>
+            <field name="arch" type="xml">
+            <tree string="Point ventes">
+                <field name="commercial"/>
+                <field name="create_date" />
+            </tree>
+            </field>
+        </record>
+
+
+        <record id="benin_petro_commercial_action_tree" model="ir.actions.act_window">
+            <field name="name">Commercial</field>
+            <field name="res_model">benin_petro.commercial</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help">Commercial ...</field>
+        </record>
+
+    </data>
+</odoo>

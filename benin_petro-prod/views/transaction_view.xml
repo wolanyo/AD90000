@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+        <!-- Form -->
+        <record id="form_benin_petro_carte_consommation" model="ir.ui.view">
+            <field name="name">Transaction</field>
+            <field name="model">benin_petro.carte.consommation</field>
+            <field name="arch" type="xml">
+                <form string="Carte" create="false" edit="true"  delete="false" >
+
+                    <group>
+                        <group>
+                            <field name="point_vente_id"/>
+                            <field name="agent_id"/>
+                            <field name="carte_id" attrs="{'invisible':[('type_vente','!=','Vente par SUBLIME CARTE')]}"/>
+                            <field name="ticket_id" attrs="{'invisible':[('type_vente','!=','Vente par TV')]}"/>
+                            <field name="product_ids"/>
+                            <field name="total_hors_taxe" widget='monetary'/>
+                            <field name="total_tva" widget='monetary'/>
+                            <field name="quantite" widget='monetary'/>
+                            <field name="montant" widget='monetary'/>
+                        </group>
+
+                        <group>
+                            <field name="create_date" readonly="1" string="Date transaction"   />
+                            <field name="valider_par_agent" />
+                            <field name="valider_par_gerant"  />
+                            <field name="verse"  />
+                            <field name="immatriculation"  />
+                            <field name="type_vente"  />
+                            <field name="reste_carte" attrs="{'invisible':[('type_vente','!=','Vente par SUBLIME CARTE')]}" />
+                            <field name="montant_avant" attrs="{'invisible':[('type_vente','!=','Vente par SUBLIME CARTE')]}" />
+                            
+                        </group>
+                    </group>
+                        
+                    <notebook>
+                        <page string="Liste des tickets valeurs">
+                            <field name="ticket_ids">
+                                <tree create='false'>
+                                    <field name="num_serie"/>
+                                    <field name="num_serie_incr"/>
+                                    <field name="tv_type"/>
+                                    <field name="create_date" string='Date de Création' />
+                                    <field name="etat"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                    
+
+                </form>
+            </field>
+        </record>
+
+
+        <!-- tree -->
+        <record id="tree_benin_petro_carte_consommation" model="ir.ui.view">
+            <field name="name">Liste des transactions</field>
+            <field name="model">benin_petro.carte.consommation</field>
+            <field name="arch" type="xml">
+		    <tree string="Cartes" default_order='create_date desc' create="false" edit="false" delete="false" decoration-danger="state in ('annuler')">
+                <field name="point_vente_id"/>
+                <field name="agent_id"/>
+                <field name="carte_id" invisible="1"/>
+                <field name="type_vente"/>
+                <field name="product_ids"/>
+                <field name="montant" widget='monetary'/>
+                <field name="create_date" readonly="1" string="Date transaction"   />
+                 <field name="state" invisible="1"/>
+		    </tree>
+            </field>
+        </record>
+
+
+        <record id="carte_transaction_action_tree" model="ir.actions.act_window">
+            <field name="name">Liste des transactions</field>
+            <field name="res_model">benin_petro.carte.consommation</field>
+            <field name="view_mode">tree,form,graph</field>
+            <field name="help">Carte ...</field>
+        </record>
+
+                <record id="view_carte_search" model="ir.ui.view">
+			  <field name="name">consommation.search</field>
+			  <field name="model">benin_petro.carte.consommation</field>
+              <field name="type">search</field>
+			  <field name="arch" type="xml">
+                  <searh>
+                    <field name="product_ids"></field>
+                      <group expand="0" string="Type">
+						<filter string="Type de vente" domain="[]" context="{'group_by':'type_vente'}"/>
+						<filter string="Point de vente" domain="[]" context="{'group_by':'point_vente_id'}"/>
+						<filter string="Produit" domain="[]" context="{'group_by':'product_ids'}"/>
+                      </group>
+                  </searh>
+			  </field>
+    	</record>
+
+        <record id="carte_transaction_action_tree_client_carte" model="ir.actions.act_window">
+            <field name="name">Liste des transactions</field>
+            <field name="res_model">benin_petro.carte.consommation</field>
+            <field name="domain">[('type_vente','=','Vente par SUBLIME CARTE')]</field>
+            <field name="view_mode">tree,form,graph</field>
+            <field name="help">Ventes ...</field>
+        </record>
+        <record id="carte_transaction_action_tree_client_tv" model="ir.actions.act_window">
+            <field name="name">Liste des transactions</field>
+            <field name="res_model">benin_petro.carte.consommation</field>
+            <field name="domain">[('type_vente','=','Vente par TV')]</field>
+            <field name="view_mode">tree,form,graph</field>
+            <field name="help">Ventes ...</field>
+        </record>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          <!-- Form -->
+        <record id="form_benin_petro_carte_shift" model="ir.ui.view">
+            <field name="name">Transaction</field>
+            <field name="model">benin_petro.carte.shift</field>
+            <field name="arch" type="xml">
+                <form string="Carte" edit="false" >
+
+                    <group>
+                        <group>
+                            <field name="total"/>
+                            <field name="agent_id"/>
+                            <field name="create_date" string="Date du shift"/>
+                        </group>
+                        <group>
+                            <field name="agent_id"/>
+                            <field name="pointVente_id"/>
+                        </group>
+                        <field name="transaction_ids" string="Liste des transactions"/>
+                    </group>
+
+                </form>
+            </field>
+        </record>
+
+
+        <!-- tree -->
+        <record id="tree_benin_petro_shift_consommation" model="ir.ui.view">
+            <field name="name">Liste des shift</field>
+            <field name="model">benin_petro.carte.shift</field>
+            <field name="arch" type="xml">
+                <tree string="Cartes" create="false" edit="false">
+                            <field name="libele"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="carte_shift_action_tree" model="ir.actions.act_window">
+            <field name="name">Liste des shift</field>
+            <field name="res_model">benin_petro.carte.shift</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help">Carte ...</field>
+        </record>
+
+
+
+
+    </data>
+</odoo>

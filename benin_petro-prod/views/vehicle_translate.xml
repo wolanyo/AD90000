@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+        
+        <!-- fleet.vehicle inherit form view -->
+       
+        <record id="view_id_vehicle" model="ir.ui.view">
+            <field name="name">fleet.vehicle.inherit.view.form</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="inherit_id" ref="tms.fleet_vehicle_form_inherit_tms"/>
+            <field name="arch" type="xml">
+             <!-- Add your xpath here -->
+              
+              <field name="year_model" position="attributes">
+               <attribute name="string">L'anneé du modèle</attribute>
+                </field>
+
+                
+                 <field name="engine_id" position="attributes">
+                <attribute name="string">Moteur</attribute>
+                </field>
+                <!-- Add your xpath here -->
+                 <!-- <field name="operating_unit_id" position="attributes">
+               
+                <attribute name="string">hello</attribute>
+                </field> -->
+                  
+                 <field name="fleet_type" position="attributes">
+               
+                <attribute name="string">Type de véhicule</attribute>
+                </field>
+                 <field name="employee_id" position="attributes">
+               
+                <attribute name="string">Chauffeur</attribute>
+                </field>
+                <!--string="General Information"-->
+               <field name="serial_number" position="attributes">
+               
+                <attribute name="string">Numéro de série</attribute>
+                </field>
+
+                <!-- <field name="registration" position="attributes">
+               
+                <attribute name="string">1</attribute>
+                </field> -->
+                <field name="supplier_unit" position="attributes">
+               
+                <attribute name="string">Véhicule</attribute>
+                </field>
+                <field name="insurance_policy" position="attributes">
+               
+                <attribute name="string">Police d'assurance</attribute>
+                </field>
+                <field name="insurance_policy_data" position="attributes">
+               
+                <attribute name="string">Donneé de la police d'assurance</attribute>
+                </field>
+                 <field name="insurance_expiration" position="attributes">
+               
+                <attribute name="string">Date d'expiration</attribute>
+                </field>
+                 <field name="insurance_supplier_id" position="attributes">
+               
+                <attribute name="string">Assureur</attribute>
+                </field>
+                  <field name="insurance_days_to_expire" position="attributes">
+               
+                <attribute name="string">jours avant expiration</attribute>
+                </field>
+                 <xpath expr="//notebook/page[1]"  position="attributes">
+                             <attribute name="string">Information générale</attribute>
+                
+                </xpath>
+                 <xpath expr="//notebook/page[1]/group[2]"  position="attributes">
+                             <attribute name="string">Propriétés additionnelles</attribute>
+                
+                </xpath>
+                 <xpath expr="//notebook/page[2]"  position="attributes">
+                             <attribute name="string">Option moteur </attribute>
+                
+                </xpath>
+                      
+
+
+
+                 
+               
+                  
+                  
+
+
+
+
+
+
+
+
+
+
+
+
+                
+            </field>
+        </record>
+        <!-- fleet.vehicle inherit form view -->
+      
+        <record id="view_id" model="ir.ui.view">
+            <field name="name">fleet.vehicle.inherit.view.form</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
+            <field name="arch" type="xml">
+            
+             <xpath expr="//label[@for='tag_ids']"  position="attributes">
+                             <attribute name="string">Option du modèle </attribute>
+                
+                </xpath>
+                <!-- <xpath expr="//button[@name='get_driver_license_info']"  position="attributes">
+                             <attribute name="string">get l</attribute>
+                
+                </xpath> -->
+            </field>
+        </record>
+    
+ 
+
+   
+    </data>
+    </odoo>
+     

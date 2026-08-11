@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Form -->
+        <record id="wizard_add_paiement_credit_form" model="ir.ui.view">
+            <field name="name">Ajouter paiement</field>
+            <field name="model">benin_petro.wizard.add.paiement.credit</field>
+            <field name="arch" type="xml">
+                <form string="Ajouter paiement">
+                <field name="id" invisible="1"/>
+                    
+                            <!-- <group>
+                            <field name="access" options="{'no_create': True}" domain="[('id','!=',access)]"/></group>
+                            -->
+                        <group col="2">
+                            <group>
+                                <field  name='montant' />
+                            </group>
+                            <group>
+                                <field name="moyen_de_paiement" />
+                            </group>
+                            <group>
+                                <field  name='journal_id'  domain="[('type','=','cash')]"  />
+                            </group>
+                        </group>
+                   
+                    <footer>
+                        <button name="recharger" string="Sauvegarder" type="object" class="oe_highlight"/>
+                        <button string="Annuler" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+
+            </field>
+        </record>
+
+
+        <act_window id="wizard_add_paiement_credit_action"
+                    name="Ajouter un paiement"
+                    res_model="benin_petro.wizard.add.paiement.credit"
+                    src_model="benin_petro.historique"
+                    key2="client_action_multi"
+                    view_mode="form"
+                    target="new"
+                    view_type="form"
+			/>
+
+
+
+
+
+    </data>
+</odoo>
+    

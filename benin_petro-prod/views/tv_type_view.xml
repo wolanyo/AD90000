@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    <!-- form view -->
+        <record id="benin_petro_tv_type_view_form" model="ir.ui.view">
+            <field name="name">benin_petro.tv_type.view.form</field>
+            <field name="model">benin_petro.tv_type</field>
+            <field name="arch" type="xml">
+                <form string="Ticket Valeur Type">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="type_name"/>
+                            </group>
+                            <group>
+                                <field name="montant" widget='monetary' options="{'currency_field': 'currency_id'}" />
+                            </group>
+                            <group>
+                                <field name="libelle"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- tree view -->
+        <record id="benin_petro_tv_type_view_treeee" model="ir.ui.view">
+            <field name="name">Types de coupures</field>
+            <field name="model">benin_petro.tv_type</field>
+            <field name="arch" type="xml">
+                <tree create='true'>
+                    <field name="type_name"/>
+                    <field name="montant"/>
+                    <field name="create_date" string='Date de Création' />
+                </tree>
+            </field>
+        </record>
+        <!-- action window -->
+        <record id="benin_petro_tv_type_action" model="ir.actions.act_window">
+            <field name="name">Liste des Types des Coupures</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">benin_petro.tv_type</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_type">form</field>
+        </record>
+
+    </data>
+</odoo>

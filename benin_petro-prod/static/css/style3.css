@@ -1,0 +1,671 @@
+.oe_form_notaire_warning {
+background: #e21b1b;
+border-bottom: 1px solid #000;
+padding: 4px;
+color: #fff;
+text-align: center;
+}
+.oe_button_hide {
+padding: 0!important;
+}
+
+.fields_infos{
+width:97%!important;
+}
+
+.div_notification{
+position: relative!important;
+margin: 0 -16px!important;
+}
+
+.openerp .oe_login .oe_login_dbpane {
+  display: none!important;
+}
+
+
+.openerp .oe_login .oe_login_bottom {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  text-shadow: 0 1px 1px #999999;
+  background-color: #4C66A4;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#4C66A4), to(#3C5182));
+  background-image: -webkit-linear-gradient(top, #4C66A4, #3C5182);
+  background-image: -moz-linear-gradient(top, #4C66A4, #3C5182);
+  background-image: -ms-linear-gradient(top, #4C66A4, #3C5182);
+  background-image: -o-linear-gradient(top, #4C66A4, #3C5182);
+  background-image: linear-gradient(to bottom, #4C66A4, #3C5182);
+}
+
+.openerp .oe_login button {
+  cursor: pointer;
+  padding: 6px 16px;
+  border: 1px solid #222222;
+  color: white;
+  margin: 0;
+  background-color: green;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(green), to(green));
+  background-image: -webkit-linear-gradient(top, green, green);
+  background-image: -moz-linear-gradient(top, green, green);
+  background-image: -ms-linear-gradient(top, green, green);
+  background-image: -o-linear-gradient(top, green, green);
+  background-image: linear-gradient(to bottom, green, green);
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  /*-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px 1px rgba(155, 155, 155, 0.4) inset;
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px 1px rgba(155, 155, 155, 0.4) inset;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px 1px rgba(155, 155, 155, 0.4) inset;*/
+}
+
+
+.oe_login_footer a {
+  display: none!important;
+}
+.oe_login_footer:after {
+  content: 'IT SHORE - 2014';
+}
+
+.oe_dialog_icon img {
+  display: none!important;
+}
+
+.oe_dialog_icon {
+  background-image: url("../img/warning_2.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+
+.openerp .oe_topbar {
+  background-color: #4C66A4!important;
+  background-image: none!important;
+}
+
+
+.openerp .oe_topbar .oe_dropdown_menu {
+  background: #3B5081;
+}
+
+.openerp .oe_topbar .oe_dropdown_menu li:hover {
+  background-color: green;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(green), to(green));
+  background-image: -webkit-linear-gradient(top, green, green);
+  background-image: -moz-linear-gradient(top, green, green);
+  background-image: -ms-linear-gradient(top, green, green);
+  background-image: -o-linear-gradient(top, green, green);
+  background-image: linear-gradient(to bottom, green, green);
+}
+
+.openerp button.oe_highlight {
+  font-weight: bold;
+  padding: 8px 27px;
+  background-color: green;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(green), to(green));
+  background-image: -webkit-linear-gradient(top, green, green);
+  background-image: -moz-linear-gradient(top, green, green);
+  background-image: -ms-linear-gradient(top, green, green);
+  background-image: -o-linear-gradient(top, green, green);
+  background-image: linear-gradient(to bottom, green, green);
+  /*-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px 1px rgba(155, 155, 155, 0.4) inset;
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px 1px rgba(155, 155, 155, 0.4) inset;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px 1px rgba(155, 155, 155, 0.4) inset;*/
+}
+
+.openerp button.oe_highlight:hover {
+  background-color: green;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(green), to(green));
+  background-image: -webkit-linear-gradient(top, green, green);
+  background-image: -moz-linear-gradient(top, green, green);
+  background-image: -ms-linear-gradient(top, green, green);
+  background-image: -o-linear-gradient(top, green, green);
+  background-image: linear-gradient(to bottom, green, green);
+}
+
+.openerp button.oe_highlight:active {
+  background-color: green;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(green), to(green));
+  background-image: -webkit-linear-gradient(top, green, green);
+  background-image: -moz-linear-gradient(top, green, green);
+  background-image: -ms-linear-gradient(top, green, green);
+  background-image: -o-linear-gradient(top, green, green);
+  background-image: linear-gradient(to bottom, green, green);
+}
+
+.openerp .oe_loading {
+  background: green;
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+}
+
+.ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-draggable .ui-resizable .ui-dialog-buttons .openerp{
+  width:350px!important;
+}
+
+tr .announcement_bar,
+.oe_leftbar .oe_footer,
+.oe_login_logo img {
+  display: none!important;
+}
+.oe_logo,
+.oe_login_logo{
+  width:180px;
+  height:90px;
+ /* background-image: url("../img/logo.png") ;*/
+  background-repeat: no-repeat;
+  background-position: center;
+
+}
+
+.oe_secondary_menu_section{
+color:green!important;
+font-size: 1.1em!important;
+margin-top: 20px!important;
+}
+.openerp .nav-pills li > a{
+font-weight: bold!important;
+}
+.openerp .nav-pills li > a:hover{
+background-image: linear-gradient(to bottom, green, green);
+  color:#fff!important;
+  border:none!important;
+  border-radius: 0px!important;
+}
+.openerp .oe_notebook{
+border-color: green!important;
+
+
+}
+.openerp .oe_notebook > li.ui-state-active > a{
+background-image: linear-gradient(to bottom, green, green);
+color:#ffffff!important;
+border: 1px solid green!important;
+border-bottom-color: transparent!important;
+/*box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(155, 155, 155, 0.4) inset;*/
+}
+
+.openerp .oe_notebook > li > a{
+color:green!important;
+font-size:15px!important;
+/*box-shadow: 5px 0px 1px 0px #656565!important;*/
+border-left: 1px solid green!important;
+border-right: 1px solid green!important;
+border-top: 1px solid green!important;
+padding-left: 11px!important;
+font-weight:bold!important;
+}
+
+.navbar-inverse{
+background: green;
+border-color:green!important;
+font-size:10px!important;
+font-weight:bold!important;
+}
+
+.navbar-inverse .navbar-nav > li > a{
+background: green;
+color:#fff!important;
+border: 1px solid green!important;
+}
+
+.navbar-inverse .navbar-nav > .active > a, 
+.navbar-inverse .navbar-nav > .active > a:hover, 
+.navbar-inverse .navbar-nav > .active > a:focus,
+.navbar-inverse .navbar-nav > li > a:hover, 
+.navbar-inverse .navbar-nav > li > a:focus{
+background: #fff;
+color:green!important;
+border: 1px solid #ffffff!important;
+border-radius: 5px!important;
+}
+
+
+/*
+.navbar-inverse .navbar-nav > li > a{
+color:#fff!important;
+}
+.navbar-inverse .navbar-nav > li > a:hover{
+background: green;
+color:#fff!important;
+border: 0px solid #ffffff!important;
+border-radius: 4px!important;
+}
+
+.navbar-inverse .navbar-nav > .open > a:focus{
+background-color:#000!important;
+color:#ffffff!important;
+border: 0px solid #ffffff!important;
+border-radius: 4px!important;
+}*/
+
+
+
+
+
+
+.navbar-nav > li{
+  margin-left: 10px!important;
+
+}
+#oe_main_menu_navbar li a{
+font-size: 15px!important;
+margin-bottom: 2px!important;
+}
+.navbar-inverse .navbar-nav > .open > a{
+background-color:#ffffff!important;
+color:green!important;
+border: 0px solid #ffffff!important;
+border-radius: 4px!important;
+}
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus{
+background-color: #CDCCCC!important;
+}
+
+.openerp .oe_notebook {
+  padding: 0 16px 0 0!important;
+}
+.openerp .oe_notebook > li {
+  margin-right: 2px!important;
+}
+.oe_group_right .oe_form_label{
+white-space: normal!important;
+}
+.oe_systray #oe_topbar_imbutton_icon:hover{
+color:green!important;
+}
+.oe_login_manage_db{
+display:none!important;
+}
+
+body.oe_single_form {
+display:none!important;
+}
+.oe_form_field_text textarea{
+min-height:90px!important;
+}
+.openerp .oe_leftbar > div a.oe_logo{
+  height: 128px!important;
+border-bottom: 1px solid green;
+}
+
+
+
+.openerp .oe_leftbar > div a.oe_logo .oe_logo_edit {
+  margin-top: 5px;
+}
+
+.oe_logo{
+  background: #fff!important;
+}
+
+.oe_topbar_item .oe_timezone_systray{
+  display:none!important;
+}
+
+.openerp .oe_view_manager_current > .oe_view_manager_header{
+
+  border-bottom: 1px solid #cacaca;
+  background-color: #F5f5f5;
+ /* background-image: -webkit-gradient(linear, left top, left bottom, from(#F0EEEE), to(#F0EEEE));
+  background-image: -webkit-linear-gradient(top, #F0EEEE, #F0EEEE);
+  background-image: -moz-linear-gradient(top, #F0EEEE, #F0EEEE);
+  background-image: -ms-linear-gradient(top, #F0EEEE, #F0EEEE);
+  background-image: -o-linear-gradient(top, #F0EEEE, #F0EEEE);
+  background-image: linear-gradient(to bottom, #F0EEEE, #F0EEEE);*/
+  /*-moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4), 0 0 9px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4), 0 0 9px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4), 0 0 9px rgba(0, 0, 0, 0.1);*/
+}
+
+.openerp .nav-pills > li.active > a,
+.openerp a.list-group-item.active > a{
+  background-color: green!important;
+}
+
+.openerp .oe_form .oe_form_group{
+  margin-bottom: 0;
+}
+
+.button_graph{
+cursor: pointer;
+background: #0e88ad;
+border: 1px solid #0e88ad;
+color: #fff;
+border-radius: 5px;
+padding: 5px;
+font-size: 17px;
+margin: 10px;
+}
+
+.button_graph:hover,
+.button_graph_focus,
+.button_graph_focus:hover{
+background: #fff;
+color: #0e88ad;
+}
+
+
+.titre_statistique{
+    background: #fff;
+    border: 1px solid green;
+    color: green;
+    border-radius: 5px;
+    padding: 5px 100px;
+    font-size: 20px;
+    margin: 10px;
+}
+
+
+.button_titre_graph{
+cursor: pointer;
+border-radius: 5px;
+padding: 5px;
+font-size: 17px;
+margin: 10px;
+background: #fff;
+border: 1px solid #006897;
+color: #006897;
+}
+
+
+.button_titre_graph_focus,
+.button_titre_graph_focus:hover,
+.button_titre_graph:hover{
+
+background: green;
+border: 1px solid #006897;
+color: #fff;
+}
+
+
+.menu-accordeon {
+  padding:0;
+  margin:0;
+  list-style:none;
+  text-align: center;
+  width: 100px;
+}
+.menu-accordeon ul {
+  padding:0;
+  margin:0;
+  list-style:none;
+  text-align: center;
+}
+.menu-accordeon li {
+   margin-bottom:2px;
+}
+.menu-accordeon li li {
+   max-height:0;
+   overflow: hidden;
+   transition: all .5s;
+   border-radius:0;
+   background: #444;
+   /*box-shadow: none;*/
+   border:none;
+   margin:0
+}
+.menu-accordeon a {
+  display:block;
+  text-decoration: none;
+  color: #fff!important;
+  padding: 8px 0;
+  font-family: verdana;
+  font-size:1.2em
+}
+.menu-accordeon ul li a, .menu-accordeon li:hover li a {
+  font-size:1em
+}
+/*.menu-accordeon li:hover {
+   background: #fff;
+   background-color:#0e88ad;
+}*/
+.menu-accordeon li li:hover {
+   background: #999;
+}
+#menu-accordeon ul li:last-child {
+   border-radius: 0 0 6px 6px;
+   border:none;
+}
+.menu-accordeon li:hover li {
+  max-height: 15em;
+}
+
+
+
+
+
+
+
+.openerp .oe_leftbar > div a.oe_logo img{
+    content:url("/contentieux/static/src/img/logo.png");
+    margin: 4px 5px;
+    margin-top: 22px;
+    width: 140px;
+    margin-top: 1px;
+}
+
+.openerp .oe_leftbar > div{
+    width: 226px;
+}
+
+.canvasjs-chart-toolbar img{
+    content:url("/contentieux/static/src/img/icons/download.png");
+    height: 15px!important;
+    width: 15px;
+    padding-bottom: 3px;
+} 
+
+#typeGraphCategorie,
+#typeGraphState,
+#typeGraphEtat,
+#typeGraphNature{
+
+}
+
+
+.openerp .oe_form .oe_form_required input:not([disabled]):not([readonly]), .openerp .oe_form .oe_form_required select:not([disabled]):not([readonly]), .openerp .oe_form .oe_form_required textarea:not([disabled]):not([readonly]){
+background-color: #d9dfe2 !important;
+}
+
+
+
+.oe_secondary_menus_container{
+background:#f5f5f5;
+}
+
+.openerp{
+font-size:13.5px;
+}
+
+.openerp .oe_leftbar{
+border-right: 1px solid green;
+}
+
+
+.openerp .oe_view_manager table.oe_view_manager_header h2{
+    line-height: 20px;
+}
+.openerp a.button:link, .openerp a.button:visited, .openerp button, .openerp .oe_button, .openerp input[type='submit']{
+    background: #ffffff;
+}
+
+
+.openerp ul.oe_form_status li.oe_active > .label, 
+.openerp ul.oe_form_status_clickable li.oe_active > .label {
+    color: #fff;
+    text-shadow: none;
+    font-weight: bold;
+}
+
+.openerp .oe_form_editable .oe_form .oe_form_field_date input,
+.openerp .oe_form_editable .oe_form .oe_form_field_float input{
+width: 100%!important;
+}
+.openerp button.oe_button button.oe_bold button.editme button.oe_highlight{display:none!important;}
+
+.openerp button.oe_button button.oe_bold button.delme{display:none!important;}
+
+#calendarEcheances a,
+#calendarEcheances a:hover{color:#fff;}
+
+.notebook_contencia .oe_form_field_many2many_list_row_add > a{
+font-weight: bold;
+}
+
+.openerp thead th.null {
+    border-left: 1px solid #dfdfdf;
+}
+
+.openerp .oe_form_field_one2many .oe_list_content > thead,
+.openerp .oe_form_field_many2many .oe_list_content > thead,
+.openerp .oe_list_content > thead{
+
+    background-image: linear-gradient(to bottom, #fff, #dedede);
+    border-top: 1px solid #cacaca;
+    border-left: 1px solid #cacaca;
+    border-right: 1px solid #cacaca;
+    border-bottom: none;
+}
+
+.openerp .oe_list_content > tbody > tr{
+border-top: 1px solid #cacaca;
+}
+
+
+.openerp .oe_list_content > tbody > tr:nth-child(odd){
+background:#fff;
+}
+
+
+/*#test>tbody>tr:last-child { background:#ff0000; }*/
+.notebook_contencia .oe_view_manager_header{display:none!important;}
+.openerp .oe_list_content > thead tr:first-child{
+	display:none;
+}
+
+.openerp .oe_list_content thead > .oe_list_header_columns{
+	display:table-row!important;
+}
+
+.html_contentieux .cleditorMain {
+    height: 150px!important;
+}
+
+
+
+.tableStatistique{
+    margin: 0 auto;
+    width: 50%;
+    margin-top: 30px;
+    background: #e8edff;
+    border-radius: 10px;
+    color: #669;
+}
+
+
+.tableStatistique tr:hover{background: #d0dafd;}
+.tableStatistique td{padding:5px 15px;border-top: 1px solid #fff;}
+.tableStatistique thead{background: #b9c9fe;color: #039;font-weight: bold;}
+.tableStatistique thead tr:hover{background: #b9c9fe;}
+.tableStatistique thead .headTDL{border-radius: 10px 0 0 0;text-align: center;}
+.tableStatistique thead .headTDR{border-radius: 0 10px 0 0;text-align: center;}
+
+.beforImport .tableStatistique thead{
+    background: #d7dae6;
+    color: #039;
+}
+
+.beforImport .tableStatistique {
+    background: #c3c4c5;
+    color: #000;
+    margin-bottom: 30px;
+}
+.beforImport .tableStatistique thead tr:hover{background: #d7dae6;}
+
+
+.msgok{
+	border: 1px solid green;
+	border-radius: 5px;
+	height: 40px;
+	padding: 10px 35px;
+	background: #77af77;
+	color: #fff;
+	font-weight: bold;
+	display:none;
+}
+
+.msgoff{
+	border: 1px solid #e01c1c;
+	border-radius: 5px;
+	height: 40px;
+	padding: 10px 35px;
+	background: #bb6e6e;
+	color: #fff;
+	font-weight: bold;
+	display:none;
+}
+
+.entiteImport{
+border-bottom: 2px solid #cacaca;
+    display: block;
+    padding: 10px 0 4px 0;
+    font-weight: bold;
+    color: green;
+
+}
+.dashboard_statistique_ul{display: inline-block;padding-left: 30px;}
+.dashboard_statistique_ul li{width:200px;height:80px;border-radius:10px;float:left;list-style:none;margin:10px;margin-left:0px;box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);position:relative;}
+.dashboard_statistique_ul li .div_left{width:100px;height:80px;position:absolute;left:0px;border-right:2px solid white;top: 10px;}
+.dashboard_statistique_ul li .div_right{width:170px;height:100px;position:absolute;padding:10px;padding-left: 21px;}
+.dashboard_statistique_ul li:nth-child(1){background-color:#1565c0}
+.dashboard_statistique_ul li:nth-child(2){background-color:#e53935}
+.dashboard_statistique_ul li:nth-child(3){background-color:#00bcd4}
+.dashboard_statistique_ul li:nth-child(4){background-color:#4caf50}
+.dashboard_statistique_ul li .div_right span{color:white;}
+.dashboard_statistique_ul li .div_right span:nth-child(1){font-size:20px;font-weight:bold;display: block;line-height:30px;}
+.dashboard_statistique_ul li .div_right span:nth-child(2){font-size:17px;font-weight:bold;display: block;line-height:30px;} 
+.dashboard_statistique_ul li .div_right span:nth-child(3){text-decoration:underline;cursor:pointer;} 
+.dashboard_statistique_ul li .div_left .money{width:60px;height:60px;border-radius:60px;background-color:white;margin: 10px auto;text-align: center;line-height: 60px;font-size: 40px;font-weight: bold;} 
+
+.top-div{width:100%;height:30px;background-color:#00bcd4;border-top-left-radius:5px;border-top-right-radius:5px;text-align:center;line-height:30px;color:white;font-weight:bold;font-size:16px;}
+.bottom-div{width:100%;height:260px;border:1px solid #ccc;}
+
+
+
+.oe_sidebar{display: none!important;}
+
+
+
+
+#showStaf{max-width: 900px;margin: 0 auto;position: relative;height: 19px;}
+
+
+#stafCheck{width: 300px;background: gainsboro;border-radius: 6px;position: absolute;right: 0;}
+
+
+
+
+
+.top-info{border: 1px solid #1676b7;padding: 4px;;background-color: #1676b7;color: white;margin:0px!important;margin-top:10px!important;}
+
+.content-client{padding:10px;border:1px solid #ccc!important;}
+
+.o_sub_menu_footer{display:none!important;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

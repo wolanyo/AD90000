@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Form -->
+        <record id="detail_consommation_par_carte_wizard_formm" model="ir.ui.view">
+            <field name="name">Détail des consommations par carte</field>
+            <field name="model">benin_petro.wizard.detail_consommation_par_carte</field>
+            <field name="arch" type="xml">
+                <form string="Etat">
+                    <group>
+                        <group string="Client">
+                            <field name="client_id" />
+                        </group>
+                        <group string="Produit">
+                            <field name="product_id" />
+                        </group>
+                        <group string="Date début">
+                            <field name="start_date" />
+                        </group>
+                        <group string="Date fin">
+                            <field name="end_date" />
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="print_report" string="PDF" type="object" class="oe_highlight"/>
+                        <button name="print_excel_report" string="EXCEL" type="object" class="oe_highlight"/>
+                        <button string="Annuler" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+
+            </field>
+        </record>
+
+
+       <record model="ir.actions.act_window" id="detail_consommation_par_carte_wizard_form">
+            <field name="name">Détail des consommations par carte</field>
+            <field name="res_model">benin_petro.wizard.detail_consommation_par_carte</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="detail_consommation_par_carte_wizard_formm" />
+            <field name="target">new</field>
+        </record>
+
+         
+       
+</data>
+</odoo>

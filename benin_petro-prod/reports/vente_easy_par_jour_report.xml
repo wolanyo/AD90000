@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="benin_petro.vente_easy_par_jour_report">
+           <t t-call="report.html_container">
+					
+							
+					<div class="page" style="position:relative;height:900px;">
+					<div class="header" style="width:100%;min-height:100px;margin-top:0px;;padding:0;">
+						<img class="img img-responsive" src="/benin_petro/static/img/entete.jpg" />
+					</div>
+					<style>
+
+						.table_info tr td{
+							border:1px solid black;
+							padding:10px 5px;
+							font-size:18px;
+						}
+
+					</style>
+					<div class="row" style="margin-top:40px;">
+							<div class="col-xs-6">
+								<table style="width:100%" class="table_info">
+
+								<tr >
+									<td><strong>Point de vente</strong></td>
+									<td><span t-esc="data['form']['point_vente']" /></td>
+								</tr>
+								</table>
+							</div>
+					</div>
+					<div class="row" style="margin-top:40px;">
+						<div class="col-xs-12" style="height:900px;">
+						<table style="width:100%;" class="table_info">
+							<tr>
+								<td colspan="2" style="text-align:center"><strong>VENTE PAT RECHARGE SUBLIME CARTE POINT DU JOUR : <span t-esc="data['form']['date']" ></span> </strong></td>
+							</tr>
+							<tr>
+								<td><strong>CLIENT</strong></td>
+								<td><strong>MONTANT</strong></td>
+							</tr>
+							<t t-foreach="data['form']['transactions']" t-as="line">
+							<tr>
+								<td><span t-esc="line_value['name']"></span></td>
+								<td><span t-esc="line_value['sum_total_vente']"></span></td>
+							</tr>
+							</t>
+							<tr>
+								<td><strong>Total</strong></td>
+								<td><strong><span t-esc="data['form']['total']['sum_total_vente']"></span></strong></td>
+							</tr>
+						</table>
+						</div>
+					</div>
+					
+						<div class="footer" style="width:100%;min-height:80px;margin-top:60px;">
+							<img class="img img-responsive" src="/benin_petro/static/img/pied.jpg"  />
+						</div>
+                    </div>
+                
+                
+					
+			</t>
+		
+		</template>
+		<report
+			id="vente_easy_par_jour_report_form"
+			string="Ventes journalières de sublime carte"
+			model="benin_petro.wizard.vente_easy_par_jour"
+			report_type="qweb-pdf"
+			file="benin_petro.vente_easy_par_jour_report"
+			name="benin_petro.vente_easy_par_jour_report"
+			paperformat="paperformat_euro_landscape"/>
+    </data>
+</odoo>

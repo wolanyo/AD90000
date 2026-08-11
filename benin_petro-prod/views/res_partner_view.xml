@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+        <!-- Form -->
+        <record id="res_partner_openacadmy_form" model="ir.ui.view">
+            <field name="name">Res partner</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+
+<xpath expr="//form" position="replace">
+			<form string="Partners">
+                <header>
+                    <button name="changeCompte" string="create Code"  class="oe_highlight" type="object" groups="base.group_system" invisible="1" />
+                    <button name="create_users_to_clients" string="create users"  class="oe_highlight" type="object" groups="base.group_system"  />
+                    <button name="setCodePine" string="Générer mot de passe"  class="oe_highlight" type="object" confirm="Voulez-vous vraiment générer un autre mot de passe ?" attrs="{'invisible':[('id','=',False)]}" groups="benin_petro.group_benin_petro_adminn,benin_petro.group_benin_petro_client" />
+                </header>
+                <sheet>
+                    <field name="auditeur_acc" invisible="1"/>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object"
+                                class="oe_stat_button" icon="fa-archive">
+                                <field name="compute_field" invisible="1"/>
+                            <field name="active" attrs="{'readonly': [('compute_field', '=', True)]}" widget="boolean_button"
+                                options='{"terminology": "archive"}'/>
+                        </button>
+                    </div>
+                    <field name="image" attrs="{'readonly': [('compute_field', '=', True)]}" widget='image' class="oe_avatar" options='{"preview_image": "image_medium", "size": [90, 90]}'/>
+                    <div class="oe_title">
+                        <field name="is_company" invisible="1"/>
+                        <field name="commercial_partner_id" invisible="1"/>
+                        <field name="company_type" widget="radio"
+                            class="oe_edit_only"
+                            options="{'horizontal': true}" attrs="{'readonly': [('compute_field', '=', True)]}"/>
+                        <h1>
+                            <field name="name" attrs="{'readonly': [('compute_field', '=', True)]}" default_focus="1" placeholder="Nom/Dénomination" required="1" />
+                        </h1>
+			
+                        <field name="email" attrs="{'readonly': [('compute_field', '=', True)]}" string="Email" placeholder="Email" widget="email" required='0'/>
+                        <field name="mysql_id" invisible="1"/>
+                        <field name="is_tv" invisible="1"/>
+                        
+                    </div>
+
+                    <group>
+<group>
+<!--
+    <field name="" widget=""/>
+    <field name="" widget=""/>-->
+  <field name="commercial"/>
+  <field name="codeClient"/>
+  <field name="client_type" widget="radio"   required='1'  groups="benin_petro.group_benin_petro_adminn,benin_petro.group_benin_petro_manager"/>
+    <field name="valuer_a_accorde"  attrs="{'invisible': [('client_type', '!=', 'client_acc')],'required':[('client_type', '=', 'client_acc')]}" />
+    <label for="street" string="Adresse"/>
+    <div class="o_address_format">
+        <field name="street" attrs="{'readonly': [('compute_field', '=', True)]}" placeholder="Adresse..." class="o_address_street" />
+        <field name="city" attrs="{'readonly': [('compute_field', '=', True)]}" placeholder="Ville" class="o_address_country" />
+        <field name="country_id" attrs="{'readonly': [('compute_field', '=', True)]}" placeholder="Pays" class="o_address_country" options='{"no_open": True, "no_create": True}'/>
+    </div>
+</group>
+<group>
+ 
+    <field name="mobile" attrs="{'readonly': [('compute_field', '=', True)]}" widget="phone" required="1"/>
+    <field name="phone" widget="phone" invisible="1"/>
+    <field name="password"  groups="base.group_system" invisible="0"/>
+    <field name="solde_compte" widget='monetary' attrs="{'readonly': [('compute_field', '=', True)]}"/>
+    <field name="solde_carte"  widget='monetary'/>
+    <field name="solde_compte_hide" attrs="{'readonly': [('compute_field', '=', True)],'invisible': [('compute_field', '=', True)]}"/>
+    <field name="user_ids" invisible="1"/>
+    <field name="id" invisible="1"/>
+    <field name="parent_id" invisible="1"/>
+    <field name="is_company" invisible="1"/>
+    
+</group>
+                    </group>
+
+
+                    <notebook colspan="4">
+                        
+<!-- cartes -->
+                        <page name='cartes' string="Cartes" >
+                            <field name="carte_ids"  >
+<tree string="Cartes"  decoration-success="state in ('brouillon','generee','activee')" decoration-danger="state in ('suspendu','perdu','expiree','terminee','annule')" editable="top">
+		<field name="id" invisible="1" />
+        <field name="click_create" invisible="1" />
+		<field name="num_serie" readonly="1" />
+		<field name="libelle" />
+		<field name="type_carte_id"/>
+		<field name="solde" widget='monetary'  readonly="1"/>
+		<field name="montant_affecter" attrs="{'readonly':['|',('id','=',False),('click_create','=',False)]}" />
+		<field name="date_activation" readonly="1" />
+		<field name="state" readonly="1"/>
+</tree>
+
+	<form>
+<header>
+<!-- cas noremale -->
+<button name="setToGenere" string="Générer cette carte" groups="benin_petro.group_benin_petro_manager,benin_petro.group_benin_petro_adminn,base.group_system"  class="oe_highlight" type="object" confirm="Voulez-vous vraiment générer cette carte ?" attrs="{'invisible':['|',('state','!=','brouillon'),('id','=',False)]}"/>
+
+<button name="setToAnnule" string="Annuler cette carte" groups="benin_petro.group_benin_petro_manager,benin_petro.group_benin_petro_adminn,base.group_system"  class="oe_highlight" type="object" confirm="Voulez-vous vraiment annuler cette carte ?" attrs="{'invisible':['|',('state','!=','brouillon'),('id','=',False)]}"/>
+
+<button name="setToEnd" string="Fin de service" groups="benin_petro.group_benin_petro_manager,benin_petro.group_benin_petro_adminn,base.group_system"  class="oe_highlight" type="object" confirm="Voulez-vous vraiment la mettre en fin service ?" attrs="{'invisible':[('state','not in',['generee','suspendu'])]}"/>
+
+<!-- cas extrem -->
+<button name="setToSuspendu" string="Suspendre cette carte" groups="benin_petro.group_benin_petro_manager,benin_petro.group_benin_petro_adminn,base.group_system" class="oe_highlight" type="object" confirm="Voulez-vous vraiment suspendre cette carte ?" attrs="{'invisible':[('state','!=','generee')]}"/>
+
+<button name="setToPerdu" string="Carte perdu" groups="benin_petro.group_benin_petro_manager,benin_petro.group_benin_petro_adminn,base.group_system"  class="oe_highlight" type="object" confirm="Etes-vous sûr que cette carte est perdu ?" attrs="{'invisible':[('state','!=','generee')]}"/>
+
+<field name="state" widget="statusbar"  statusbar_visible="activee,expiree,terminee"/>
+</header>
+                    <field name="id" invisible="1"/>
+                    <group>
+                        <group>
+			    <field name="num_serie" readonly="1" />
+                            <field name="libelle"/>
+                            <field name="type_carte_id"/>
+		    	    <field name="solde" widget='monetary'/>
+                        </group>
+
+                        <group>
+                            <field name="create_date" readonly="1" string="Date de création" />
+                            <field name="date_activation" readonly="1"  />
+                            <field name="date_perte" readonly="1"  attrs="{'invisible':[('state','!=','perdu')]}"/>
+                            <field name="date_suspension" readonly="1"  attrs="{'invisible':[('state','!=','suspendu')]}"/>
+                            <field name="date_expiration" readonly="1"  attrs="{'invisible':[('state','!=','expiree')]}"/>
+                            <field name="date_termine" readonly="1"  attrs="{'invisible':[('state','!=','terminee')]}"/>
+                        </group>
+                    </group>
+	</form>
+
+
+			    </field>
+                        </page>
+                        <page string='Tickets' >
+                            <field name="tv_ids"/>
+                        </page>
+                        <page string='Recharges SUBLIME CARTE' >
+                            <field name="recharge_ids">
+                                <tree string="Recharges SUBLIME CARTE">
+                                    <field name="create_date" string='Date de la recharge'/>
+                                    <field name="type_op"/>
+                                    <field name="debit" string="Débit"/>
+                                    <field name="credit" string="Crédit"/>
+                                    <field name="solde_carte" string="Solde"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string='Recharges TV' >
+                            <field name="recharge_tv_ids">
+                                <tree string="Recharges TV">
+                                    <field name="sous_chargeur"  />
+                                    <field name="diff"  />
+                                    <field name="create_date" string="Date de recharge"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string='Historique recharge kkiapay' >
+                            <field name="historiqueKkiapay" nolabel="1" create="false" >
+                            <tree>
+                                    <field name="transactionId" />
+                                    <field name="amount" />
+                                    <field name="country" />
+                                    <field name="create_date" string="Date modification" />
+                            </tree>
+                            </field>
+                        </page>
+                        <page name='Beneficiaire' string="Bénéficiaire" >
+                            <field name="beneficiaires_ids">
+                                <tree string="Bénéficiaire" attrs="{'readonly': [('compute_field', '=', True)]}" delete="true">
+                                    <field name="id" invisible="1" />
+                                    <field name="owner_id" invisible="1" />
+                                    <field name="name"/>
+                                    <field name="email" string="Email"/>
+                                    <field name="mobile" widget="phone" required="1"/>
+                                    <field name="phone" widget="phone"/>
+                                    <field name="taux"/>
+                                    <field name="bonus"/>
+
+                                </tree>
+                                <form>
+                                    <header>
+                                    <!-- cas noremale -->
+                                    </header>
+                                    <field name="id" invisible="1"/>
+                                    <group>
+                                        <group>
+                                            <field name="name"/>
+                                            <field name="email" string="Email"/>
+                                            <field name="mobile" widget="phone"/>
+                                            <field name="phone" widget="phone"/>
+                                            <field name="taux"/>
+                                        </group>
+                                        <group>
+                                            <div class="o_address_format">
+                                                <field name="adresse" placeholder="Adresse..." class="o_address_street" />
+                                                <field name="city" placeholder="Ville" class="o_address_country" />
+                                            </div>
+                                        </group>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        <!--Customer-->
+                    <page name='Consommateur' string="Consommateur" >
+                        <field name="customers_id">
+                            <tree string="Consommateur" delete="true" create="false">
+                                <field name="id" invisible="1" />
+                                <field name="name"/>
+                                <field name="email" string="Email"/>
+                                <field name="mobile" widget="phone"/>
+                                <field name="taux"/>
+                                <field name="bonus"/>
+                            </tree>
+                        </field>
+                    </page>
+                    <page name='internal_notes' string="Post-it" >
+                        <field name="comment" placeholder="Post-it"/>
+                    </page>
+			        <page string='Historique modifications' name="log" >
+                        <field name="log_ids" nolabel="1" create="false" >
+                        <tree>
+                                <field name="acteur_name" />
+                                <field name="champ" />
+                                <field name="old_version" />
+                                <field name="new_version" />
+                                <field name="create_date" string="Date modification" />
+                        </tree>
+                        <form>
+                        <group>
+                            <group>
+                                <field name="acteur_name" />
+                                <field name="champ" />
+                                <field name="create_date" string="Date de modification" />
+                            </group>
+                            <group>
+                                <field name="old_version" />
+                                <field name="new_version" />
+                            </group>
+                        </group>
+                        </form>
+                        </field>
+                    </page>
+
+                        <page name='sales_purchases' string="Ventes &amp; achats"  >
+                            <group name="container_row_2">
+                                <group string="Vente" name="sale" groups='benin_petro.group_benin_petro_commercial,benin_petro.group_benin_petro_auditeur'>
+                                    <field name="customer" groups='benin_petro.group_benin_petro_commercial'/>
+                                    <field name="user_id" groups='benin_petro.group_benin_petro_commercial'/>
+                                    
+                                <field name="notify_email" widget="radio" groups='benin_petro.group_benin_petro_commercial' attrs="{'readonly': [('compute_field', '=', True)]}"/>
+                                <field name="opt_out" groups='benin_petro.group_benin_petro_commercial' attrs="{'readonly': [('compute_field', '=', True)]}"/>
+                                <field name="message_bounce" groups='benin_petro.group_benin_petro_commercial'/>
+                                <!--<field name="property_product_pricelist" attrs="{'readonly': [('auditeur_acc', '=', True)]}" groups='benin_petro.group_benin_petro_commercial,benin_petro.group_benin_petro_auditeur'/>-->
+                                
+                                </group>
+                                <group string="Achat" name="purchase" groups='benin_petro.group_benin_petro_achateur'>
+                                    <field name="supplier" attrs="{'readonly': [('compute_field', '=', True)]}"/>
+                                </group>
+                                <group string="Misc">
+                                    <field name="ref" attrs="{'readonly': [('compute_field', '=', True)]}"/>
+                                    <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}" attrs="{'readonly': [('compute_field', '=', True)]}"/>
+                                </group>
+                            </group>
+
+                        </page>
+                        <page string="Comptabilité" name="accounting" attrs="{'invisible': ['|',('parent_id','!=',False)]}">
+                                <group>
+                                    <group string="Vente" name="acc_sale" groups='benin_petro.group_benin_petro_commercial'>
+                                        <field name="property_payment_term_id" widget="selection"/>
+                                        <field name="credit" groups="base.group_no_one"/>
+                                        <field name="trust"/>
+                                        
+                                    </group>
+                                    <group string="Achat" name="acc_purchase" groups='benin_petro.group_benin_petro_achateur'>
+                                        <field name="property_supplier_payment_term_id" widget="selection"/>
+                                        <field name="debit" groups="base.group_no_one"/>
+                                        <field name="currency_id" invisible="1"/>
+                                    </group>
+                                    <group string="Informations fiscales" name="fiscal_information" groups='benin_petro.group_benin_petro_comptable'>
+                                        <field name="property_account_position_id" options="{'no_create': True, 'no_open': True}"/>
+                                    </group>
+                                    <group string="Écritures comptables" name="accounting_entries" groups='benin_petro.group_benin_petro_comptable'>
+                                        <field name="property_account_receivable_id"/>
+                                        <field name="property_account_payable_id"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Comptabilité" name="accounting_disabled" attrs="{'invisible': ['|',('is_company','=',True),'|',('is_tv', '=', True),('parent_id','=',False)]}">
+                                <div>
+                                    <p>Accounting-related settings are managed on <button name="open_commercial_entity" type="object" string="the parent company" class="oe_link"/></p>
+                                </div>
+                            </page>
+                    </notebook>
+
+
+                </sheet>
+                </form>
+</xpath>
+
+               
+
+            </field>
+        </record>
+
+        <record id="view_partner_tree" model="ir.ui.view">
+            <field name="name">Liste des clients</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" />
+                    <field name="solde_compte" />
+                    <field name="create_date" string="Date de création" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="benin_petro_res_partne_action_tree" model="ir.actions.act_window">
+            <field name="name">Liste des clients</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_partner_tree" />
+            <field name="help">Point vente ...</field>
+        </record>
+        <record id="benin_petro_res_partne_action_tree_logged" model="ir.actions.act_window">
+            <field name="name">Liste des clients</field>
+            <field name="res_model">res.partner</field>
+            <field name="domain">[('access','=',uid)]</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="view_id" ref="view_partner_tree" />
+            <field name="help">Point vente ...</field>
+        </record>
+        <record id="benin_petro_res_partne_action_ticket" model="ir.actions.act_window">
+            <field name="name">Liste des clients</field>
+            <field name="res_model">res.partner</field>
+            <field name="domain">[('is_tv','=',True)]</field>
+             <field name="context">{'default_is_tv': True}</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="view_id" ref="view_partner_tree" />
+            <field name="help">Point vente ...</field>
+        </record>
+    </data>
+</odoo>

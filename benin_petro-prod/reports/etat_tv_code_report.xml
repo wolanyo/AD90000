@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="benin_petro.etat_tv_code_report">
+           <t t-call="report.html_container">
+		   		<t t-set="data_report_margin_top" t-value="0" />
+		   		<t t-set="data_report_margin_bottom" t-value="12" />
+                <t t-set="data_report_header_spacing" t-value="9" />
+                <t t-set="data_report_dpi" t-value="110" />
+				<!-- <t t-call="report.internal_layout"> -->
+				
+				<div class="page" >
+					<div  style="width:100%;min-height:100px;margin-top:0px;;padding:0;">
+						<img class="img img-responsive" src="/benin_petro/static/img/entete.jpg" />
+					</div>
+					
+					<style>
+
+						.table_info tr td ,.table_info tr th{
+							border:1px solid black;
+							padding:10px 5px;
+							font-size:13px
+						}
+						.table_info tr th,.table_info tr:last-child td{
+							font-weight:bold;
+						}
+						ul {margin:0px;}
+						
+						ul {
+						padding:0;
+						margin:0;
+						list-style-type:none;
+						}
+						.table tr td , .table tr th {
+						font-size:14px
+						}
+					</style>
+                    
+					<div style="text-align:center;"><h2>Détails retour tv</h2></div>
+					<div class="row" style="width:100%;margin:40px auto;font-size:24px;" >
+						<table style="width:100%;">
+							<tr>
+								<td><strong>Date début :</strong></td>
+								<td><span t-esc="data['form']['date_debut']" /></td>
+								<td><strong>Date Fin :</strong></td>
+								<td><span  t-esc="data['form']['date_fin']" /></td>
+							</tr>
+						</table>
+					</div>
+
+					<div class="row" style="margin-top:40px;margin-bottom:20px;padding-left:20px;">
+
+						<table class="table table-condensed">
+							<tr>
+								<th>TYPE</th>
+								<th>NUMERO TICKET</th>
+								<th>NUMERO TICKET</th>
+								<th>CLIENT</th>
+								<th>NOM CLIENT</th>
+								<th>PRODUIT</th>
+								<th>QTE</th>
+								<th>COUT UNITAIRE</th>
+								<th>MONTANT</th>
+								<th>STATION</th>
+								<th>NOM STATION</th>
+								<th>DATE 1</th>
+								<th>DATE 2</th>
+							</tr>
+							<t t-foreach="data['form']['transaction']" t-as="line">
+									<tr>
+										<td><span t-esc="line_value['ticket_type']"></span></td>
+										<td><span t-esc="line_value['numTicket']"></span></td>
+										<td><span t-esc="line_value['client']"></span></td>
+										<td><span t-esc="line_value['codeClient']"></span></td>
+										<td><span t-esc="line_value['produit']"></span></td>
+										<td><span t-esc="line_value['quantite']"></span></td>
+										<td><span t-esc="line_value['prixProduit']"></span></td>
+										<td><span t-esc="line_value['montant']"></span></td>
+										<td><span t-esc="line_value['station']"></span></td>
+										<td><span t-esc="line_value['stationName']"></span></td>
+										<td><span t-esc="line_value['dateDebut']"></span></td>
+										<td><span t-esc="line_value['dateFin']"></span></td>
+									</tr>
+
+							</t>
+
+						</table>
+						<p style="page-break-before:always;"></p>
+					</div>
+							
+						
+						
+					
+				<!-- <div  style="width:100%;"></div> -->
+                <!-- </div> -->
+
+				<div class="footer"   style="width:100%;margin-top:-150px">
+<!--						<strong>Date d'édition : <span t-esc="data['form']['print_date']"></span></strong>-->
+						<img class="img img-responsive" src="/benin_petro/static/img/pied.jpg"  />
+					</div>
+					
+				</div>
+				<!-- </t> -->
+			</t>
+		
+		</template>
+		<report
+			id="etat_tv_code_report_form"
+			string="Détails retour tv"
+			model="benin_petro.wizard.etat_tv_code_report"
+			report_type="qweb-pdf"
+			file="benin_petro.etat_tv_code_report"
+			name="benin_petro.etat_tv_code_report"
+			paperformat="paysage_euro_lowmargin"/>
+    </data>
+</odoo>

@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+ <record id="rule_benin_petro_model_res_user" model="ir.rule">
+            <field name="name">Client Access</field>
+            <field name="model_id" ref="base.model_res_users"/>
+            <field name="groups" eval="[(4,ref('benin_petro.group_benin_petro_client'))]"/>
+            <field name="domain_force">[('id','=',user.id),('company_id','=',user.company_id.id)]</field>
+            <field eval="False" name="perm_unlink"/>
+            <field eval="False" name="perm_write"/>
+            <field eval="True" name="perm_read"/>
+            <field eval="False" name="perm_create"/>
+        </record>
+        <record id="rule_benin_petro_model_agent" model="ir.rule">
+            <field name="name">Agent Access</field>
+            <field name="model_id" ref="model_benin_petro_agent"/>
+            <field name="domain_force">[('company_id','=',user.company_id.id)]</field>
+            <field eval="False" name="perm_unlink"/>
+            <field eval="False" name="perm_write"/>
+            <field eval="True" name="perm_read"/>
+            <field eval="False" name="perm_create"/>
+        </record>
+        <record id="rule_benin_petro_model_PARTNER" model="ir.rule">
+            <field name="name">PARTNER </field>
+            <field name="model_id" ref="model_res_partner"/>
+            <field name="domain_force">[('company_id','=',user.company_id.id)]</field>
+            <field eval="False" name="perm_unlink"/>
+            <field eval="False" name="perm_write"/>
+            <field eval="True" name="perm_read"/>
+            <field eval="False" name="perm_create"/>
+        </record>
+        <record id="rule_benin_petro_model_customer" model="ir.rule">
+            <field name="name">CUSTOMER </field>
+            <field name="model_id" ref="model_benin_petro_customer"/>
+            <field name="domain_force">[('company_id','=',user.company_id.id)]</field>
+            <field eval="False" name="perm_unlink"/>
+            <field eval="False" name="perm_write"/>
+            <field eval="True" name="perm_read"/>
+            <field eval="False" name="perm_create"/>
+        </record>
+        
+        <record id="rule_benin_petro_model_commercial" model="ir.rule">
+            <field name="name">COMMERCIAL </field>
+            <field name="model_id" ref="model_benin_petro_commercial"/>
+            <field name="domain_force">[('company_id','=',user.company_id.id)]</field>
+            <field eval="False" name="perm_unlink"/>
+            <field eval="False" name="perm_write"/>
+            <field eval="True" name="perm_read"/>
+            <field eval="False" name="perm_create"/>
+        </record>
+
+        <record id="rule_benin_petro_model_log" model="ir.rule">
+            <field name="name">LOG </field>
+            <field name="model_id" ref="model_benin_petro_log"/>
+            <field name="domain_force">[('company_id','=',user.company_id.id)]</field>
+            <field eval="False" name="perm_unlink"/>
+            <field eval="False" name="perm_write"/>
+            <field eval="True" name="perm_read"/>
+            <field eval="False" name="perm_create"/>
+        </record>
+        <record id="rule_benin_petro_model_shift" model="ir.rule">
+            <field name="name">LOG </field>
+            <field name="model_id" ref="model_benin_petro_carte_shift"/>
+            <field name="domain_force">[('company_id','=',user.company_id.id)]</field>
+            <field eval="False" name="perm_unlink"/>
+            <field eval="False" name="perm_write"/>
+            <field eval="True" name="perm_read"/>
+            <field eval="False" name="perm_create"/>
+        </record>
+        <record id="rule_benin_petro_model_carte" model="ir.rule">
+            <field name="name">Carte Access</field>
+            <field name="model_id" ref="model_benin_petro_carte"/>
+            <field name="domain_force">[('company_id','=',user.company_id.id)]</field>
+            <field eval="False" name="perm_unlink"/>
+            <field eval="False" name="perm_write"/>
+            <field eval="True" name="perm_read"/>
+            <field eval="False" name="perm_create"/>
+        </record>
+        <record id="rule_benin_petro_model_type_carte" model="ir.rule">
+            <field name="name">Type carte Access</field>
+            <field name="model_id" ref="model_benin_petro_type_carte"/>
+            <field name="groups" eval="[(4,ref('benin_petro.group_benin_petro_client'))]"/>
+            <field name="domain_force">[('company_id','=',user.company_id.id)]</field>
+            <field eval="False" name="perm_unlink"/>
+            <field eval="False" name="perm_write"/>
+            <field eval="True" name="perm_read"/>
+            <field eval="False" name="perm_create"/>
+        </record>
+        <record id="rule_benin_petro_model_transfert" model="ir.rule">
+            <field name="name">Transfert Access</field>
+            <field name="model_id" ref="model_benin_petro_sold_transfert"/>
+            <field name="groups" eval="[(4,ref('benin_petro.group_benin_petro_client'))]"/>
+            <field name="domain_force">[('compte','=',user.partner_id.id)]</field>
+            <field eval="False" name="perm_unlink"/>
+            <field eval="False" name="perm_write"/>
+            <field eval="True" name="perm_read"/>
+            <field eval="True" name="perm_create"/>
+        </record>
+
+        <record id="rule_benin_petro_model_tresorier" model="ir.rule">
+            <field name="name">Tresorier Access</field>
+            <field name="model_id" ref="model_benin_petro_chargeur"/>
+            <field name="groups" eval="[(4,ref('benin_petro.group_benin_petro_chargeur'))]"/>
+            <field name="domain_force">[('access.id','=',user.id),('company_id','=',user.company_id.id)]</field>
+            <field eval="False" name="perm_unlink"/>
+            <field eval="False" name="perm_write"/>
+            <field eval="True" name="perm_read"/>
+            <field eval="False" name="perm_create"/>
+        </record>
+
+        <record id="rule_benin_petro_model_bseneficiaire" model="ir.rule">
+            <field name="name">BENEFICIAIRE</field>
+            <field name="model_id" ref="model_benin_petro_bseneficiaire"/>
+            <field name="groups" eval="[(4,ref('benin_petro.group_benin_petro_chargeur'))]"/>
+            <field name="domain_force">[('company_id','=',user.company_id.id)]</field>
+            <field eval="False" name="perm_unlink"/>
+            <field eval="False" name="perm_write"/>
+            <field eval="True" name="perm_read"/>
+            <field eval="False" name="perm_create"/>
+        </record>
+
+        <record id="rule_benin_petro_model_sous_chargeurr" model="ir.rule">
+            <field name="name">Caissier Access</field>
+            <field name="model_id" ref="model_benin_petro_sous_chargeur"/>
+            <field name="groups" eval="[(4,ref('benin_petro.group_benin_petro_sous_chargeur'))]"/>
+            <field name="domain_force">[('access.id','=',user.id),('company_id','=',user.company_id.id)]</field>
+            <field eval="False" name="perm_unlink"/>
+            <field eval="False" name="perm_write"/>
+            <field eval="True" name="perm_read"/>
+            <field eval="False" name="perm_create"/>
+        </record>
+
+        <record id="rule_benin_petro_model_product_product" model="ir.rule">
+            <field name="name">Caissier Access</field>
+            <field name="model_id" ref="model_product_product"/>
+            <field name="domain_force">[('company_id','=',user.company_id.id)]</field>
+            <field eval="False" name="perm_unlink"/>
+            <field eval="False" name="perm_write"/>
+            <field eval="True" name="perm_read"/>
+            <field eval="False" name="perm_create"/>
+        </record>
+
+        <record id="rule_benin_petro_model_versement" model="ir.rule">
+            <field name="name">Caissier Versement</field>
+            <field name="model_id" ref="model_benin_petro_versement"/>
+            <field name="groups" eval="[(4,ref('benin_petro.group_benin_petro_sous_chargeur'))]"/>
+            <field name="domain_force">[('access.id','=',user.id),('company_id','=',user.company_id.id)]</field>
+            <field eval="False" name="perm_unlink"/>
+            <field eval="False" name="perm_write"/>
+            <field eval="True" name="perm_read"/>
+            <field eval="False" name="perm_create"/>
+        </record>
+
+        <record id="rule_benin_petro_model_versement_line" model="ir.rule">
+            <field name="name">Caissier Versement</field>
+            <field name="model_id" ref="model_benin_petro_versement_line"/>
+            <field name="groups" eval="[(4,ref('benin_petro.group_benin_petro_sous_chargeur'))]"/>
+            <field name="domain_force">[('company_id','=',user.company_id.id)]</field>
+            <field eval="False" name="perm_unlink"/>
+            <field eval="False" name="perm_write"/>
+            <field eval="True" name="perm_read"/>
+            <field eval="False" name="perm_create"/>
+        </record>
+
+        <record id="rule_benin_petro_model_tv_type" model="ir.rule">
+            <field name="name">Tv Type</field>
+            <field name="model_id" ref="model_benin_petro_tv_type"/>
+            <field name="groups" eval="[(4,ref('benin_petro.group_benin_petro_sous_chargeur'))]"/>
+            <field name="domain_force">[('company_id','=',user.company_id.id)]</field>
+            <field eval="False" name="perm_unlink"/>
+            <field eval="False" name="perm_write"/>
+            <field eval="True" name="perm_read"/>
+            <field eval="False" name="perm_create"/>
+        </record>
+
+        <record id="rule_benin_petro_model_tv_print" model="ir.rule">
+            <field name="name">Tv print</field>
+            <field name="model_id" ref="model_benin_petro_tv_print"/>
+            <field name="domain_force">[('company_id','=',user.company_id.id)]</field>
+            <field eval="False" name="perm_unlink"/>
+            <field eval="False" name="perm_write"/>
+            <field eval="True" name="perm_read"/>
+            <field eval="False" name="perm_create"/>
+        </record>
+
+        <!-- <record id="rule_benin_petro_model_ticket_valeur" model="ir.rule">
+            <field name="name">Ticket valeur</field>
+            <field name="model_id" ref="model_benin_petro_ticket_valeur"/>
+            <field name="domain_force">[('company_id','=',user.company_id.id)]</field>
+            <field eval="False" name="perm_unlink"/>
+            <field eval="False" name="perm_write"/>
+            <field eval="True" name="perm_read"/>
+            <field eval="False" name="perm_create"/>
+        </record> -->
+
+        <record id="rule_benin_petro_model_point_vente" model="ir.rule">
+            <field name="name">Tv Type</field>
+            <field name="model_id" ref="model_benin_petro_point_vente"/>
+            <field name="domain_force">[('company_id','=',user.company_id.id)]</field>
+            <field eval="False" name="perm_unlink"/>
+            <field eval="False" name="perm_write"/>
+            <field eval="True" name="perm_read"/>
+            <field eval="False" name="perm_create"/>
+        </record>
+
+
+<!--        <record id="rule_benin_petro_model_recharge" model="ir.rule">-->
+<!--            <field name="name">Caissier Recharge</field>-->
+<!--            <field name="model_id" ref="model_benin_petro_historique"/>-->
+<!--            <field name="groups" eval="[(4,ref('benin_petro.group_benin_petro_sous_chargeur'))]"/>-->
+<!--            <field name="domain_force">[('sous_chargeur.access.id','=',user.id),('company_id','=',user.company_id.id)]</field>-->
+<!--            <field eval="False" name="perm_unlink"/>-->
+<!--            <field eval="False" name="perm_write"/>-->
+<!--            <field eval="True" name="perm_read"/>-->
+<!--            <field eval="False" name="perm_create"/>-->
+<!--        </record>-->
+        
+        
+<!--        <record id="rule_benin_petro_model_recharge" model="ir.rule">-->
+<!--            <field name="name">Admin Recharge</field>-->
+<!--            <field name="model_id" ref="model_benin_petro_historique"/>-->
+<!--            <field name="groups" eval="[(4,ref('benin_petro.group_benin_petro_adminn'))]"/>-->
+<!--            <field name="domain_force">[('sous_chargeur.access.id','=',user.id),('company_id','=',user.company_id.id)]</field>-->
+<!--            <field eval="False" name="perm_unlink"/>-->
+<!--            <field eval="False" name="perm_write"/>-->
+<!--            <field eval="True" name="perm_read"/>-->
+<!--            <field eval="False" name="perm_create"/>-->
+<!--        </record>-->
+
+        <record id="rule_benin_petro_model_benin_petro_demande_credit_par_treso" model="ir.rule">
+            <field name="name">Demande crédit par trésorier</field>
+            <field name="model_id" ref="model_benin_petro_demande_credit_par_treso"/>
+            <field name="groups" eval="[(4,ref('benin_petro.group_benin_petro_chargeur'))]"/>
+            <field name="domain_force">[('tresorier.access.id','=',user.id),('company_id','=',user.company_id.id)]</field>
+            <field eval="False" name="perm_unlink"/>
+            <field eval="False" name="perm_write"/>
+            <field eval="True" name="perm_read"/>
+            <field eval="False" name="perm_create"/>
+        </record>
+        <record id="rule_benin_petro_model_benin_petro_demande_credit" model="ir.rule">
+            <field name="name">Demande crédit</field>
+            <field name="model_id" ref="model_benin_petro_demande_credit"/>
+            <field name="groups" eval="[(4,ref('benin_petro.group_benin_petro_sous_chargeur'))]"/>
+            <field name="domain_force">[('agent_monetique.access.id','=',user.id),('company_id','=',user.company_id.id)]</field>
+            <field eval="False" name="perm_unlink"/>
+            <field eval="False" name="perm_write"/>
+            <field eval="True" name="perm_read"/>
+            <field eval="False" name="perm_create"/>
+        </record>
+<!--        <record id="rule_benin_petro_model_benin_petro_historique" model="ir.rule">-->
+<!--            <field name="name">Historique</field>-->
+<!--            <field name="model_id" ref="model_benin_petro_historique"/>-->
+<!--            <field name="groups" eval="[(4,ref('benin_petro.group_benin_petro_chargeur'))]"/>-->
+<!--            <field name="domain_force">[('company_id','=',user.company_id.id)]</field>-->
+<!--            <field eval="False" name="perm_unlink"/>-->
+<!--            <field eval="False" name="perm_write"/>-->
+<!--            <field eval="True" name="perm_read"/>-->
+<!--            <field eval="False" name="perm_create"/>-->
+<!--        </record>-->
+
+<!--        <record id="rule_benin_petro_model_recharge_client" model="ir.rule">-->
+<!--            <field name="name">Caissier Recharge</field>-->
+<!--            <field name="model_id" ref="model_benin_petro_historique"/>-->
+<!--            <field name="groups" eval="[(4,ref('benin_petro.group_benin_petro_client'))]"/>-->
+<!--            <field name="domain_force">[('company_id','=',user.company_id.id)]</field>-->
+<!--            <field eval="False" name="perm_unlink"/>-->
+<!--            <field eval="False" name="perm_write"/>-->
+<!--            <field eval="True" name="perm_read"/>-->
+<!--            <field eval="False" name="perm_create"/>-->
+<!--        </record>-->
+
+        <record id="rule_benin_petro_model_transaction_client" model="ir.rule">
+            <field name="name">Caissier Recharge</field>
+            <field name="model_id" ref="model_benin_petro_carte_consommation"/>
+            <field name="groups" eval="[(4,ref('benin_petro.group_benin_petro_client'))]"/>
+            <field name="domain_force">[('company_id','=',user.company_id.id)]</field>
+            <field eval="False" name="perm_unlink"/>
+            <field eval="False" name="perm_write"/>
+            <field eval="True" name="perm_read"/>
+            <field eval="False" name="perm_create"/>
+        </record>
+
+        <record id="rule_benin_petro_model_transaction" model="ir.rule">
+            <field name="name">Liste transaction</field>
+            <field name="model_id" ref="model_benin_petro_carte_consommation"/>
+            <field name="domain_force">[('company_id','=',user.company_id.id)]</field>
+            <field eval="False" name="perm_unlink"/>
+            <field eval="False" name="perm_write"/>
+            <field eval="True" name="perm_read"/>
+            <field eval="False" name="perm_create"/>
+        </record>
+
+        <record id="rule_benin_petro_model_transaction_client_tv" model="ir.rule">
+            <field name="name">Caissier Recharge</field>
+            <field name="model_id" ref="model_benin_petro_carte_consommation"/>
+            <field name="groups" eval="[(4,ref('benin_petro.group_benin_petro_client'))]"/>
+            <field name="domain_force">[('ticket_id.client.access.id','=',user.id),('company_id','=',user.company_id.id)]</field>
+            <field eval="False" name="perm_unlink"/>
+            <field eval="False" name="perm_write"/>
+            <field eval="True" name="perm_read"/>
+            <field eval="False" name="perm_create"/>
+        </record>
+
+        <record id="rule_benin_petro_model_transaction_promoteur" model="ir.rule">
+            <field name="name">Caissier Recharge</field>
+            <field name="model_id" ref="model_benin_petro_carte_consommation"/>
+            <field name="groups" eval="[(4,ref('benin_petro.group_benin_petro_promoteur'))]"/>
+            <field name="domain_force">[('point_vente_id.promoteur.access.id','=',user.id),('company_id','=',user.company_id.id)]</field>
+            <field eval="False" name="perm_unlink"/>
+            <field eval="False" name="perm_write"/>
+            <field eval="True" name="perm_read"/>
+            <field eval="False" name="perm_create"/>
+        </record>
+
+    </data>
+</odoo>
+    

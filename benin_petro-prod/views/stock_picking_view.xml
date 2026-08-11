@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+        <!-- Form -->
+        <record id="res_tran_picking_form" model="ir.ui.view">
+            <field name="name">Transfert</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="before">
+                    
+                     <field name="type"/>
+                 <field name="hide" invisible='1'/>
+                 
+            </xpath>
+            
+
+<!--                 
+                <xpath expr="/form/sheet/notebook/page[1]" position="before">
+            
+       <page string="Les informationd du camion" name="camion_info"   attrs="{'invisible':[('hide', '=', True)]}">
+        
+       
+          
+         <field name="camion_id"    >
+         <tree  editable='top'  create='false' edit='false'> 
+                <field name="name" />
+                 <field name="matricule"/>
+                    <field name="date_mise_en_route"/>
+                    <field name="capacite" />
+                    <field name="conteneur_type"/>
+         </tree>
+         </field>
+        
+         
+    </page>
+        </xpath> -->
+
+            </field>
+        </record>
+        <record id="stock_picking_tree_view_cr" model="ir.ui.view">
+            <field name="name">stock.picking.tree.inherit.cr</field>
+            <field name="model">stock.picking</field>
+            <field name="priority" eval="2"/>
+            <field name="inherit_id" ref="stock.vpicktree"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="create">false</attribute>
+                </xpath>
+
+            </field>
+        </record>
+    <!-- account.account inherit form view -->
+    
+    
+    </data>
+    </odoo>

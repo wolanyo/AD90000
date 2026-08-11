@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+<t t-name="statistique_total_vente"></t>
+<t t-name="statistique_recharge_client"></t>
+<t t-name="statistique_stat_client"></t>
+<t t-name="statistique_stat_client_recharhe"></t>
+
+
+
+
+
+</templates>

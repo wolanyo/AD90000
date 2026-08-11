@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+         <record id="form_benin_petro_chargeur" model="ir.ui.view">
+            <field name="name">Trésorier</field>
+            <field name="model">benin_petro.chargeur</field>
+            <field name="arch" type="xml">
+            <form string="Chargeur" edit="false">
+                 <field name="id" invisible="1"/>
+                    <group>
+                        <group>
+                        <!-- <field string='test2' widget="radio"/> -->
+                        <field name='access'/>
+
+                         <field name="montant_plafond" widget='monetary'  required='1'  string="Plafond de la dotation SUBLIME CARTE"/>
+                         <field name="montant_plafond_tv" widget='monetary'  required='1'  string="Plafond de la dotation TV"/>
+                         <!-- <field name="rest" widget='monetary' readonly='1'/> -->
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Historique TV" >
+                                <field name="historique_tv" >
+                                        <tree create='false'>
+                                            <field name="create_date" string='Date de la recharge'/>
+                                            <field name="type_op"/>
+                                            <field name="debit" string="Débit"/>
+                                            <field name="credit" string="Crédit"/>
+                                            <field name="montant_fin" string="Solde"/>
+                                            
+                                        </tree>
+                                    
+                                </field>
+                        </page>
+                        <page string="Historique sublime carte">
+                                <field name="historique_sublim" >
+                                        <tree create='false'>
+                                            <field name="create_date" string='Date de la recharge'/>
+                                            <field name="type_op"/>
+                                            <field name="debit" string="Débit"/>
+                                            <field name="credit" string="Crédit"/>
+                                            <field name="montant_fin" string="Solde"/>
+                                            
+                                        </tree>
+                                    
+                                </field>
+                        </page>
+                        <page string="Liste des agents monétique" name="sous_chargeur">
+                                <field name="sous_chargeur">
+                                        <tree>
+                                            <field name="access" string="Agent monétique"/>
+                                            <field name="montant_plafond"/>
+                                        </tree>
+                                    
+                                </field>
+                        </page>
+                    </notebook>
+                    
+            </form>
+
+            </field>
+         </record>
+
+
+        <!-- tree -->
+        <record id="tree_benin_petro_chargeur" model="ir.ui.view">
+            <field name="name">Liste des Trésoriers </field>
+            <field name="model">benin_petro.chargeur</field>
+            <field name="arch" type="xml">
+                <tree string="Chargeurs" >
+                    
+                     <!-- <field name="name" string="Nom complet"/>-->
+                     <field name="access" string='Trésorier'/> 
+                     <field name="montant_plafond" widget='monetary' string="Plafond de la dotation SUBLIME CARTE "/>
+                    <field name="montant_plafond_tv" widget='monetary' string="Plafond de la dotation T.V"/>
+                     <field name="write_date" string="Date modification"/>
+                     <!-- <field name="rest" widget='monetary'/> -->
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="benin_petro_chargeur_tree" model="ir.actions.act_window">
+            <field name="name">Trésoriers</field>
+            <field name="res_model">benin_petro.chargeur</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help">Trésoriers ...</field>
+        </record>
+
+
+    </data>
+</odoo>

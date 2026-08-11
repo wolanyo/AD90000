@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+        <!-- Form -->
+        <record id="res_tran_openacadmy_form" model="ir.ui.view">
+            <field name="name">Transfert</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="before">
+                    <field name="image1"/>
+                    <field name="type"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

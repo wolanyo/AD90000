@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    
+
+    <menuitem id="menu_promoteur" name="Promoteur" sequence="3" action="retour_bon_consommation_wizard_form" groups="group_benin_petro_promoteur" />
+
+    <menuitem id="menu_promoteur_demande_pfi"
+		parent="menu_promoteur"
+		name="DEMANDE DE PFI"
+		groups="benin_petro.group_benin_petro_promoteur"
+		action="benin_petro_point_vente_action_tree_consommation_carte" sequence="5"/>
+
+    <menuitem id="menu_promoteur_demande_pfi_carte"
+		parent="menu_promoteur_demande_pfi"
+		name="Demande de PFI crédit Carte I"
+		groups="benin_petro.group_benin_petro_promoteur"
+		action="benin_petro_point_vente_action_tree_consommation_carte" sequence="5"/>
+        
+    <menuitem id="menu_promoteur_demande_pfi_tv"
+		parent="menu_promoteur_demande_pfi"
+		name="Demande de PFI TV"
+		groups="benin_petro.group_benin_petro_promoteur"
+		action="benin_petro_point_vente_action_tree_consommation_tv" sequence="5"/>
+
+
+    <menuitem id="menu_promoteur_vente"
+		parent="menu_promoteur"
+		name="Vente par tv et carte carburant"
+		groups="benin_petro.group_benin_petro_promoteur"
+		action="carte_transaction_action_tree_client_carte" sequence="5"/>
+
+    <menuitem id="menu_promoteur_vente_carte"
+		parent="menu_promoteur_vente"
+		name="Vente par Carte"
+		groups="benin_petro.group_benin_petro_promoteur"
+		action="carte_transaction_action_tree_client_carte" sequence="5"/>
+    <menuitem id="menu_promoteur_vente_tv"
+		parent="menu_promoteur_vente"
+		name="Vente pat TV"
+		groups="benin_petro.group_benin_petro_promoteur"
+		action="carte_transaction_action_tree_client_tv" sequence="5"/>
+
+
+    <menuitem id="menu_promoteur_suivie"
+		parent="menu_promoteur"
+		name="Suivi des ventes sur la station par agent"
+		groups="benin_petro.group_benin_petro_promoteur"
+		action="agent_creation_credit_historique_tree2" sequence="5"/>
+
+    <menuitem id="menu_promoteur_suivie_carte"
+		parent="menu_promoteur_suivie"
+		name="Vente Carte"
+		groups="benin_petro.group_benin_petro_promoteur"
+		action="agent_creation_credit_historique_tree2" sequence="5"/>
+        
+    <menuitem id="menu_promoteur_suivie_tv"
+		parent="menu_promoteur_suivie"
+		name="Vente TV"
+		groups="benin_petro.group_benin_petro_promoteur"
+		action="agent_creation_credit_historique_tree2" sequence="5"/>
+
+
+        <menuitem id="menu_promoteur_tableau_bord"
+		parent="menu_promoteur"
+		name="Tableau de bord recapitulatif des ventes"
+		groups="benin_petro.group_benin_petro_promoteur"
+		action="agent_creation_credit_historique_tree2" sequence="5"/>
+
+    <menuitem id="menu_promoteur_tableau_bord_carte"
+		parent="menu_promoteur_tableau_bord"
+		name="Vente Carte"
+		groups="benin_petro.group_benin_petro_promoteur"
+		action="agent_creation_credit_historique_tree2" sequence="5"/>
+        
+    <menuitem id="menu_promoteur_tableau_bord_tv"
+		parent="menu_promoteur_tableau_bord"
+		name="Vente TV"
+		groups="benin_petro.group_benin_petro_promoteur"
+		action="agent_creation_credit_historique_tree2" sequence="5"/>
+
+
+
+    
+
+
+
+
+
+    </data>
+</odoo>

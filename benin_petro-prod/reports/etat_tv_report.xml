@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="benin_petro.etat_tv_report">
+           <t t-call="report.html_container">
+		   		<t t-set="data_report_margin_top" t-value="0" />
+		   		<t t-set="data_report_margin_bottom" t-value="12" />
+                <t t-set="data_report_header_spacing" t-value="9" />
+                <t t-set="data_report_dpi" t-value="110" />
+				<!-- <t t-call="report.internal_layout"> -->
+				
+				<div class="page" >
+					<div  style="width:100%;min-height:100px;margin-top:0px;;padding:0;">
+						<img class="img img-responsive" src="/benin_petro/static/img/entete.jpg" />
+					</div>
+					
+					<style>
+
+						.table_info tr td ,.table_info tr th{
+							border:1px solid black;
+							padding:10px 5px;
+							font-size:20px
+						}
+						.table_info tr th,.table_info tr:last-child td{
+							font-weight:bold;
+						}
+						ul {margin:0px;}
+						
+						ul {
+						padding:0;
+						margin:0;
+						list-style-type:none;
+						}
+						.table tr td , .table tr th {
+						font-size:17px
+						}
+					</style>
+                    
+					
+					<div style="width:100%;text-align:center;font-size:24px;"><strong>Client : </strong> <span t-esc="data['form']['client']" /> </div>
+					<div class="row" style="width:100%;margin:40px auto;font-size:24px;" >
+						<table style="width:100%;">
+							<tr>
+								<td><strong>Date début :</strong></td>
+								<td><span t-esc="data['form']['date_debut']" /></td>
+								<td><strong>Date Fin :</strong></td>
+								<td><span  t-esc="data['form']['date_fin']" /></td>
+							</tr>
+						</table>
+					</div>
+
+					<div class="row" style="margin:40px auto;padding-left:20px;">
+
+						<table style="width:100%" class="table_info">
+							<tr>
+								<th>COUPURE</th>
+								<th>NOMBRE UTILISE</th>
+								<th>NOMBRE NON UTILISE</th>
+								<th>NOMBRE TOTAL</th>
+							</tr>
+							<t t-foreach="data['form']['transactions']" t-as="line">
+									<tr>
+										<td><span t-esc="line"></span></td>
+										<td><span t-esc="line_value['util']"></span></td>
+										<td><span t-esc="line_value['nonutil']"></span></td>
+										<td><span t-esc="line_value['total']"></span></td>
+									</tr>
+
+							</t>
+							<tr>
+								<td>Total</td>
+								<td><span t-esc="data['form']['total']['util']"></span></td>
+								<td><span t-esc="data['form']['total']['nonutil']"></span></td>
+								<td><span t-esc="data['form']['total']['total']"></span></td>
+							</tr>
+							
+						</table>
+						<p style="page-break-before:always;">
+                            </p>
+					</div>
+							
+						
+						
+					
+				<!-- <div  style="width:100%;"></div> -->
+                <!-- </div> -->
+				
+				<div class="footer"   style="width:100%;margin-top:-150px;">
+						<strong>Date d'édition : <span t-esc="data['form']['print_date']"></span></strong>
+						<img class="img img-responsive" src="/benin_petro/static/img/pied.jpg"  />
+					</div>
+					
+				</div>
+				<!-- </t> -->
+			</t>
+		
+		</template>
+		<report
+			id="etat_tv_report_form"
+			string="Détail des consommations par carte"
+			model="benin_petro.wizard.etat_tv_report"
+			report_type="qweb-pdf"
+			file="benin_petro.etat_tv_report"
+			name="benin_petro.etat_tv_report"
+			paperformat="paperformat_euro_landscape"/>
+    </data>
+</odoo>

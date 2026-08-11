@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="paysage_euro_lowmargin" model="report.paperformat">
+        <field name="name">European A4 paysage</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">0</field>
+        <field name="margin_bottom">0</field>
+        <field name="margin_left">0</field>
+        <field name="margin_right">0</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">0</field>
+        <field name="dpi">80</field>
+        <field name="report_ids">report_carte</field>
+    </record>
+
+
+    <record id="paperformat_euro_landscape" model="report.paperformat"> 
+        <field name="name">European A4 Landscape</field> 
+        <field name="default" eval="True" /> 
+        <field name="format">A4</field> 
+        <field name="orientation">Portrait</field>
+        <field name="page_height">0</field> 
+        <field name="page_width">0</field> 
+        <field name="margin_top">0</field> 
+        <field name="margin_bottom">0</field> 
+        <field name="margin_left">0</field> 
+        <field name="margin_right">0</field> 
+        <field name="header_line" eval="False" /> 
+        <field name="header_spacing">0</field> 
+        <field name="dpi">80</field> 
+    </record> 
+
+</odoo>

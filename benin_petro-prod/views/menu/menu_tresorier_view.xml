@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- ///////// Menu Trésorier //////// -->
+
+		<menuitem id="menu_demande_credit_electronique"
+		parent="menu_outils_parent"
+		name="Demande de crédit agent monétique"
+		groups="group_benin_petro_chargeur,group_benin_petro_sous_chargeur"
+		action="benin_petro_demande_credit_action_tree" sequence="4"/>
+
+        <menuitem id="menu_demande_credit_carte"
+		parent="menu_demande_credit_electronique"
+		name="Demande de crédit"
+		groups="group_benin_petro_chargeur,group_benin_petro_sous_chargeur"
+		action="benin_petro_demande_credit_action_tree" sequence="5"/>
+
+        <!-- <menuitem id="menu_demande_credit_tv"
+		parent="menu_demande_credit_electronique"
+		name="Demande de credit TV"
+		groups="group_benin_petro_chargeur,group_benin_petro_sous_chargeur"
+		action="benin_petro_demande_credit_action_tree" sequence="5"/> -->
+        
+    </data>
+</odoo>

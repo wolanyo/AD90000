@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+	<record id="akad_product_product_form_view" model="ir.ui.view">
+		<field name="name">product.product.form</field>
+		<field name="model">product.product</field>
+		<field name="inherit_id" ref="product.product_normal_form_view"/>
+		<field name="arch" type="xml">
+			<field name="default_code" position="before">
+				<field name="categories_consomable" attrs="{'invisible':[('type','!=','product')],'required':[('type','=','product')]}"/>
+				<field name="categories_service" attrs="{'invisible':[('type','!=','service')],'required':[('type','=','service')]}"/>
+				<field name="autre_service" attrs="{'invisible':[('categories_service','!=','Autre')],'required':[('categories_service','=','Autre')]}"/>
+				<field name="categories_lavage"  attrs="{'invisible':['|',('categories_service','!=','Lavage'),('type','!=','service')],'required':[('categories_service','=','Lavage')]}"/>
+				<!--<field name="type_accessoire"  attrs="{'invisible':['|',('categories_consomable','!=','Accessoire'),('type','!=','product')],'required':[('categories_consomable','=','Accessoire')]}"/>-->
+			</field>
+
+<xpath expr="//notebook/page[@name='sales']" position="attributes">
+	<attribute name="invisible">True</attribute>              
+</xpath>
+
+
+		</field>
+	</record>
+
+
+
+        <!-- tree -->
+        <record id="tree_benin_petro_product_product" model="ir.ui.view">
+            <field name="name">Liste des produits</field>
+            <field name="model">product.product</field>
+            <field name="arch" type="xml">
+		<tree>
+			<field name="name" />
+			<field name="type" string="Type produit" />
+			<field name="categories_consomable" />
+			<field name="categories_service" />
+			<field name="lst_price" />
+		</tree>
+            </field>
+        </record>
+
+
+        <record id="benin_petro_product_product_action_tree" model="ir.actions.act_window">
+            <field name="name">Liste des produits</field>
+            <field name="res_model">product.product</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="tree_benin_petro_product_product"></field>
+            <field name="help">Carte ...</field>
+        </record>
+		<record id="view_product_inherit_search" model="ir.ui.view">
+			  <field name="name">product.search</field>
+			  <field name="model">product.product</field>
+			  <field name="inherit_id" ref="product.product_search_form_view"/>
+			  <field name="arch" type="xml">
+				<xpath expr="//search" position="inside">
+					<!--<field name="categories_consomable" />-->
+					<group expand="0" string="Categories : Stockables">
+						<filter string="Categories : Stockables" domain="[]" context="{'group_by':'categories_consomable'}"/>
+					</group>
+					<group expand="0" string="Categories : Services">
+						<filter string="Categories : Services" domain="[]" context="{'group_by':'categories_service'}"/>
+					</group>
+					<filter string="Lubrifiants" name="cat_lubrifiants" domain="[('categories_consomable', '=','Lubrifiants')]"/>
+					<filter string="Produits blancs" name="cat_produits_blancs" domain="[('categories_consomable', '=','Produits blancs')]"/>
+					<filter string="Gaz" name="cat_gaz" domain="[('categories_consomable', '=','Gaz')]"/>
+					<filter string="Lavage" name="cat_gaz" domain="[('categories_service', '=','Lavage')]"/>
+					<filter string="Accessoire" name="cat_gaz" domain="[('categories_consomable', '=','Accessoire')]"/>
+					<separator orientation="vertical"/>
+					<filter string="Lavage" name="cat_lavage" domain="[('categories_service', '=','Lavage')]"/>
+					<filter string="Autre" name="cat_autre" domain="[('categories_service', '=','Autre')]"/>
+					<separator orientation="vertical"/>
+					<filter string="Lavage automatique à brosse" name="cat_brosse" domain="[('categories_lavage', '=','brosse')]"/>
+					<filter string="Lavage traditionnelle à eau" name="cat_eau" domain="[('categories_lavage', '=','eau')]"/>
+				</xpath>
+			  </field>
+    	</record>
+
+
+    </data>
+</odoo>

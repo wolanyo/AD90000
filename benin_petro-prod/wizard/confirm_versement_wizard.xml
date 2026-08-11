@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Form -->
+        <record id="wizard_versement" model="ir.ui.view">
+            <field name="name">Versement Wizard</field>
+            <field name="model">benin_petro.wizard.versement</field>
+            <field name="arch" type="xml">
+                <form string="Valider">
+                    <group>
+                        <!-- <label  string='Voulez-vous vraiment valider ce versement meme si le montant manquant est de : '/> -->
+                        <field name="montant" />
+                    </group>
+
+                    <footer>
+                        <button name="call" string="Valider" type="object" class="oe_highlight"
+                        confirm="Vous être sûr que vous voulez confirmer ce versement"
+                        />
+                        <button string="Annuler" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+
+            </field>
+        </record>
+
+
+        <act_window id="wizard_versement_action"
+                    name="Valider"
+                    res_model="benin_petro.wizard.versement"
+                    src_model="benin_petro.versement"
+                    key2="client_action_multi"
+                    view_mode="form"
+                    target="new"
+                    view_type="form"
+                    groups="base.group_system"
+			/>
+
+
+    </data>
+</odoo>
+    

@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="repport_template_facture_ticket">
+            <t t-call="report.html_container">
+				<t t-foreach="docs" t-as="doc">
+										
+					<div class="page" style="margin-top:20px;">
+                    <style>
+                        .table_facture tr th{
+                            border: 1px solid black;
+                            padding:5px 10px;
+                        }
+                        .table_facture tr td{
+                            border: 1px solid black;
+                            padding:5px 10px;
+                        }
+                        .table_facture{
+                            margin-top:10px;
+                            margin-bottom:10px;
+                            width:100%;
+                        }
+                        .table_taxe tr td{
+                            
+                            padding : 5px 10px!important;
+                            margin : 0px!important
+                        }
+                        .table_taxe tr{
+                            margin : 0px!important
+                        }
+                        .table_taxe{margin:0px;padding:0px;}
+						.table_produit{margin:0px;padding:0px;width:100%}
+						.table_produit tr td{
+                            border: 1px solid black;
+                            padding:5px 10px;
+                        }
+                    </style>
+                    <div class="header" style="width:100%;min-height:100px;margin-top:20px;;padding:0;">
+						<img class="img img-responsive" src="/benin_petro/static/img/entete.jpg"/>
+					</div>
+                    <div class="row" style="padding:10px 80px">
+                        <div class="col-xs-12">
+                            <div class="col-xs-4"></div>
+                            <div class="col-xs-8">
+                                <table class="table_facture">
+                                    <tr>
+                                        <td><strong>Facture</strong></td>
+                                        <td><span t-field='doc.historique_id.facture_num' ></span></td>
+                                    </tr>
+                                    <tr t-if="doc.quitance_tva == 'OUI'">
+                                        <td><strong>Numéro de quittance tva</strong></td>
+                                        <td><span t-field='doc.numero_quitance_tva'  ></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Mode de paiement</strong></td>
+                                        <td><span t-field='doc.moyen_de_paiement'  ></span></td>
+                                    </tr>
+                                    <tr t-if="doc.moyen_de_paiement == 'cheque'">
+                                        <td><strong>Numéro du chèque</strong></td>
+                                        <td><span t-field='doc.numero_cheque'  ></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Date</strong></td>
+                                        <td><span t-field='doc.create_date' t-options='{"widget": "date"}' ></span></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="col-xs-6" style="margin:0px;padding:0px;">
+                                <table class="table_facture">
+                                    <tr>
+                                        <td><strong>Client</strong></td>
+                                        <td><span t-field='doc.client' ></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Téléphone</strong></td>
+                                        <td><span t-field='doc.client.mobile' ></span></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-xs-6"></div>
+                        </div>
+						<div  class="col-xs-12"  style="margin-top:20px!important;width:70%;margin-left:120px!important">
+							<table class="table_produit" >
+								<tr>
+									<td><strong>PRODUIT</strong></td>
+									<td  style="width:300px"><span >Divers produits Bénin petro</span></td>
+								</tr>
+								<tr>
+									<td colspan="2" style="text-align:center;"><strong>Cette facture a été délivrée pour la vente de Tickets valeurs</strong></td>
+								</tr>
+							</table>
+						</div>
+                        <div class="col-xs-12" style="padding-left:10px;">
+                            <table class="table_facture">
+                                <tr>
+                                    <th><strong>DESIGNATION </strong></th>
+                                    <th style="border-bottom:none;"><strong>MONTANT</strong></th>
+                                </tr>
+                                <tr style="height:50px;line-height:50px;">
+                                    <td> <span  >Divers produits Bénin petro</span> </td>
+                                    <td> <span t-field='doc.hest_id.montant_ttc' ></span> </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="1" style="border:none;"></td>
+                                    <td style="padding:0px;border:none;">
+                                        <table class="table_taxe" style="width:100%">
+                                            <!-- <tr >
+                                                <td style="border-top:none;"><strong>TVA</strong></td>
+                                                <td style="border-top:none;"><span t-field='doc.hest_id.tva' ></span></td>
+                                            </tr> -->
+                                            <tr>
+                                                <td  style="border-top:none;"><strong>TOTAL TTC</strong></td>
+                                                <td style="border-top:none;"><span t-field='doc.hest_id.montant_ttc' ></span></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div  class="col-xs-12" style="width:70%;padding:10px 20px!important;margin-top:30px!important;margin-left:140px!important;font-size:14px;border:1px solid black;font-weight:bold;text-align:center;border-bottom:none;">
+                           Arrêtée la présente Facture à la somme TTC de francs CFA :
+                        </div>
+                        <div class="col-xs-12" style="width:70%;height:80px;font-size:20px;border:1px solid black;margin-left:140px!important;text-align:center;line-height:80px;">
+                            <span t-esc="doc.getMontantWords()" ></span>
+                        </div>
+                        <div class="col-xs-12" style="font-size:14px;font-weight:bold;margin-top:20px;margin-bottom:20px">
+                            NB: le prix à la pompe est susceptible d'être changé lorsqu'il y a changement de structure
+                        </div>
+                        <div class="col-xs-12" style="margin-top:20px;margin-bottom:20px;" >
+                            <div class="col-xs-6"></div>
+                            <div class="col-xs-6" style="border:1px solid black;height:200px;margin:0px;padding:0px;">
+                                <div  class="col-xs-12" style="height:40px;border-bottom:1px solid black;margin:0px;padding:0px;text-align:center;line-height:40px;"><strong>SERVICE COMMERCIAL</strong></div>
+                                <div  class="col-xs-12" style="height:120px;border-bottom:1px solid black;margin:0px;padding:0px;"></div>
+                                <div  class="col-xs-12"  style="height:40px;margin:0px;padding:0px;text-align:center;line-height:40px;"><strong><span t-field='doc.historique_id.sous_chargeur.access.name' ></span></strong></div>
+                            </div>
+                        </div>
+
+                        
+
+                    </div>
+                    <div style="margin-top:-10px"><strong>Date d'édition : <span t-esc="doc.getDate()"></span></strong></div>
+                    <div class="footer" style="width:100%;min-height:80px;position:absolute:bottom:0px">
+                        <img class="img img-responsive" src="/benin_petro/static/img/pied.jpg"  />
+                    </div>	
+                    </div>
+				</t>
+			</t>
+		</template>
+		<report
+			id="report_facture_de_ticket"
+			string="Générer Facture PRO FORMAT"
+			model="benin_petro.tv_print"
+			report_type="qweb-pdf"
+			file="repport_template_facture_ticket"
+			name="benin_petro.repport_template_facture_ticket"
+			paperformat="paperformat_euro_landscape"/>
+
+		<template id="repport_template_facture_proformat_ticket">
+            <t t-call="report.html_container">
+				<t t-foreach="docs" t-as="doc">
+										
+					<div class="page" style="margin-top:20px;">
+                    <style>
+                        .table_facture tr th{
+                            border: 1px solid black;
+                            padding:5px 10px;
+                        }
+                        .table_facture tr td{
+                            border: 1px solid black;
+                            padding:5px 10px;
+                        }
+                        .table_facture{
+                            margin-top:10px;
+                            margin-bottom:10px;
+                            width:100%;
+                        }
+                        .table_taxe tr td{
+                            
+                            padding : 5px 10px!important;
+                            margin : 0px!important
+                        }
+                        .table_taxe tr{
+                            margin : 0px!important
+                        }
+                        .table_taxe{margin:0px;padding:0px;}
+						.table_produit{margin:0px;padding:0px;width:100%}
+						.table_produit tr td{
+                            border: 1px solid black;
+                            padding:5px 10px;
+                        }
+                    </style>
+                    <div class="header" style="width:100%;min-height:100px;margin-top:20px;;padding:0;">
+						<img class="img img-responsive" src="/benin_petro/static/img/entete.jpg"/>
+					</div>
+                    <div class="row" style="padding:10px 80px">
+                        <div class="col-xs-12">
+                            <div class="col-xs-4"></div>
+                            <div class="col-xs-8">
+                                <table class="table_facture">
+                                    <tr>
+                                        <td><strong>Facture</strong></td>
+                                        <td><span t-field='doc.historique_id.facture_num' ></span></td>
+                                    </tr>
+                                    <tr t-if="doc.quitance_tva == 'OUI'">
+                                        <td><strong>Numéro de quittance tva</strong></td>
+                                        <td><span t-field='doc.numero_quitance_tva'  ></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Mode de paiement</strong></td>
+                                        <td><span t-field='doc.moyen_de_paiement'  ></span></td>
+                                    </tr>
+                                    <tr t-if="doc.moyen_de_paiement == 'cheque'">
+                                        <td><strong>Numéro du chèque</strong></td>
+                                        <td><span t-field='doc.numero_cheque'  ></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Date</strong></td>
+                                        <td><span t-field='doc.create_date' t-options='{"widget": "date"}' ></span></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="col-xs-6" style="margin:0px;padding:0px;">
+                                <table class="table_facture">
+                                    <tr>
+                                        <td><strong>Client</strong></td>
+                                        <td><span t-field='doc.client' ></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Téléphone</strong></td>
+                                        <td><span t-field='doc.client.mobile' ></span></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-xs-6"></div>
+                        </div>
+						<div  class="col-xs-12"  style="margin-top:20px!important;width:70%;margin-left:120px!important">
+							<table class="table_produit" >
+								<tr>
+									<td><strong>PRODUIT</strong></td>
+									<td  style="width:300px"><span >Divers produits Bénin petro</span></td>
+								</tr>
+								<tr>
+									<td colspan="2" style="text-align:center;"><strong>Cette facture a été délivrée pour la vente de Tickets valeurs</strong></td>
+								</tr>
+							</table>
+						</div>
+                        <div class="col-xs-12" style="padding-left:10px;">
+                            <table class="table_facture">
+                                <tr>
+                                    <th><strong>DESIGNATION </strong></th>
+                                    <th style="border-bottom:none;"><strong>MONTANT</strong></th>
+                                </tr>
+                                <tr style="height:50px;line-height:50px;">
+                                    <td> <span  >Divers produits Bénin petro</span> </td>
+                                    <td> <span t-field='doc.hest_id.montant_ttc' ></span> </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="1" style="border:none;"></td>
+                                    <td style="padding:0px;border:none;">
+                                        <table class="table_taxe" style="width:100%">
+                                            <!-- <tr >
+                                                <td style="border-top:none;"><strong>TVA</strong></td>
+                                                <td style="border-top:none;"><span t-field='doc.hest_id.tva' ></span></td>
+                                            </tr> -->
+                                            <tr>
+                                                <td  style="border-top:none;"><strong>TOTAL TTC</strong></td>
+                                                <td style="border-top:none;"><span t-field='doc.hest_id.montant_ttc' ></span></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div  class="col-xs-12" style="width:70%;padding:10px 20px!important;margin-top:20px!important;margin-left:140px!important;font-size:14px;border:1px solid black;font-weight:bold;text-align:center;border-bottom:none;">
+                           Arrêtée la présente Facture à la somme TTC de francs CFA :
+                        </div>
+                        <div class="col-xs-12" style="width:70%;height:80px;font-size:20px;border:1px solid black;margin-left:140px!important;text-align:center;line-height:80px;">
+                            <span t-esc="doc.getMontantWords()" ></span>
+                        </div>
+                        <div class="col-xs-12" style="font-size:14px;font-weight:bold;margin-top:20px;margin-bottom:20px">
+                            NB: le prix à la pompe est susceptible d'être changé lorsqu'il y a changement de structure
+                        </div>
+                        <div class="col-xs-12" style="margin-top:15px;margin-bottom:10px;" >
+                            <div class="col-xs-6"></div>
+                            <div class="col-xs-6" style="border:1px solid black;height:200px;margin:0px;padding:0px;">
+                                <div  class="col-xs-12" style="height:40px;border-bottom:1px solid black;margin:0px;padding:0px;text-align:center;line-height:40px;"><strong>SERVICE COMMERCIAL</strong></div>
+                                <div  class="col-xs-12" style="height:100px;border-bottom:1px solid black;margin:0px;padding:0px;"></div>
+                                <div  class="col-xs-12"  style="height:40px;margin:0px;padding:0px;text-align:center;line-height:40px;"><strong><span t-field='doc.historique_id.sous_chargeur.access.name' ></span></strong></div>
+                            </div>
+                        </div>
+
+                        
+
+                    </div>
+                    <div style="margin-top:-10px"><strong>Date d'édition : <span t-esc="doc.getDate()"></span></strong></div>
+                    <div class="footer" style="width:100%;min-height:80px;position:absolute:bottom:0px">
+                        <img class="img img-responsive" src="/benin_petro/static/img/pied.jpg"  />
+                    </div>	
+                    </div>
+				</t>
+			</t>
+		</template>
+
+
+
+
+			<report
+			id="report_facture_proformat_de_ticket"
+			string="Générer Facture"
+			model="benin_petro.tv_print"
+			report_type="qweb-pdf"
+			file="repport_template_facture_proformat_ticket"
+			name="benin_petro.repport_template_facture_proformat_ticket"
+			paperformat="paperformat_euro_landscape"/>
+    </data>
+</odoo>

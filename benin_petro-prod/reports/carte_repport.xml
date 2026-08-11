@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+
+        <template id="repport_template_carte">
+            <t t-call="report.html_container">
+<t t-foreach="docs" t-as="doc">
+<div class="page" >
+<!-- ************************************************************** -->
+
+<style>
+
+* {
+margin: 0;
+padding: 0;
+}
+
+body {
+    margin: 0;
+    background-color: transparent;
+}
+
+.page {
+margin: 0;
+padding: 0;
+}
+
+.container {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.qrcode{
+    width: 270px;
+    height: 270px;
+    position: absolute;
+    top: 380px;
+    left: 82px;
+    z-index:1000;
+    border-radius:60px;
+    //border:2px solid #f06547;
+}
+
+.carteserie{
+    font-size: 60px;
+    text-transform: uppercase;
+    position: absolute;
+    top: 290px;
+    left: 50px;
+    color: black;
+    text-shadow: 4px 3px 6px #000000;
+    font-family: "Calisto MT", "Bookman Old Style", Bookman, "Goudy Old Style", Garamond, "Hoefler Text", "Bitstream Charter", Georgia, serif;
+    z-index:700;
+}
+
+.clientname {
+    font-size: 38px;
+    text-transform: uppercase;
+    position: absolute;
+    top: 660px;
+    left: 70px;
+    font-weight: bold;
+    font-family: "Calisto MT", "Bookman Old Style", Bookman, "Goudy Old Style", Garamond, "Hoefler Text", "Bitstream Charter", Georgia, serif;
+    z-index:500;
+    width:900px;
+}
+
+    
+.dateexpiration{
+    font-size: 30px;
+    position: absolute;
+    font-weight: bold;
+    top: 660px;
+    right: 67px;
+    color: #000;
+    z-index:200;
+}
+
+
+</style>
+
+<img t-att-src="'data:image/gif;base64,%s' % doc.type_carte_id.front_carte" style="width:100%; height:720px"/>
+<img t-att-src="'/report/barcode/QR/%s' % doc.qrcode" class="qrcode"/>
+
+<span t-field="doc.num_serie" class="carteserie" />
+<p><span t-field="doc.owner_id.name" style="color:white" class="clientname" t-if="doc.type_carte_id.libelle== 'VIP'"  /></p>
+<span t-field="doc.libelle.name" style="color:white;margin-top:140px" class="clientname" t-if="doc.type_carte_id.libelle == 'VIP'"  />
+<span t-field="doc.owner_id.name" style="color:white" class="clientname" t-if="doc.type_carte_id.libelle == 'Carte normale'"  />
+<span class="dateexpiration" style="color:white" t-if="doc.type_carte_id.libelle == 'VIP'">Valable jusqu'à <span t-field="doc.date_expiration"  /></span>
+<span class="dateexpiration" style="color:white" t-if="doc.type_carte_id.libelle == 'Carte normale'">Valable jusqu'à <span t-field="doc.date_expiration"  /></span>
+
+
+<img t-att-src="'data:image/gif;base64,%s' % doc.type_carte_id.back_carte" style="width:100%; height:720px;"/>
+
+
+
+<!--
+<img t-att-src="'/report/barcode/QR/%s' % doc.libelle" style="width:100px; height:100px; margin-top:15px;"/>
+-->
+
+
+
+
+
+<!-- ************************************************************** -->
+</div>
+</t>
+            </t>
+        </template>
+        <template id="repport_template_bon">
+            <t t-call="report.html_container">
+            <t t-foreach="docs" t-as="doc">
+            <div class="page" >
+            <!-- ************************************************************** -->
+
+            <style>
+
+            * {
+            margin: 0;
+            padding: 0;
+            }
+
+            body {
+                margin: 0;
+                background-color: transparent;
+            }
+        .page {
+                margin: 0;
+                padding: 0;
+                }
+
+            
+            .title
+                {
+                    margin-left:70px
+                }
+                .content
+                {
+                    position : relative;
+                    left:100px
+                }
+                .size
+                {
+                    font-size:20px
+                }
+            </style>
+                <div class="header" style="width:100%;min-height:100px;margin-top:20px;;padding:0;">
+                        <img class="img img-responsive" src="/benin_petro/static/img/entete.jpg"/>
+                </div>
+                <div class="row" style="margin-bottom:40px;">
+                
+                <div class="content">
+                    <div style="margin-top:30px;margin-left:230px;">
+                        <h2 style="font-weight:bold;font-size:30px">BON DE LIVRAISON</h2>
+                        <h3 class="title" style="font-size:20px">SUBLIME CARTE</h3>
+                    </div>
+                    <div style="margin-top:100px;margin-bottom:380px;">
+                    <p class="size">Client : <span t-field="doc.owner_id"/></p>
+                    <br/><br/>
+                    <p class="size">N° Carte : <span t-field="doc.num_serie"/></p>
+                    <br/><br/>
+                    <p class="size">Code PIN carte : <span t-field="doc.code_pin"/></p>
+                    <br/><br/>
+                    <p class="size">Valable jusqu’au : <span t-field="doc.date_expiration"/></p>
+                    <br/><br/>
+                    <p class="size">Consommateur : <span t-field="doc.libelle"/></p>
+                    <br/><br/>
+                    <p class="size">Type Carte : <span t-field="doc.type_carte_id"/></p>
+                    </div>
+                </div>
+                </div>
+                            
+                    <div class="footer" style="width:100%;">
+                        <img class="img img-responsive" src="/benin_petro/static/img/pied.jpg"  />
+                    </div>
+                    </div>
+                    </t>
+                </t>
+        </template>
+
+        <report
+            id="report_carte"
+            string="Générer Carte"
+            model="benin_petro.carte"
+            report_type="qweb-pdf"
+            file="repport_template_carte"
+            name="benin_petro.repport_template_carte"
+            paperformat="paysage_euro_lowmargin"
+            groups="group_benin_petro_adminn"
+        />
+        <report
+            id="report_carte_bon"
+            string="Générer Bon De Catre"
+            model="benin_petro.carte"
+            report_type="qweb-pdf"
+            file="repport_template_bon"
+            name="benin_petro.repport_template_bon"
+            paperformat="paperformat_euro_landscape"
+            groups="group_benin_petro_adminn"
+            />
+
+
+    </data>
+</odoo>

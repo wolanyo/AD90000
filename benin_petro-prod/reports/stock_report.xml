@@ -1,0 +1,630 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    <record id="paperformat_euro_landscape" 
+        model="report.paperformat"> 
+  <field name="name">European A4 Landscape</field> 
+  <field name="default" eval="True" /> 
+  <field name="format">A4</field> 
+  <field name="orientation">Portrait</field>
+  <field name="page_height">0</field> 
+  <field name="page_width">0</field> 
+  <field name="margin_top">40</field> 
+  <field name="margin_bottom">23</field> 
+  <field name="margin_left">0</field> 
+  <field name="margin_right">0</field> 
+  <field name="header_line" eval="False" /> 
+  <field name="header_spacing">35</field> 
+  <field name="dpi">90</field> 
+</record> 
+
+        <template id="benin_petro_transfert_report">
+         <t t-call="report.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-if="o.transfer_type == 'a'" >
+               <div class="header" style="min-height:100px;margin:0;padding:0;">
+               
+               <img class="img img-responsive" src="/benin_petro/static/img/ent.jpg"/>
+                </div>
+                        <div class="page" style="padding:20px;padding-top:40px">
+                    <style>
+                        td
+                        {
+                            text-align:left;
+                            border : 30px solid #fff
+                        }
+                        table
+                        {
+                            border : 5px solid #fff
+                        }
+                        .table-bordered td, .table-bordered th {
+                            border: 2px solid #000 !important;
+                            border-color:#000;
+                            text-align : center
+                        }
+                        .header
+                        {
+                            padding:0px;
+                            margin:0px;
+                        }
+                    </style>
+                <div class="container">
+                <div class="row" >
+                   <div>
+                            <h4 style="text-align:right;font-weight:bold" t-if="o.typeDesProuduit == 'autre'" >Section LUBRIFIANT</h4>
+                            <h4 style="text-align:right;font-weight:bold" t-if="o.typeDesProuduit == 'blanch'" >Section Blanch</h4>
+                        <div style="display: inline-block !important;width:320px;overflow:hidden;border-radius:10px;padding:5px;border:1px solid">
+                            <h4 style="display: inline-block !important;text-align:center;border-radius:10px;width:300px;background-color:#000;color:#fff;">BORDEREAU DE LIVRAISON</h4>
+                        </div>
+                        <span style="font-size:20px;font-weight:bold">N°: <span class="lead" t-field="o.num" ></span></span>
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                        <br/><br/><p style="font-size:20px;text-align:right;font-weight:bold;margin-top:-40px">Le <span style="font-size:20px" t-field="o.create_date"  t-options='{"widget": "date"}'></span> </p>
+                         <span class="lead" style="font-size:20px;margin-top:20px;font-weight:bold">CLIENT : </span><span style="font-size:20px" t-field="o.camion_id"></span> <br/><br/>
+                        <span class="lead" style="font-weight:bold"  >№ DE CAMION - № MATRICULE : </span><span class="lead" t-field="o.camion_id" /> - <span class="lead" t-field="o.camion_id.license_plate" /><br/><br/>
+                        <br/><br/>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th  scope="col" colspan="3">DESIGNATION</th>
+                                    <th  scope="col">QUANTTIE</th>
+                                    <th  scope="col">OBSERVATION</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach='o.move_lines' t-as='v'>
+                                    <tr>
+                                        <td colspan="3"><span t-field="v.product_id"></span></td>
+                                        <td ><span t-field="v.qty"></span></td>
+                                        <td><span></span></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                        <table class="table">
+                            <tr>
+                                <td><p class="lead" style="font-weight:bold"  >NOM ET PRENOM DU CHAUFFEUR : </p>
+                                <p><span class="lead" t-field="o.stock_picking_id.chauffeur_nom" /></p></td>
+                                <td><p class="lead" style="font-weight:bold"  >NOM ET PRENOM DE RÉCEPTIONNAIRE : </p>
+                                <p><span class="lead" t-field="o.stock_picking_id.recepteur_nom" /></p></td>
+                            </tr>
+                            
+                            <tr>
+                                <td>
+                                    <div style="min-width:100px;display: flex!important;justify-content: center!important;margin-top:-40px;margin-left:-20px" class="d-flex justify-content-center">
+                                        <img class="media-object" 
+                                        t-att-src="'data:image/png;base64,%s' %  
+                                        o.stock_picking_id.image1" 
+                                        style="max-height : 90px;min-height:60px;margin:10px" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="min-width:80px;display: flex!important;justify-content: center!important;margin-top:-40px;margin-left:-20px" class="d-flex justify-content-center">
+                                        <img class="media-object" 
+                                        t-att-src="'data:image/png;base64,%s' %  
+                                        o.stock_picking_id.image2" 
+                                        style="max-height : 90px;min-height:60px;margin:10px" />
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                   </div>
+                  </div>
+                </div>
+                <div>
+                </div>
+                </div>
+                <div class="footer" style="min-height:300px;">
+
+                    <img class="img img-responsive" src="/benin_petro/static/img/pd3.jpg"  /> 
+                   
+                </div>
+                    </t>
+                    <t t-if="o.transfer_type == 'b'" >
+                    <div class="header" style="min-height:100px;margin:0;padding:0;">
+               
+               <img class="img img-responsive" src="/benin_petro/static/img/ent.jpg"/>
+                </div>
+                        <div class="page" style="padding:20px;padding-top:40px">
+                    <style>
+                        td
+                        {
+                            text-align:left;
+                            border : 30px solid #fff
+                        }
+                        table
+                        {
+                            border : 5px solid #fff
+                        }
+                        .table-bordered td, .table-bordered th {
+                            border: 2px solid #000 !important;
+                            border-color:#000;
+                            text-align : center
+                        }
+                        .header
+                        {
+                            padding:0px;
+                            margin:0px;
+                        }
+                    </style>
+                <div class="container">
+                <div class="row" >
+                   <div>
+                            <h4 style="text-align:right;font-weight:bold" t-if="o.typeDesProuduit == 'autre'" >Section LUBRIFIANT</h4>
+                            <h4 style="text-align:right;font-weight:bold" t-if="o.typeDesProuduit == 'blanch'" >Section Blanch</h4>
+                        <div style="display: inline-block !important;width:320px;overflow:hidden;border-radius:10px;padding:5px;border:1px solid">
+                            <h4 style="display: inline-block !important;text-align:center;border-radius:10px;width:300px;background-color:#000;color:#fff;">BORDEREAU DE LIVRAISON</h4>
+                        </div>
+                        <span style="font-size:20px;font-weight:bold">N°: <span class="lead" t-field="o.num" ></span></span>
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                        <br/><br/><p style="font-size:20px;text-align:right;font-weight:bold;margin-top:-40px">Le <span style="font-size:20px" t-field="o.create_date"  t-options='{"widget": "date"}'></span> </p>
+                         <span class="lead" style="font-size:20px;margin-top:20px;font-weight:bold">Source : </span><span style="font-size:20px" t-field="o.stock_picking_id.location_id"></span> <br/><br/>
+                        <span class="lead" style="font-weight:bold"  >№ DE CAMION - № MATRICULE : </span><span class="lead" t-field="o.stock_picking_id.location_dest_id" /> - <span class="lead" t-field="o.camion_id.license_plate" /><br/><br/>
+                        <br/><br/>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th  scope="col" colspan="3">DESIGNATION</th>
+                                    <th  scope="col">QUANTTIE</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach='o.stock_picking_id.move_lines' t-as='v'>
+                                    <tr>
+                                        <td colspan="3"><span t-field="v.product_id"></span></td>
+                                        <td ><span t-field="v.product_uom_qty"></span></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                        <p style="font-weight:bold">Observation</p>
+                        <p><span  t-field="o.stock_picking_id.observation" /></p>
+                        <table class="table">
+                            <tr>
+                                <td><p class="lead" style="font-weight:bold"  >NOM ET PRENOM DU CHAUFFEUR : </p>
+                                <p><span class="lead" t-field="o.stock_picking_id.chauffeur_nom" /></p></td>
+                                <td><p class="lead" style="font-weight:bold"  >NOM ET PRENOM DE RECEPTIONNAIRE : </p>
+                                <p><span class="lead" t-field="o.stock_picking_id.recepteur_nom" /></p></td>
+                            </tr>
+                            
+                            <tr>
+                                <td>
+                                    <div style="min-width:100px;display: flex!important;justify-content: center!important;margin-top:-40px;margin-left:-20px" class="d-flex justify-content-center">
+                                        <img class="media-object" 
+                                        t-att-src="'data:image/png;base64,%s' %  
+                                        o.stock_picking_id.image1" 
+                                        style="max-height : 90px;min-height:60px;margin:10px" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="min-width:80px;display: flex!important;justify-content: center!important;margin-top:-40px;margin-left:-20px" class="d-flex justify-content-center">
+                                        <img class="media-object" 
+                                        t-att-src="'data:image/png;base64,%s' %  
+                                        o.stock_picking_id.image2" 
+                                        style="max-height : 90px;min-height:60px;margin:10px" />
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                   </div>
+                  </div>
+                </div>
+                <div>
+                </div>
+                </div>
+                <div class="footer" style="min-height:300px;">
+
+                    <img class="img img-responsive" src="/benin_petro/static/img/pd3.jpg"  /> 
+                   
+                </div>
+
+                    <t t-foreach='o.station_move_lines' t-as='b' >
+                <div class="header" style="min-height:100px;margin:0;padding:0;">
+               
+               <img class="img img-responsive" src="/benin_petro/static/img/ent.jpg"/>
+                </div>
+                        <div class="page" style="padding:20px;padding-top:40px" >
+                    <style>
+                        td
+                        {
+                            text-align:left;
+                            border : 30px solid #fff
+                        }
+                        table
+                        {
+                            border : 5px solid #fff
+                        }
+                        .table-bordered td, .table-bordered th {
+                            border: 2px solid #000 !important;
+                            border-color:#000;
+                            text-align : center
+                        }
+                        .header
+                        {
+                            padding:0px;
+                            margin:0px;
+                        }
+                    </style>
+                <div class="container">
+                <div class="row" >
+                   <div>
+                            <h4 style="text-align:right;font-weight:bold" t-if="o.typeDesProuduit == 'autre'" >Section LUBRIFIANT</h4>
+                            <h4 style="text-align:right;font-weight:bold" t-if="o.typeDesProuduit == 'blanch'" >Section Blanch</h4>
+                        <div style="display: inline-block !important;width:320px;overflow:hidden;border-radius:10px;padding:5px;border:1px solid">
+                            <h4 style="display: inline-block !important;text-align:center;border-radius:10px;width:300px;background-color:#000;color:#fff;">BORDEREAU DE LIVRAISON</h4>
+                        </div>
+                        <span style="font-size:20px;font-weight:bold">N°: <span class="lead" t-field="o.num" ></span></span>
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                        <br/><br/><p style="font-size:20px;text-align:right;font-weight:bold;margin-top:-40px">Le <span style="font-size:20px" t-field="o.create_date"  t-options='{"widget": "date"}'></span> </p>
+                         <br/><br/><span class="lead" style="font-size:20px;margin-top:20px;font-weight:bold">CLIENT : </span><span style="font-size:20px" t-field="b.point_vente_id"/><br/>
+                      
+                        <span class="lead" style="font-weight:bold"  >№ DE CAMION - № MATRICULE : </span><span class="lead" t-field="o.camion_id" /> - <span class="lead" t-field="o.camion_id.license_plate" /><br/>
+<br/><br/>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th  scope="col" colspan="3">DESIGNATION</th>
+                                    <th  scope="col">QUANTTIE</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach='b.move_lines' t-as='v'>
+                                    <tr>
+                                        <td colspan="3"><span t-field="v.product_id"></span></td>
+                                        <td ><span t-field="v.qty"></span></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                        <p style="font-weight:bold">Observation</p>
+                        <p><span  t-field="b.stock_picking_id.observation" /></p>
+                        <table class="table">
+                            <tr>
+                                <td><p class="lead" style="font-weight:bold"  >NOM ET PRENOM DU CHAUFFEUR : </p>
+                                <p><span class="lead"  t-field="b.stock_picking_id.chauffeur_nom" /></p></td>
+                                <td><p class="lead" style="font-weight:bold" >NOM ET PRENOM DE RECEPTIONNAIRE : </p>
+                                <p><span class="lead" t-field="b.stock_picking_id.recepteur_nom" /></p></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div style="min-width:80px;display: flex!important;justify-content: center!important;margin-top:-40px;margin-left:-20px" class="d-flex justify-content-center">
+                                        <img class="media-object" 
+                                        t-att-src="'data:image/png;base64,%s' %  
+                                        b.stock_picking_id.image1" 
+                                        style="max-height : 90px;min-height:60px;margin:10px" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="min-width:80px;display: flex!important;justify-content: center!important;margin-top:-40px;margin-left:-20px" class="d-flex justify-content-center">
+                                        <img class="media-object" 
+                                        t-att-src="'data:image/png;base64,%s' %  
+                                        b.stock_picking_id.image2" 
+                                        style="max-height : 90px;min-height:60px;margin:10px" />
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                   </div>
+                  </div>
+                </div>
+                <div>
+                </div>
+                </div>
+                <div class="footer" style="min-height:300px;">
+
+                    <img class="img img-responsive" src="/benin_petro/static/img/pd3.jpg"  /> 
+                   
+                </div>
+                        </t>
+                    </t>
+                    <t t-if="o.transfer_type == 'c'" >
+                    <t t-foreach='o.station_move_lines' t-as='b' >
+               <div class="header" style="min-height:100px;margin:0;padding:0;">
+               
+               <img class="img img-responsive" src="/benin_petro/static/img/ent.jpg"/>
+                </div>
+                        <div class="page" style="padding:20px;padding-top:40px">
+                    <style>
+                        td
+                        {
+                            text-align:left;
+                            border : 30px solid #fff
+                        }
+                        table
+                        {
+                            border : 5px solid #fff
+                        }
+                        .table-bordered td, .table-bordered th {
+                            border: 2px solid #000 !important;
+                            border-color:#000;
+                            text-align : center
+                        }
+                        .header
+                        {
+                            padding:0px;
+                            margin:0px;
+                        }
+                    </style>
+                <div class="container">
+                <div class="row" >
+                   <div>
+                            <h4 style="text-align:right;font-weight:bold" t-if="o.typeDesProuduit == 'autre'" >Section LUBRIFIANT</h4>
+                            <h4 style="text-align:right;font-weight:bold" t-if="o.typeDesProuduit == 'blanch'" >Section Blanch</h4>
+                        <div style="display: inline-block !important;width:320px;overflow:hidden;border-radius:10px;padding:5px;border:1px solid">
+                            <h4 style="display: inline-block !important;text-align:center;border-radius:10px;width:300px;background-color:#000;color:#fff;">BORDEREAU DE LIVRAISON</h4>
+                        </div>
+                        <span style="font-size:20px;font-weight:bold">N°: <span class="lead" t-field="o.num" ></span></span>
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                        <br/><br/><p style="font-size:20px;text-align:right;font-weight:bold;margin-top:-40px">Le <span style="font-size:20px" t-field="o.create_date"  t-options='{"widget": "date"}'></span> </p>
+                         <br/><br/><span class="lead" style="font-size:20px;margin-top:20px;font-weight:bold">CLIENT : </span><span style="font-size:20px" t-field="b.point_vente_id"/><br/>
+                      
+                        <br/><br/><span class="lead" style="font-weight:bold"  >№ DE CAMION - № MATRICULE : </span><span class="lead" t-field="o.camion_id" /> - <span class="lead" t-field="o.camion_id.license_plate" /><br/>
+<br/><br/>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th  scope="col" colspan="3">DESIGNATION</th>
+                                    <th  scope="col">QUANTTIE</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach='b.move_lines' t-as='v'>
+                                <tr>
+                                   <td colspan="3"><span t-field="v.product_id"></span></td>
+                                   <td ><span t-field="v.qty"></span></td>
+                                </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                        <p style="font-weight:bold">Observation</p>
+                        <p><span  t-field="b.stock_picking_id.observation" /></p>
+                        <table style="min-width:100%;" class="table">
+                            <tr>
+                                <td><p class="lead"  style="font-weight:bold" >NOM ET PRENOM DU CHAUFFEUR : </p>
+                                <p><span class="lead"  t-field="b.stock_picking_id.chauffeur_nom" /></p></td>
+                                <td><p class="lead"  style="font-weight:bold">NOM ET PRENOM DE RECEPTIONNAIRE : </p>
+                                <p><span class="lead"  t-field="b.stock_picking_id.recepteur_nom" /></p></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div style="min-width:80px;display: flex!important;justify-content: center!important;margin-top:-40px;margin-left:-20px" class="d-flex justify-content-center">
+                                        <img class="media-object" 
+                                        t-att-src="'data:image/png;base64,%s' %  
+                                        b.stock_picking_id.image1" 
+                                        style="max-height : 90px;min-height:60px;margin:10px" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="min-width:80px;display: flex!important;justify-content: center!important;margin-top:-40px;margin-left:-20px" class="d-flex justify-content-center">
+                                        <img class="media-object" 
+                                        t-att-src="'data:image/png;base64,%s' %  
+                                        b.stock_picking_id.image2" 
+                                        style="max-height : 90px;min-height:60px;margin:10px" />
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                   </div>
+                  </div>
+                </div>
+                <div>
+                </div>
+                </div>
+                <div class="footer" style="min-height:300px;">
+
+                    <img class="img img-responsive" src="/benin_petro/static/img/pd3.jpg"  /> 
+                   
+                </div>
+                        </t>
+                    </t>
+                    <t t-if="o.transfer_type == 'd'" >
+               <div class="header" style="min-height:100px;margin:0;padding:0;">
+               
+               <img class="img img-responsive" src="/benin_petro/static/img/ent.jpg"/>
+                </div>
+                        <div class="page" style="padding:20px;padding-top:40px">
+                    <style>
+                        td
+                        {
+                            text-align:left;
+                            border : 30px solid #fff
+                        }
+                        table
+                        {
+                            border : 5px solid #fff
+                        }
+                        .table-bordered td, .table-bordered th {
+                            border: 2px solid #000 !important;
+                            border-color:#000;
+                            text-align : center
+                        }
+                        .header
+                        {
+                            padding:0px;
+                            margin:0px;
+                        }
+                    </style>
+                <div class="container">
+                <div class="row" >
+                   <div>
+                            <h4 style="text-align:right;font-weight:bold" t-if="o.typeDesProuduit == 'autre'" >Section LUBRIFIANT</h4>
+                            <h4 style="text-align:right;font-weight:bold" t-if="o.typeDesProuduit == 'blanch'" >Section Blanch</h4>
+                        <div style="display: inline-block !important;width:320px;overflow:hidden;border-radius:10px;padding:5px;border:1px solid">
+                            <h4 style="display: inline-block !important;text-align:center;border-radius:10px;width:300px;background-color:#000;color:#fff;">BORDEREAU DE LIVRAISON</h4>
+                        </div>
+                        <span style="font-size:20px;font-weight:bold">N°: <span class="lead" t-field="o.num" ></span></span>
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                        <br/><br/><p style="font-size:20px;text-align:right;font-weight:bold;margin-top:-40px">Le <span style="font-size:20px" t-field="o.create_date"  t-options='{"widget": "date"}'></span> </p>
+                         <span class="lead" style="font-size:20px;margin-top:20px;font-weight:bold">Source : </span><span style="font-size:20px" t-field="o.location_id"></span> <br/><br/>
+                        <span class="lead" style="font-weight:bold"  >Destination : </span><span class="lead" t-field="o.camion_id" /> - <span class="lead" t-field="o.camion_id.license_plate" /><br/><br/>
+                        <br/><br/>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th  scope="col" colspan="3">DESIGNATION</th>
+                                    <th  scope="col">QUANTTIE</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach='o.move_lines' t-as='v'>
+                                    <tr>
+                                        <td colspan="3"><span t-field="v.product_id"></span></td>
+                                        <td ><span t-field="v.qty"></span></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                        <p style="font-weight:bold">Observation</p>
+                        <p><span  t-field="o.stock_picking_id.observation" /></p>
+                        <table class="table">
+                            <tr>
+                                <td><p class="lead" style="font-weight:bold"  >NOM ET PRENOM DU CHAUFFEUR : </p>
+                                <p><span class="lead" t-field="o.stock_picking_id.chauffeur_nom" /></p></td>
+                                <td><p class="lead" style="font-weight:bold"  >NOM ET PRENOM DE RECEPTIONNAIRE : </p>
+                                <p><span class="lead" t-field="o.stock_picking_id.recepteur_nom" /></p></td>
+                            </tr>
+                            
+                            <tr>
+                                <td>
+                                    <div style="min-width:100px;display: flex!important;justify-content: center!important;margin-top:-40px;margin-left:-20px" class="d-flex justify-content-center">
+                                        <img class="media-object" 
+                                        t-att-src="'data:image/png;base64,%s' %  
+                                        o.stock_picking_id.image1" 
+                                        style="max-height : 90px;min-height:60px;margin:10px" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="min-width:80px;display: flex!important;justify-content: center!important;margin-top:-40px;margin-left:-20px" class="d-flex justify-content-center">
+                                        <img class="media-object" 
+                                        t-att-src="'data:image/png;base64,%s' %  
+                                        o.stock_picking_id.image2" 
+                                        style="max-height : 90px;min-height:60px;margin:10px" />
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                   </div>
+                  </div>
+                </div>
+                <div>
+                </div>
+                </div>
+                <div class="footer" style="min-height:300px;">
+
+                    <img class="img img-responsive" src="/benin_petro/static/img/pd3.jpg"  /> 
+                   
+                </div>
+
+
+
+                <div class="header" style="min-height:100px;margin:0;padding:0;">
+               
+               <img class="img img-responsive" src="/benin_petro/static/img/ent.jpg"/>
+                </div>
+                        <div class="page" style="padding:20px;padding-top:40px">
+                    <style>
+                        td
+                        {
+                            text-align:left;
+                            border : 30px solid #fff
+                        }
+                        table
+                        {
+                            border : 5px solid #fff
+                        }
+                        .table-bordered td, .table-bordered th {
+                            border: 2px solid #000 !important;
+                            border-color:#000;
+                            text-align : center
+                        }
+                        .header
+                        {
+                            padding:0px;
+                            margin:0px;
+                        }
+                    </style>
+                <div class="container">
+                <div class="row" >
+                   <div>
+                            <h4 style="text-align:right;font-weight:bold" t-if="o.typeDesProuduit == 'autre'" >Section LUBRIFIANT</h4>
+                            <h4 style="text-align:right;font-weight:bold" t-if="o.typeDesProuduit == 'blanch'" >Section Blanch</h4>
+                        <div style="display: inline-block !important;width:320px;overflow:hidden;border-radius:10px;padding:5px;border:1px solid">
+                            <h4 style="display: inline-block !important;text-align:center;border-radius:10px;width:300px;background-color:#000;color:#fff;">BORDEREAU DE LIVRAISON</h4>
+                        </div>
+                        <span style="font-size:20px;font-weight:bold">N°: <span class="lead" t-field="o.num" ></span></span>
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                        <br/><br/><p style="font-size:20px;text-align:right;font-weight:bold;margin-top:-40px">Le <span style="font-size:20px" t-field="o.create_date"  t-options='{"widget": "date"}'></span> </p>
+                         <span class="lead" style="font-size:20px;margin-top:20px;font-weight:bold">Source : </span><span style="font-size:20px" t-field="o.camion_id"></span> <br/><br/>
+                        <span class="lead" style="font-weight:bold"  >Destination : </span><span class="lead" t-field="o.location_dest_depot_id" /> <br/><br/>
+                        <br/><br/>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th  scope="col" colspan="3">DESIGNATION</th>
+                                    <th  scope="col">QUANTTIE</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach='o.move_lines' t-as='v'>
+                                    <tr>
+                                        <td colspan="3"><span t-field="v.product_id"></span></td>
+                                        <td ><span t-field="v.qty"></span></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                        <p style="font-weight:bold">Observation</p>
+                        <p><span  t-field="o.stock_picking_id.observation" /></p>
+                        <table class="table">
+                            <tr>
+                                <td><p class="lead" style="font-weight:bold"  >NOM ET PRENOM DU CHAUFFEUR : </p>
+                                <p><span class="lead" t-field="o.stock_picking_id.chauffeur_nom" /></p></td>
+                                <td><p class="lead" style="font-weight:bold"  >NOM ET PRENOM DE RECEPTIONNAIRE : </p>
+                                <p><span class="lead" t-field="o.stock_picking_id.recepteur_nom" /></p></td>
+                            </tr>
+                            
+                            <tr>
+                                <td>
+                                    <div style="min-width:100px;display: flex!important;justify-content: center!important;margin-top:-40px;margin-left:-20px" class="d-flex justify-content-center">
+                                        <img class="media-object" 
+                                        t-att-src="'data:image/png;base64,%s' %  
+                                        o.stock_picking_id.image1" 
+                                        style="max-height : 90px;min-height:60px;margin:10px" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="min-width:80px;display: flex!important;justify-content: center!important;margin-top:-40px;margin-left:-20px" class="d-flex justify-content-center">
+                                        <img class="media-object" 
+                                        t-att-src="'data:image/png;base64,%s' %  
+                                        o.stock_picking_id.image2" 
+                                        style="max-height : 90px;min-height:60px;margin:10px" />
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                   </div>
+                  </div>
+                </div>
+                <div>
+                </div>
+                </div>
+                <div class="footer" style="min-height:300px;">
+
+                    <img class="img img-responsive" src="/benin_petro/static/img/pd3.jpg"  /> 
+                   
+                </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    <report
+        id="report_tran_benin_petro"
+        string="Bon De Livrison"
+        model="benin_petro.transfert"
+        report_type="qweb-pdf"
+        file="benin_petro_transfert_report"
+        name="benin_petro.benin_petro_transfert_report"
+        paperformat="paperformat_euro_landscape"
+        
+        />
+    </data>
+</odoo>

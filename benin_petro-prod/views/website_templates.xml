@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="MYSITE_layout" inherit_id="website.layout" name="MYSITE layout" priority="17">
+            <xpath expr="//head//link" position="after">
+                <link rel="shortcut icon" href="/benin_petro/static/src/favicon.ico" type="image/x-icon"/>
+            </xpath>
+        </template>
+
+    </data>
+</odoo>

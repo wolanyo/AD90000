@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="saleorder_inhitir_report" inherit_id="stock.report_delivery_document">
+       <xpath expr="//t[@t-call='report.external_layout']" position="attributes">
+    <attribute name="t-call"></attribute>
+</xpath>
+        
+           <xpath expr="//div[@class='page']" position="replace">
+                <div class="header" style="background-color:#000;min-height:100px;margin:0;padding:0">
+            
+        </div>
+                <div class="page">
+                <style>
+                    td
+                    {
+                        text-align:left;
+                         border : 30px solid #fff
+                        
+                        
+                        
+                    }
+                    table
+                    {
+                        border : 5px solid #fff
+                    }
+                    .table-bordered td, .table-bordered th {
+                        border: 2px solid #000 !important;
+                        border-color:#000;
+                        text-align : center
+                    }
+                    
+                </style>
+                <div class="container">
+                <div class="row" >
+                <div t-if="o.type == 'blanch'">
+                <h4 class="text-center" style="text-decoration: underline;padding-bottom:30px" >BORDEREAU DE LIVRAISON</h4>
+                    <table style="min-width:100%;max-width:100%;width:100%">
+                        <tr style="padding-bottom:40px">
+                            <td style="margin-top:30px;">
+                                <span class="lead" style="text-decoration: underline;padding-bottom:30px" >Client : </span>
+                                <span class="lead" t-field="o.partner_id" />
+                                
+                            </td>
+                            <td style="margin-top:30px;">
+
+                                <!-- <img class="media-object" 
+                                t-att-src="'data:image/png;base64,%s' %  
+                                o.image1" 
+                                style="max-height: 24px;" />  -->
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td></td>
+                        </tr>
+                        <tr style="margin-top:30px;">
+                            <td>
+                                <span class="lead" style="text-decoration: underline" > : </span>
+                                <span class="lead" t-field="o.partner_id" />
+                            </td>
+                            <td>  
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                        </tr>
+                        <tr style="margin-top:30px;">
+                            <td>
+                                <span class="lead" style="text-decoration: underline" >NATURE DE PRODUIT : </span>
+                                <span class="lead" t-field="o.partner_id" />
+                            </td>
+                            <td>
+
+                                <!-- <img class="media-object" 
+                                t-att-src="'data:image/png;base64,%s' %  
+                                o.image1" 
+                                style="max-height: 24px;" />  -->
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                        </tr>
+                        <tr style="margin-top:30px;">
+                            <td>
+                                <span class="lead" style="text-decoration: underline" >DESTINATION : </span>
+                                <span class="lead" t-field="o.partner_id" />
+                            </td>
+                            <td>
+
+                                <!-- <img class="media-object" 
+                                t-att-src="'data:image/png;base64,%s' %  
+                                o.image1" 
+                                style="max-height: 24px;" />  -->
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                        </tr>
+                        <tr style="margin-top:30px;">
+                            <td>
+                                <span class="lead" style="text-decoration: underline" >NUMERO DE CAMION : </span>
+                                <span class="lead" t-field="o.partner_id" />
+                            </td>
+                            <td>
+                                <!-- <img class="media-object" 
+                                t-att-src="'data:image/png;base64,%s' %  
+                                o.image1" 
+                                style="max-height: 24px;" />  -->
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                        </tr>
+                        <tr style="margin-top:30px;">
+                            <td>
+                                <span class="lead" style="text-decoration: underline" >CAPACITE : </span>
+                                <span class="lead" t-field="o.partner_id" />
+                            </td>
+                            <td>
+                                <span class="lead" style="text-decoration: underline" >DATE DE LIVRAISON  : </span>
+                                <span class="lead" t-field="o.partner_id" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                        </tr>
+                        <tr style="margin-top:30px;">
+                            <td>
+                                <span class="lead" style="text-decoration: underline" >N BON DE COMMANDE : </span>
+                                <span class="lead" t-field="o.partner_id" />
+                            </td>
+                            <td>
+                                <span class="lead" style="text-decoration: underline" >NOM ET PRENOM DE RECEPTIONNAIRE  : </span>
+                                <span class="lead" t-field="o.partner_id" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                        </tr>
+                        <tr style="margin-top:30px;">
+                            <td>
+                                <span class="lead" style="text-decoration: underline" >La Chargée des Produits : </span>
+                                <span class="lead" t-field="o.partner_id" />
+                            </td>
+                            <td>
+                                <span class="lead" style="text-decoration: underline" >SIGNATURE DU RECEPTIONNAIRE  : </span>
+                                <div style="border:1px solid;min-width:80px;display: flex!important;justify-content: center!important;" class="d-flex justify-content-center">
+                                    <img class="media-object" 
+                                    t-att-src="'data:image/png;base64,%s' %  
+                                    o.image1" 
+                                    style="max-height: 50px;min-height:50px;margin:10px" />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                        </tr>
+                        <tr style="margin-top:30px;">
+                            <td>
+                               
+                            </td>
+                            <td>
+                                <span class="lead" style="text-decoration: underline" >NOM ET PRENOM DU CHAUFFEUR : </span>
+                                <span class="lead" t-field="o.partner_id" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                        </tr>
+                         <tr style="margin-top:30px;">
+                            <td>
+                               <span class="lead" style="text-decoration: underline" >prisce ADJOFOGUE : </span>
+                                <span class="lead" t-field="o.partner_id" />
+                            </td>
+                            <td>
+                                <span class="lead" style="text-decoration: underline"> SIGNATURE DU CHAUFFEUR : </span>
+                                <div style="border:1px solid;min-width:80px;display: flex!important;justify-content: center!important;" class="d-flex justify-content-center">
+                                    <img class="media-object" 
+                                    t-att-src="'data:image/png;base64,%s' %  
+                                    o.image2" 
+                                    style="max-height: 50px;min-height:50px;margin:10px" />
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                   </div>
+                   <div t-if="o.type == 'autre'">
+                            <h4 style="text-align:right" >Section LUBRIFIANT</h4>
+                        <div style="display: inline-block !important;width:320px;overflow:hidden;border-radius:10px;padding:5px;border:1px solid">
+                            <h4 style="display: inline-block !important;text-align:center;border-radius:10px;width:300px;background-color:#000;color:#fff;">BORDEREAU DE LIVRAISON</h4>
+                        </div>
+                        <span style="font-size:20px">N°:</span><span style="font-size:20px" t-field="o.partner_id"></span>
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                        <span style="font-size:20px;text-align:right;">........ , le </span><span style="font-size:20px" t-field="o.date_done"  t-options='{"widget": "date"}'></span>
+                        <p class="lead" style="font-size:20px;margin-top:20px">Client : <span style="font-size:20px" t-field="o.partner_id"></span> </p>
+                   
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th  scope="col">QUANTTIE</th>
+                                    <th  scope="col" colspan="3">DESTINATION</th>
+                                    <th  scope="col">OBSERVATION</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach='o.move_lines' t-as='v'>
+                                   <td><span t-field="v.product_id"></span></td>
+                                   <td colspan="3"><span t-field="v.product_uom_qty"></span></td>
+                                   <td><span t-field="v.state"></span></td>
+                                </t>
+                            </tbody>
+                        </table>
+                        <table class="table">
+                            <tr>
+                                <td>Le livreur</td>
+                                <td>Le Receptionnaire</td>
+                            </tr>
+                            <tr>
+                                <td><div style="border:1px solid;min-width:80px;display: flex!important;justify-content: center!important;" class="d-flex justify-content-center">
+                                    <img class="media-object" 
+                                    t-att-src="'data:image/png;base64,%s' %  
+                                    o.image1" 
+                                    style="max-height: 50px;min-height:50px;margin:10px" />
+                                </div></td>
+                                <td><div style="border:1px solid;min-width:80px;display: flex!important;justify-content: center!important;" class="d-flex justify-content-center">
+                                    <img class="media-object" 
+                                    t-att-src="'data:image/png;base64,%s' %  
+                                    o.image1" 
+                                    style="max-height: 50px;min-height:50px;margin:10px" />
+                                </div></td>
+                            </tr>
+                        </table>            
+                   
+                   </div>
+                  </div>
+                </div>
+                <div>
+                </div>
+                 
+                </div>
+            </xpath>
+        </template>
+    </data>
+</odoo>

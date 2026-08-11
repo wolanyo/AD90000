@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+         <record id="form_rapport_kilometrage" model="ir.ui.view">
+            <field name="name">Consultation</field>
+            <field name="model">benin_petro.rapport_kilometrage</field>
+            <field name="arch" type="xml">
+                <form string="Consultation"  create="false" edit="false">
+                <center ><h1 style="color:red">Rapport de kilometrage</h1></center>
+                    <group col="2">
+                        <group>
+                            <field name="client" />
+                        </group>
+                    </group>
+                    <group col="2">
+                        <group>
+                            <field name="start_date" />
+                        </group>
+                        <group>
+                            <field name="end_date" />
+                        </group>
+                    </group>
+
+                    <group>
+                        <button name="print_report_pdf" string="Imprimer en PDF"  class="oe_highlight" type="object" />
+                        <button name="print_excel_kilometrage_report" string="Imprimer en EXCEL"  class="oe_highlight" type="object" />
+                    </group>
+
+                    <field name="list_releve" readonly="1">
+                        <tree limit="15">
+                            <field name="date_kilometrage" />
+                            <field name="carte_id" />
+                            <field name="point_vente" />
+                            <field name="produit" />
+                            <field name="type_operation" />
+                            <field name="kilometrage" />
+                            <field name="quantite" />
+                        </tree>
+                    </field>
+                </form>
+            </field>
+        </record>
+        <record id="rapport_kilometrage_action_form" model="ir.actions.act_window">
+            <field name="name">Consultation des recharges</field>
+            <field name="res_model">benin_petro.rapport_kilometrage</field>
+            <field name="view_mode">form</field>
+            <field name="help">Recharge ...</field>
+            <field name="target">inline</field>
+        </record>
+
+        <menuitem action="rapport_kilometrage_action_form" id="menu_rapport_kilometrage_form"
+            parent="menu_tabeal_bord_client" sequence="2"
+            name="Rapport de kilometrage" groups="group_benin_petro_manager,group_benin_petro_adminn,base.group_system"/>
+    </data>
+</odoo>

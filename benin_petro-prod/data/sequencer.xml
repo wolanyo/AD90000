@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="ref_contrat" model="ir.sequence">
+            <field name="name">company_sequencer</field>
+            <field name="code">ref.contrat</field>
+            <field name="prefix">QO</field>
+            <field name="padding">5</field>
+        </record>
+
+</odoo>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+
+    <template id="validation_reportt1">
+    <t t-call="report.html_container">
+     <t t-foreach="docs" t-as="doc">
+	 <div class="page">
+     <style>
+            .mr-to{
+                margin-left: 4px;
+            }
+    </style>
+               <div class="container">
+            <!-- Content here -->
+   <table  class="table">
+
+        <tr t-attf-style="border-top: 1px solid #1a1c1d  !important;margin-top: 10px;font-weigth:bold;" >
+
+            <td  t-attf-style="border-bottom: 1px solid #1a1c1d  !important;border-top: 1px solid #1a1c1d ;margin-top: 10px;font-weigth:bold;" class="font-weight-bold p-3 mb-2 bg-light text-dark">Client</td>
+            <td  t-attf-style="border-bottom: 1px solid #1a1c1d ;border-top: 1px solid #1a1c1d  !important;margin-top: 10px;font-weigth:bold;" class="font-weight-bold p-3 mb-2 bg-light text-dark">montant</td>
+            
+        </tr>
+        <t t-foreach="docs.get_report_data()" t-as="info">
+        <tr t-attf-style="border-top: 1px solid #1a1c1d ;margin-top: 10px;font-weigth:bold;" >
+              
+                <td> <p t-esc="info['client']"></p></td>
+                <td> <p t-esc="info['price']" t-field-options="{'widget': 'float','precision':3}" ></p>   </td>
+              
+        </tr>
+        </t>
+       
+       
+        
+      
+      
+       </table>
+           
+        </div>
+        </div>
+            </t>
+             </t>
+        </template>
+        <report
+                id="validation_report22"
+                string="Imprime"
+                model="benin_petro.wizard.valider.client"
+                report_type="qweb-pdf"
+                file="validation_report2"
+                name="benin_petro.validation_reportt1"
+              
+        />
+    </data>
+</odoo>

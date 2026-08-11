@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="benin_petro.etat_recharge_par_carte">
+           <t t-call="report.html_container">
+		   		<t t-set="data_report_margin_top" t-value="0" />
+		   		<t t-set="data_report_margin_bottom" t-value="12" />
+                <t t-set="data_report_header_spacing" t-value="9" />
+                <t t-set="data_report_dpi" t-value="110" />
+				<!-- <t t-call="report.internal_layout"> -->
+				
+				<div class="page" >
+					<div  style="width:100%;min-height:100px;margin-top:0px;;padding:0;">
+						<img class="img img-responsive" src="/benin_petro/static/img/entete.jpg" />
+					</div>
+					<style>
+						.table_info tr th{
+							font-size:14px;
+							border:1px solid black;
+							padding:5px 5px;
+						}
+						.table_info tr td{
+							border:1px solid black;
+							padding:5px 5px;
+							font-size:14px;
+							font-weight:normal!important;
+						}
+
+						.top_table tr td{
+							padding:10px 5px;
+						}
+
+					</style>
+					
+						
+					<div style="width:100%;text-align:center;font-size:20px;"><strong>Relevé des recharges sur cartes</strong></div>
+					<table class="top_table" style="width:100%;margin-top:40px;font-size:18px;" >
+						<tr>
+							<td><strong>Date début :</strong></td>
+							<td><span t-esc="data['form']['date_debut']" /></td>
+							<td><strong>Date Fin :</strong></td>
+							<td><span t-esc="data['form']['date_fin']" /></td>
+						</tr>
+						<tr>
+							<td><strong>Carte :</strong></td>
+							<td><span t-esc="data['form']['carte']" /></td>
+							<td><strong>Type d'opération :</strong></td>
+							<td><span t-esc="data['form']['type_operation']" /></td>
+						</tr>
+					</table>
+					
+					<div class="row" style="margin-top:40px;margin-bottom:20px;padding-left:20px;">
+						<table style="width:100%;" class="table table-condensed">
+							<tr>
+								<th><strong>DATE RECHARGE</strong></th>
+								<th><strong>CONSOMATEUR</strong></th>
+								<th><strong>TYPE D'OPÉRATION</strong></th>
+								<th><strong>MONTANT</strong></th>
+							</tr>
+							<t t-foreach="data['form']['transactions']" t-as="line">
+								<tr>
+									<th><span t-esc="line['date_recharge']"></span></th>
+									<th><span t-esc="line['consomateur']"></span></th>
+									<th><span t-esc="line['type_operation']"></span></th>
+									<th><span t-esc="line['montant']"></span></th>
+								</tr>
+							</t>
+						</table>
+						<p style="page-break-before:always;">
+                            </p>
+					</div>
+				
+                     <div class="footer"   style="width:100%;margin-top:-150px;">
+						<strong>Date d'édition : <span t-esc="data['form']['print_date']"></span></strong>
+						<img class="img img-responsive" src="/benin_petro/static/img/pied.jpg"  />
+                    </div>
+
+                    </div>
+                    
+                
+                
+					
+			</t>
+		
+		</template>
+		<report
+			id="etat_recharge_par_carte_form"
+			string="Relevé des recharges sur cartes"
+			model="benin_petro.recharge_par_carte"
+			report_type="qweb-pdf"
+			file="benin_petro.etat_recharge_par_carte"
+			name="benin_petro.etat_recharge_par_carte"
+			paperformat="paperformat_euro_landscape"/>
+    </data>
+</odoo>

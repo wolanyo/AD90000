@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+
+    <t t-extend="UserMenu">
+        <t t-jquery="a[data-menu='account'], a[data-menu='support'], a[data-menu='documentation']">
+            this.parent().remove();
+        </t>
+    </t>
+
+
+<!--
+    <t t-extend="WebClient">
+        <t t-jquery="a.oe_logo" t-operation="replace">
+		<img src='igt_contract/static/img/logo.png' class="space"/>
+        </t>
+	<t t-jquery="div.oe_footer" t-operation="replace">
+            <div class="oe_footer">
+                <a href="http://www.it-shore.com/" target="_blank">Powered by <span>IT shore</span></a>
+            </div>
+        </t>
+    </t>-->
+
+
+
+
+
+</templates>

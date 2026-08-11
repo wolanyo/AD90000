@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+         <record id="form_consulte_stock" model="ir.ui.view">
+            <field name="name">Consultation</field>
+            <field name="model">benin_petro.consulte_stock</field>
+            <field name="arch" type="xml">
+                <form string="Consultation"  create="false" edit="false">
+                <sheet>
+                <group>
+                    <group>
+                        <field name="type_emp"/>
+                    </group>
+                    <group>
+                        <field name="product"/>
+                    </group>
+                </group>
+
+                    <notebook>
+                        <page string="Stock" attrs="{'invisible':[('type_emp','!=','p')]}">
+                            <field name="stock" readonly="1">
+                            <tree>
+                                    <field name="point_vente" />
+                                    <field name="produit"/>
+                                    <field name="stock" sum="totale"/>
+                                </tree>
+                            </field>
+                                
+                        </page>
+                        <page string="Stock" attrs="{'invisible':[('type_emp','!=','d')]}">
+                            <field name="stock_depot" readonly="1">
+                            <tree>
+                                    <field name="depot" />
+                                    <field name="produit"/>
+                                    <field name="stock" sum="totale"/>
+                                </tree>
+                            </field>
+                                
+                        </page>
+                        <page string="Stock" attrs="{'invisible':[('type_emp','!=','c')]}">
+                            <field name="stock_camion" readonly="1">
+                            <tree>
+                                    <field name="camion" />
+                                    <field name="produit"/>
+                                    <field name="stock" sum="totale"/>
+                                </tree>
+                            </field>
+                                
+                        </page>
+                    </notebook>
+                </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="consulte_action_form" model="ir.actions.act_window">
+            <field name="name">Consultation</field>
+            <field name="res_model">benin_petro.consulte_stock</field>
+            <field name="view_mode">form</field>
+            <field name="help">Carte ...</field>
+            <field name="target">inline</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+        
+        <!-- fleet.vehicle inherit form view -->
+       
+        <record id="view_id7" model="ir.ui.view">
+            <field name="name">fleet.vehicle.inherit.view.form</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="inherit_id" ref="tms.fleet_vehicle_form_inherit_tms"/>
+            <field name="arch" type="xml">
+             <!-- Add your xpath here -->
+              
+              <field name="operating_unit_id" position="attributes">
+              <attribute name="invisible">1</attribute>
+                </field>
+
+                
+            </field>
+        </record>
+   
+
+        
+        <!-- fleet.vehicle inherit form view -->
+       
+        <record id="view_id6" model="ir.ui.view">
+            <field name="name">hr.employee.inherit.view.form</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="tms.view_employee_form_tms"/>
+            <field name="arch" type="xml">
+             <!-- Add your xpath here -->
+              
+              <field name="operating_unit_id" position="attributes">
+              <attribute name="invisible">1</attribute> 
+                </field>
+
+                
+                 <field  name="tms_advance_account_id" position="attributes">
+                <attribute name="required">0</attribute>
+                <attribute name="invisible">1</attribute> 
+                <attribute name="attrs"></attribute>
+            
+                </field>
+                <!-- Add your xpath here -->
+                 <!-- <field name="operating_unit_id" position="attributes">
+               
+                <attribute name="string">hello</attribute>
+                </field> -->
+                  
+                 <field name="tms_loan_account_id" position="attributes">
+               
+               <attribute name="required">0</attribute>
+                <attribute name="invisible">1</attribute>
+                </field>
+                 <field name="tms_expense_negative_account_id" position="attributes">
+               
+               <attribute name="required">0</attribute>
+                <attribute name="invisible">1</attribute>
+                  <attribute name="attrs"></attribute>
+                </field>
+                 <field name="income_percentage" position="attributes">
+               
+                <attribute name="required">0</attribute>
+                <attribute name="invisible">1</attribute>
+                  <attribute name="attrs"></attribute>
+                </field>
+              
+             
+                  
+
+
+
+
+
+
+
+
+
+
+
+
+                
+            </field>
+        </record>
+        
+      
+        
+    
+ 
+
+  
+    
+ 
+
+   
+    </data>
+    </odoo>
+     

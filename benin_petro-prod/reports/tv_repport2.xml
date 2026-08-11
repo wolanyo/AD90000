@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+
+        <template id="repport_tv_template_remise">
+            <t t-call="report.html_container">
+                <t t-foreach="docs" t-as="doc">
+                <div class="page"  t-attf-style="overflow:hidden;">
+                    <div class="row" >
+                     <t t-foreach="doc.tv_ids" t-as="item">
+                        <div class='col-xs-12' t-attf-style="width:100%;height:281px;margin-bottom:0px;overflow:hidden;background-size:100% 100%;" >
+                            <style>
+                                .qrcode{
+                                    width: 105px;
+                                    height: 90px;
+                                    position: absolute;
+                                    top:102px;
+                                    left: 118px;
+                                    z-index:1000;
+                                    border-radius:35px;
+                                }
+                                .qrcode2{
+                                    width: 108px;
+                                    height: 95px;
+                                    position: absolute;
+                                    top: 130px;
+                                    right: 38px;
+                                    z-index:1000;
+                                    border-radius:35px;
+                                }
+                                .qrcode3{
+                                    width: 80px;
+                                    height: 73px;
+                                    position: absolute;
+                                    top: 13px;
+                                    right: 612px;
+                                    z-index:1000;
+                                    border-radius:35px;
+                                }
+                                .name{
+                                    width:200px;
+                                    position: absolute;
+                                    left: 305px;
+                                    top: 115px;
+                                }
+                                
+                                .montant_right{
+                                    position:absolute;
+                                    right:45px;
+                                    top:220px;
+                                }
+                                .montant_left{
+                                    position:absolute;
+                                    left:120;
+                                    top:189px;
+                                }
+                                .num_serie_right{
+                                    position:absolute;
+                                    right:40px;
+                                    top:235px;
+                                }
+                                .num_serie_left{
+                                    position:absolute;
+                                    left:120;
+                                    top:200px;
+                                }
+                            </style>
+                            <br/>
+                            <h5  class="name"><span t-field='item.client' ></span></h5>
+                            <h5  class="montant_left"><span t-field='item.tv_type.montant' style="font-weight:bold"  ></span><span style="font-weight:bold"> CFA</span></h5>
+                            <h5 class="montant_right"><span t-field='item.tv_type.montant' style="font-weight:bold" ></span><span style="font-weight:bold"> CFA</span></h5>
+                            <h3 class="num_serie_left" ><span t-field='item.num_serie' style="font-size:14px;font-weight:bold" ></span></h3>
+                            <h3 class="num_serie_right"><span t-field='item.num_serie' style="font-size:14px;font-weight:bold"></span></h3>
+
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <img t-att-src="'/report/barcode/QR/%s' % item.qrcode" class="qrcode"/>
+                            <img t-att-src="'/report/barcode/QR/%s' % item.qrcode" class="qrcode2"/>
+                            <img t-att-src="'/report/barcode/QR/%s' % item.qrcode" class="qrcode3"/>
+                        </div>
+                       </t>
+                    </div>
+                </div>
+                </t>    
+            </t>
+        </template>
+        <report
+                id="report_tv2"
+                string="Imprime"
+                model="benin_petro.tv_remise"
+                report_type="qweb-pdf"
+                file="repport_tv_template_remise"
+                name="benin_petro.repport_tv_template_remise"
+                paperformat="paperformat_euro_landscape"
+        />
+    </data>
+</odoo>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="benin_petro.point_jour_report">
+           <t t-call="report.html_container">
+					
+							
+					<div class="page" style="position:relative;height:900px;">
+					<div class="header" style="width:100%;min-height:100px;margin-top:0px;;padding:0;">
+						<img class="img img-responsive" src="/benin_petro/static/img/entete.jpg" />
+					</div>
+					<style>
+
+						.table_info tr td{
+							border:1px solid black;
+							padding:10px 5px;
+							font-size:15px;
+						}
+
+					</style>
+
+					<div class="row" style="margin-top:40px;">
+						<div class="col-xs-12" style="height:840px;">
+						<table style="width:100%;" class="table_info">
+							<tr>
+								<td colspan="4" style="text-align:center"><strong>POINT DU JOUR : <span t-esc="data['form']['date']" ></span> </strong></td>
+							</tr>
+							<tr>
+								<td><strong>NOM AGENT MONETIQUE</strong></td>
+								<td><strong>VENTE SBC</strong></td>
+								<td><strong>VENTE DE TV</strong></td>
+								<td><strong>TOTAL PAR AGENT</strong></td>
+							</tr>
+							<t t-foreach="data['form']['transactions']" t-as="line">
+							<tr>
+								<td><span t-esc="line_value['name']"></span></td>
+								<td><span t-esc="line_value['vente_sbc']"></span></td>
+								<td><span t-esc="line_value['vente_tv']"></span></td>
+								<td><span t-esc="line_value['total']"></span></td>
+							</tr>
+							</t>
+							<tr>
+								<td><strong>Total</strong></td>
+								<td><strong><span t-esc="data['form']['total']['sum_total_sbc']"></span></strong></td>
+								<td><strong><span t-esc="data['form']['total']['sum_total_vente']"></span></strong></td>
+								<td><strong><span t-esc="data['form']['total']['sum_total']" ></span></strong></td>
+							</tr>
+						</table>
+						</div>
+					</div>
+						<div style="margin-top:-10px"><strong>Date d'édition : <span t-esc="data['form']['print_date']"></span></strong></div>
+						<div class="footer" style="width:100%;min-height:80px;margin-top:30px;">
+							<img class="img img-responsive" src="/benin_petro/static/img/pied.jpg"  />
+						</div>
+                    </div>
+                
+                
+					
+			</t>
+		
+		</template>
+		<report
+			id="point_jour_report_form"
+			string="Point du jour"
+			model="benin_petro.wizard.point_jour"
+			report_type="qweb-pdf"
+			file="benin_petro.point_jour_report"
+			name="benin_petro.point_jour_report"
+			paperformat="paperformat_euro_landscape"/>
+    </data>
+</odoo>

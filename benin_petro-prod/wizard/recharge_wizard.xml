@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Form -->
+        <record id="wizard_recharger_form" model="ir.ui.view">
+            <field name="name">Trésorier</field>
+            <field name="model">benin_petro.wizard.benin_petro.chargeur</field>
+            <field name="arch" type="xml">
+                <form string="Recharge">
+                <field name="id" invisible="1"/>
+                    
+                            <!-- <group>
+                            <field name="access" options="{'no_create': True}" domain="[('id','!=',access)]"/></group>
+                            -->
+                            <group><field name="chargeur_id"  invisible='1'/></group>
+                            <group>
+                                <field string='Type' name='booltest' widget="radio"/>
+                            </group>
+                            <group>
+                                <field name="montant" widget='monetary' string='Montant'/>
+                            </group>
+                        
+                   
+                    <footer>
+                        <button name="recharger" string="Sauvegarder" type="object" class="oe_highlight"/>
+                        <button string="Annuler" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+
+            </field>
+        </record>
+
+
+        <act_window id="wizard_recharge_action"
+                    name="Recharger Trésorier SUBLIME CARTEE"
+                    res_model="benin_petro.wizard.benin_petro.chargeur"
+                    src_model="benin_petro.chargeur"
+                    key2="client_action_multi"
+                    view_mode="form"
+                    target="new"
+                    view_type="form"
+		            groups="group_benin_petro_president"
+			/>
+
+
+
+
+
+    </data>
+</odoo>
+    

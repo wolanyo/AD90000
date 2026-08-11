@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+         <record id="form_recharge_par_carte" model="ir.ui.view">
+            <field name="name">Consultation</field>
+            <field name="model">benin_petro.recharge_par_carte</field>
+            <field name="arch" type="xml">
+                <form string="Consultation"  create="false" edit="false">
+                <center ><h1 style="color:red">Relevé des recharges sur cartes</h1></center>
+                    <group col="2">
+                        <group>
+                            <field name="carte" />
+                        </group>
+                        <group>
+                            <field name="type_operation" />
+                        </group>
+                    </group>
+                    <group col="2">
+                        <group>
+                            <field name="start_date" />
+                        </group>
+                        <group>
+                            <field name="end_date" />
+                        </group>
+                    </group>
+                    
+
+                    <group  col="2">
+                        <group>
+                            <button name="print_report_pdf" string="Imprimer en PDF" type="object" class="oe_highlight"/>
+                        </group>
+                        <group>
+                            <button name="print_report_excel" string="Imprimer en EXCEL" type="object" class="oe_highlight"/>
+                        </group>
+                    </group>
+
+                    
+                    <field name="list_releve_client" readonly="1">
+                        <tree limit="15">
+                            <field name="date_recharge" />
+                            <field name="consomateur" />
+                            <field name="type_operation" />
+                            <field name="montant" sum='Total' /> 
+                        </tree>
+                    </field>
+                </form>
+            </field>
+        </record>
+        <record id="recharge_par_carte_action_form" model="ir.actions.act_window">
+            <field name="name">Consultation des recharges</field>
+            <field name="res_model">benin_petro.recharge_par_carte</field>
+            <field name="view_mode">form</field>
+            <field name="help">Recharge ...</field>
+            <field name="target">inline</field>
+        </record>
+
+        <menuitem action="recharge_par_carte_action_form" id="menu_recharge_par_carte_form"
+            parent="menu_tabeal_bord_client" sequence="2"
+            name="Relevé des recharges sur cartes" groups="group_benin_petro_manager,group_benin_petro_adminn,base.group_system"/>
+    </data>
+</odoo>

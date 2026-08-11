@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="repport_template_facture_ticket_pro_format">
+            <t t-call="report.html_container">
+				<t t-foreach="docs" t-as="doc">
+					<div class="header" style="min-height:100px;margin:0;padding:0;">
+						<img class="img img-responsive" src="/benin_petro/static/img/ent.jpg"/>
+					</div>						
+					<div class="page" >
+					<br/><br/><br/>
+								<div class='row'>
+									<div class='col-xs-6' >
+										<h2 class='text-left' >Facture Pro-Forma N <span t-field="doc.facture_number" ></span>  DU <span t-field='doc.create_date' t-options='{"widget": "date"}' ></span> </h2>
+										<br/><br/>
+										<p>PRIX A LA POMPE : <span t-field='doc.hest_id.prix_init' ></span> </p>
+										<strong><p>PRODUIT : <span t-field='doc.hest_id.type_de_recharge' ></span></p></strong>
+									</div>
+									<div class='col-xs-6'  >
+										<table class='table table-bordered' >
+											
+											<tr>
+												<td>Nom:</td>
+												<td><span t-field='doc.client' ></span></td>
+											</tr>
+											<tr>
+												<td>Adresse</td>
+												<td><span t-field='doc.client.street' ></span></td>
+											</tr>
+											<tr>
+												<td>Tel:</td>
+												<td><span t-field='doc.client.mobile' ></span></td>
+											</tr>
+										</table>
+									</div>
+								</div>
+								<div class='row'>
+									<div calss='col-xs-12' style='margin:10px' >
+										<table class='table table-bordered'>
+											<thead>
+												<tr>
+													<th class='text-center'>Designation</th>
+													<th class='text-center'>Qte</th>
+													<th class='text-center'>PU HT</th>
+													<th class='text-center'>Montant</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td> <span >Divers produits Bénin petro</span> </td>
+													<td> <span t-esc='doc.getQty()' ></span> </td>
+													<td> <span t-field='doc.getProduct().lst_price' ></span> </td>
+													<td> <span t-field='doc.montant' ></span> </td>
+												</tr>
+											</tbody>
+										</table>
+									</div>	
+								</div>
+								<div class='row' >
+									
+									<div class='col-xs-6'  >
+										<table class='table table-bordered' >
+											<!-- <tr>
+												<td>Total Hors Taxes</td>
+												<td><span t-esc='doc.getMontantHorsTax()'/></td>
+											</tr>
+											<tr>
+												<td>TVA(84,0463F/L)</td>
+												<td><span t-esc='doc.getTva()' ></span></td>
+											</tr> -->
+											<tr>
+												<td>Total TTC</td>
+												<td><span t-esc='doc.getMontantTtc()' ></span></td>
+											</tr>
+											<tr>
+												<td class='text-center'>Montant en ticket Valeur a remettre</td>
+												<td><span t-esc='doc.getMontantTtc()' /></td>
+											</tr>
+										</table>
+										<strong>
+											<p>Arretee la presente Facture a la somme TTC de francs CFA :</p>
+										</strong>
+										<p><span t-esc="doc.getMontantWords()" ></span></p>
+									</div>
+									<div class='col-xs-6' >
+										
+										<table class='table table-bordered' >
+											<tr>
+												<td>Total Hors Taxes</td>
+												<td><span t-esc='doc.getMontantHorsTax()' /></td>
+											</tr>
+										</table>
+									</div>
+								</div>
+								<p><i>NB</i></p>
+								<p><i>  -le prix a la prompe est susceptible d'etre chnage lorsqu'il y a changement de structure</i></p>
+								<h5 class='text-right'>Direction Commerciale et Marketing</h5>
+								<p>Cette facture a été délivrée pour la vente de Tickets valeurs </p>
+								<br/><br/><br/><br/><br/><br/>
+
+						</div>
+						<div class="footer" style="min-height:300px;">
+                    		<img class="img img-responsive" src="/benin_petro/static/img/pd3.jpg"  /> 
+                		</div>
+					</t>
+			</t>
+		</template>
+		<report
+			id="report_facture_de_ticket_pro_format"
+			string="Générer Facture Pro Format"
+			model="benin_petro.tv_print"
+			report_type="qweb-pdf"
+			file="repport_template_facture_ticket_pro_format"
+			name="benin_petro.repport_template_facture_ticket_pro_format"
+			paperformat="paperformat_euro_landscape"/>
+    </data>
+</odoo>

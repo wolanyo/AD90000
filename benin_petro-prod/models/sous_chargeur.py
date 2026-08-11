@@ -1,0 +1,156 @@
+# -*- coding: utf-8 -*-
+from odoo import fields, models,api
+from odoo.exceptions import  ValidationError
+class sous_chargeur(models.Model):
+
+    _name="benin_petro.sous_chargeur"
+    _rec_name='access'
+   
+    montant_plafond = fields.Float(string='Montant plafond SUBLIME CARTE',required=True)
+    access = fields.Many2one("res.users",string="Agent monétique",required=True)
+    superv = fields.Many2one("benin_petro.chargeur",string="Trésorier", default=lambda  s : s.env["benin_petro.chargeur"].search([('access','=',s.env.user.id)]) )
+    montant_super=fields.Float(readonly=True,default=lambda  s : s.env["benin_petro.chargeur"].search([('access','=',s.env.user.id)]).montant_plafond)
+    rest=fields.Float(string='Montant actuel')
+    historique = fields.One2many(comodel_name='benin_petro.historique', inverse_name='sous_chargeur', string='Historique')
+    historique_tv = fields.One2many(comodel_name='benin_petro.historique', inverse_name='sous_chargeur_tv', string='Historique',domain=[('type_af','=','TV')])
+    historique_sublim = fields.One2many(comodel_name='benin_petro.historique', inverse_name='sous_chargeur_sublim', string='Historique',domain=[('type_af','=','sublime carte')])
+    
+    montant_super_tv=fields.Float(readonly=True,default=lambda  s : s.env["benin_petro.chargeur"].search([('access','=',s.env.user.id)]).montant_plafond_tv)
+    montant_plafond_tv = fields.Float(string='Montant plafond TV',required=True)
+    company_id = fields.Many2one('res.company','Company',default=lambda self: self.env.user.company_id )
+    
+    # @api.onchange('montant_plafond')
+    # def _getsoldeTresor(self):
+    #     print 'ooooooooooooooooooo'
+    #     print self.env.user.id
+    #     return float(self.env["benin_petro.chargeur"].search([('access','=',self.env.user.id)]).montant_plafond)
+
+    @api.model
+    def create(self, vals):
+        flag=0
+        po=self.env["benin_petro.chargeur"].search([('access','=',self.env.user.id)])
+        if  vals['montant_plafond'] <= po.montant_plafond and vals['montant_plafond_tv'] <= po.montant_plafond_tv :
+            res = super(sous_chargeur, self).create(vals)
+            if  vals['montant_plafond'] !=0:
+                historique_carte = self.env['benin_petro.historique'].create({
+                    'montant_init':po.montant_plafond,
+                    'montant_fin':po.montant_plafond-vals['montant_plafond'],
+                    'chargeur':po.id,
+                    'type_op':'RECHARGE MONETIQUE',
+                    'type_af':'sublime carte',
+                    'diff':abs(po.montant_plafond-po.montant_plafond-vals['montant_plafond']),
+                    'debit':abs(po.montant_plafond-po.montant_plafond-vals['montant_plafond']),
+                    'credit':0
+                })
+                historique_carte = self.env['benin_petro.historique'].create({
+                    'montant_init':self.montant_plafond,
+                    'montant_fin':self.montant_plafond+vals['montant_plafond'],
+                    'sous_chargeur':res.id,
+                    'type_op':'RECHARGE MONETIQUE',
+                    'type_af':'sublime carte',
+                    'diff':abs(po.montant_plafond-po.montant_plafond-vals['montant_plafond']),
+                    'debit':0,
+                    'credit':abs(po.montant_plafond-po.montant_plafond-vals['montant_plafond'])  
+                })
+                vals['montant_super'] = po.montant_plafond-vals['montant_plafond']            
+                flag=1
+        else :
+            raise ValidationError("Le montant indiqué doit etre inférieur ou égale a votre solde")
+            
+        #if  vals['montant_plafond_tv'] <= po.montant_plafond_tv :
+            #if  vals['montant_plafond_tv']!=0:
+                
+        vals['montant_super_tv'] = po.montant_plafond_tv-vals['montant_plafond_tv']
+        flag=1
+        
+        self.env['benin_petro.historique'].create({
+            'montant_init':self.montant_plafond_tv,
+            'montant_fin':self.montant_plafond_tv+vals['montant_plafond_tv'],
+            'sous_chargeur':res.id,
+            'type_op':'RECHARGE MONETIQUE',
+            'type_af':'TV',
+            'diff':abs(po.montant_plafond_tv-po.montant_plafond_tv-vals['montant_plafond_tv']),
+            'debit':0,
+            'credit':abs(po.montant_plafond_tv-po.montant_plafond_tv-vals['montant_plafond_tv']) 
+        })
+        historique_carte.sous_chargeur=res.id
+        
+        self.env['benin_petro.historique'].create({
+            'montant_init':po.montant_plafond_tv,
+            'montant_fin':po.montant_plafond_tv-vals['montant_plafond_tv'],
+            'chargeur':po.id,
+            'type_op':'RECHARGE MONETIQUE',
+            'type_af':'TV',
+            'diff':abs(po.montant_plafond_tv-po.montant_plafond_tv-vals['montant_plafond_tv']),
+            'debit':abs(po.montant_plafond_tv-po.montant_plafond_tv-vals['montant_plafond_tv']),
+            'credit':0
+        })
+        # else :
+        #     raise ValidationError("Le montant indiqué doit etre inférieur ou égale a votre solde")
+        if flag==0:
+            raise ValidationError("L'un des montants  indiqués doit etre différent de zéro")
+        po.write({
+                'montant_plafond_tv':po.montant_plafond_tv-vals['montant_plafond_tv'],
+                'montant_plafond':po.montant_plafond-vals['montant_plafond']
+            })
+        return res
+
+    @api.onchange('access')
+    def _getCharger(self):
+     res = {}
+     ids = []
+     chargeur=self.env["benin_petro.chargeur"].search([])
+     print '----------------    1'
+     for c in chargeur:
+         ids.append(c.access.id)
+     chargeur=self.env["benin_petro.sous_chargeur"].search([])
+     print '----------------    2'
+     for c in chargeur:
+         ids.append(c.access.id)
+     res['domain'] = {'access': [('id', 'not in', ids),('groups_id','=',self.env.ref('benin_petro.group_benin_petro_sous_chargeur').id)]}
+     return res 
+
+
+    # @api.multi
+    # def unlink(self):
+        # po=self.env["benin_petro.chargeur"].search([('superv','=',self.superv.id)])
+        # print po.rest
+        # print 'jujjukjkjknj'
+
+
+    # @api.constrains("montant_plafond")
+    # def montant_controle(self):
+    #     if  float(self.montant_plafond) > float(self.superv.rest ):
+    #         raise ValidationError("Le montant indiqué doit etre inférieur ou égale a votre solde")
+
+
+
+    # @api.multi
+    # def write(self,vals):
+    #     print ' HHHHHHHHHHHHHHJAOZle,'
+    #     print vals['montant_plafond']
+    #     print self.montant_plafond
+    #     dif=vals['montant_plafond']-self.montant_plafond
+    #     print dif
+    #     p=self.env["benin_petro.chargeur"].search([('access','=',self.env.user.id)])
+    #     print p.montant_plafond-dif
+    #     print 'iiiiiiiiiiiiiiii'
+    #     p.write({
+    #         'montant_plafond':p.montant_plafond-dif
+    #     })
+        
+    #     return super(sous_chargeur,self).write(vals)
+
+    # if dif > 0:
+        #     p=self.env["benin_petro.chargeur"].search([('access','=',self.env.user.id)])
+        #     p.write({
+        #         'montant_plafond':p.montant_plafond-dif
+        #     })
+        # if dif < 0:
+        #     p=self.env["benin_petro.chargeur"].search([('access','=',self.env.user.id)])
+        #     p.write({
+        #         'montant_plafond':p.montant_plafond - dif
+        #     })
+
+
+

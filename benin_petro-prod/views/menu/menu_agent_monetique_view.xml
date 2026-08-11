@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- ///////// Menu agent monétique//////// -->
+		 
+
+		<menuitem id="menu_agent_reception_credit_electronique"
+		parent="menu_outils_parent"
+		name="Réception de crédit electronique"
+		groups="group_benin_petro_sous_chargeur"
+		action="agent_creation_credit_historique_tree2" sequence="5"/>
+
+		<menuitem id="menu_agent_reception_credit_carte"
+		parent="menu_agent_reception_credit_electronique"
+		name="Réception de crédit CARTE"
+		groups="group_benin_petro_sous_chargeur"
+		action="agent_creation_credit_historique_tree2" sequence="5"/>
+
+		<menuitem id="menu_agent_reception_credit_tv"
+		parent="menu_agent_reception_credit_electronique"
+		name="Réception de crédit TV"
+		groups="group_benin_petro_sous_chargeur"
+		action="agent_creation_credit_historique_tree3" sequence="5"/>
+
+		<menuitem id="menu_vente_credit"
+		parent="menu_outils_parent"
+		name="Vente de crédits"
+		groups="group_benin_petro_sous_chargeur,group_benin_petro_chargeur"
+		action="vente_credit_historique_tree2" sequence="6"/>
+
+		<menuitem id="menu_vente_credit_carte"
+		parent="menu_vente_credit"
+		name="Vente de crédit carte"
+		groups="group_benin_petro_sous_chargeur,group_benin_petro_chargeur"
+		action="vente_credit_historique_tree2" sequence="6"/>
+
+		<menuitem id="menu_vente_credit_tv"
+		parent="menu_vente_credit"
+		name="Vente de crédit TV"
+		groups="group_benin_petro_sous_chargeur,group_benin_petro_chargeur"
+		action="vente_credit_historique_tree3" sequence="6"/>
+
+
+        <menuitem id="menu_suivi_comptee"
+		parent="menu_outils_parent"
+		name="Suivi des Comptes client"
+		groups="group_benin_petro_sous_chargeur"
+		action="releve_compte_action_form" sequence="7"/>
+        
+        <menuitem id="menu_suivi_comptee_client"
+		parent="menu_suivi_comptee"
+		name="Liste des comptes clients"
+		groups="group_benin_petro_sous_chargeur"
+		action="releve_compte_action_form" sequence="7"/>
+
+
+        <!-- <menuitem id="menu_suivi_compte_carte_tv"
+		parent="menu_outils_parent"
+		name="Suivi des comptes"
+		groups="group_benin_petro_sous_chargeur,group_benin_petro_chargeur"
+		action="releve_compte_action_form" sequence="10"/>
+
+        <menuitem id="menu_suivi_compte_client_carte_tv"
+		parent="menu_suivi_compte_carte_tv"
+		name="Suivi des comptes clients"
+		groups="group_benin_petro_sous_chargeur,group_benin_petro_chargeur"
+		action="releve_compte_action_form" sequence="10"/> -->
+
+
+<!-- ///////// FIN Menu agent monétique//////// -->
+
+    </data>
+</odoo>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    <!-- form view -->
+        <record id="benin_petro_carte_preimprime_view_form" model="ir.ui.view">
+            <field name="name">Génération des carte</field>
+            <field name="model">benin_petro.carte.preimprime</field>
+            <field name="arch" type="xml">
+                <form string="Génération des cartes">
+                    <sheet>
+                        <group col="2">
+                            <field name="nombre"/>
+                        </group>
+                        <notebook>
+                            <page string="Liste des cartes pré imprimé">
+                                <field name="carte_ids" nolabel="1">
+                                    <tree>
+                                        <field name="num_serie" readonly="1" />
+                                        <field name="libelle"/>
+                                        <field name="solde" widget='monetary'/>
+                                        <field name="type_carte_id"/>
+                                        <field name="create_date" string="Date de création"  />
+                                        <field name="state" />
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- tree view -->
+        <record id="benin_petro_carte_preimprime_view_treeee" model="ir.ui.view">
+            <field name="name">Génération des carte</field>
+            <field name="model">benin_petro.carte.preimprime</field>
+            <field name="arch" type="xml">
+                <tree create='true'>
+                    <field name="nombre"/>
+                    <field name="create_date" string='Date de Création' />
+                </tree>
+            </field>
+        </record>
+        <!-- action window -->
+        <record id="benin_petro_carte_preimprime_action" model="ir.actions.act_window">
+            <field name="name">Liste des Génération des carte</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">benin_petro.carte.preimprime</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_type">form</field>
+        </record>
+
+    </data>
+</odoo>

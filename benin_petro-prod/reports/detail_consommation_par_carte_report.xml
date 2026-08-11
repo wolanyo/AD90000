@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="benin_petro.detail_consommation_par_carte_report">
+           <t t-call="report.html_container">
+		   		<t t-set="data_report_margin_top" t-value="0" />
+		   		<t t-set="data_report_margin_bottom" t-value="12" />
+                <t t-set="data_report_header_spacing" t-value="9" />
+                <t t-set="data_report_dpi" t-value="110" />
+				<!-- <t t-call="report.internal_layout"> -->
+				
+				<div class="page" >
+					<div  style="width:100%;min-height:100px;margin-top:0px;;padding:0;">
+						<img class="img img-responsive" src="/benin_petro/static/img/entete.jpg" />
+					</div>
+					
+					<style>
+
+						.table_info tr td{
+							border:1px solid black;
+							padding:5px 5px;
+							font-size:13px
+						}
+						ul {margin:0px;}
+						
+						ul {
+						padding:0;
+						margin:0;
+						list-style-type:none;
+						}
+						.table tr td {
+						font-size:17px
+						}
+					</style>
+                    
+					<div style="width:100%;text-align:center;font-size:20px;"><strong>Client : </strong> <span t-esc="data['form']['client']" /> </div>
+					<table style="width:100%;margin-top:40px;font-size:18px;" >
+						<tr>
+							<td><strong>Date début :</strong></td>
+							<td><span t-esc="data['form']['date_debut']" /></td>
+							<td><strong>Date Fin :</strong></td>
+							<td><span  t-esc="data['form']['date_fin']" /></td>
+						</tr>
+						<tr t-if="data['form']['produit']" >
+							<td><strong>Produit</strong></td>
+							<td ><span t-esc="data['form']['produit']" /></td>
+						</tr>
+					</table>
+					<div class="row" style="margin-top:40px;margin-bottom:20px;padding-left:20px;">
+							<table  class="table table-condensed">
+									<tr>
+										<th style="width:160px"></th>
+										<th style="width:170px"><strong>Carte</strong></th>
+										<th style="width:80px"><strong>Num serie</strong></th>
+										<th style="width:80px"><strong>Produit</strong></th>
+										<th style="width:70px"><strong>Quantité</strong></th>
+										<th style="width:110px"><strong>Montant HT</strong></th>
+										<th style="width:60px"><strong>TVA</strong></th>
+										<th style="width:120px"><strong>MONTANT TTC</strong></th>
+                                        <th style="width:120px"><strong>POINT DE VENTE</strong></th>
+									</tr>
+								<tbody>
+									<t t-foreach="data['form']['transactions']" t-as="line">
+										<!-- <t t-foreach="line_value" t-as="v"> -->
+<!--											<tr style="width:100%">-->
+<!--												<td  style="width:160px"><strong>Point de vente</strong></td>-->
+<!--												<td colspan="5" style="text-align:center;width:620px"><strong><span t-esc="line"></span></strong></td>-->
+<!--											</tr>-->
+											<!-- <t t-foreach="v_value" t-as="v_s"> -->
+												<tr>
+													<td style="width:160px"><span t-esc="line['date']"></span></td>
+													<td style="width:160px"><span t-esc="line['carte_id']"></span></td>
+													<td style="width:80px"><span t-esc="line['carte_serie']"></span></td>
+													<td style="width:60px"><span t-esc="line['produit']"></span></td>
+													<td style="width:60px"><span t-esc="line['qte']"></span></td>
+													<td style="width:100px"><span t-esc="line['montant_horstaxe']"></span></td>
+													<td style="width:50px"><span t-esc="line['tva']"></span></td>
+													<td style="width:80px"><span t-esc="line['montant_ttc']"></span></td>
+                                                    <td style="width:220px"><span t-esc="line['point_vente']"></span></td>
+												</tr>
+											<!-- </t> -->
+										<!-- </t> -->
+									</t>
+									
+<!--									<tr>-->
+<!--										<td  colspan="4"><strong>Total</strong></td>-->
+<!--										<td style="width:70px"><strong><span t-esc="data['form']['total']['qte']"></span></strong></td>-->
+<!--										<td style="width:110px"><strong><span t-esc="data['form']['total']['sum_montant_horstaxe']" ></span></strong></td>-->
+<!--										<td style="width:60px"><strong><span t-esc="data['form']['total']['sum_tva']"></span></strong></td>-->
+<!--										<td style="width:130px"><strong><span t-esc="data['form']['total']['sum_montant_ttc']"></span></strong></td>-->
+<!--									</tr>-->
+								</tbody>
+							</table>
+							
+                            <p style="page-break-before:always;">
+                            </p>
+							
+						
+						
+					
+				<!-- <div  style="width:100%;"></div> -->
+                </div>
+				
+				<div class="footer"   style="width:100%;margin-top:-150px;">
+						<strong>Date d'édition : <span t-esc="data['form']['print_date']"></span></strong>
+						<img class="img img-responsive" src="/benin_petro/static/img/pied.jpg"  />
+					</div>
+					
+				</div>
+				<!-- </t> -->
+			</t>
+		
+		</template>
+		<report
+			id="detail_consommation_par_carte_report_form"
+			string="Détail des consommations par carte"
+			model="benin_petro.wizard.detail_consommation_par_carte"
+			report_type="qweb-pdf"
+			file="benin_petro.detail_consommation_par_carte_report"
+			name="benin_petro.detail_consommation_par_carte_report"
+			paperformat="paperformat_euro_landscape"/>
+    </data>
+</odoo>

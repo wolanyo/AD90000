@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Form -->
+        <record id="wizard_tv_print_form" model="ir.ui.view">
+            <field name="name">Print Wizard</field>
+            <field name="model">benin_petro.wizard.tv_impression</field>
+            <field name="arch" type="xml">
+                <form string="Impression">
+                    <group>
+                        <field name="nbr_print"/>
+                    </group>
+
+                    <footer>
+                        <button name="save_print" string="Imprime" type="object" class="oe_highlight"/>
+                        <button string="Annuler" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+
+            </field>
+        </record>
+
+
+        <act_window id="wizard_print_tv_action"
+                    name="Impression"
+                    res_model="benin_petro.wizard.tv_impression"
+                    src_model="benin_petro.tv_print"
+                    key2="client_action_multi"
+                    view_mode="form"
+                    target="new"
+                    view_type="form"
+			/>
+
+
+    </data>
+</odoo>
+    

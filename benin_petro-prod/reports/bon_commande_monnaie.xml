@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="bon_commande_monaie_report">
+            <t t-call="report.html_container">
+                <div class="page" style="padding: 25px;height:1000px;padding-top: 5px;">
+                
+                <div  style="width:100%;min-height:100px;margin-top:0px;;padding:0;">
+                    <img class="img img-responsive" src="/benin_petro/static/img/entete.jpg" />
+                </div>
+                <t t-foreach="docs" t-as="doc">
+                <style>
+                        .table_info_tres tr td{
+                            padding-top:15px;
+							font-size:13px;
+                        }
+						.table_infoo tr td{
+							padding:5px 5px;
+							font-size:15px;
+						}
+                        .table_info tr th{
+							border:1px solid black;
+							padding:5px 5px;
+							font-size:15px;
+						}
+                        .table_info tr td{
+							border:1px solid black;
+							padding:5px 5px;
+							font-size:15px;
+						}
+                        .table_infa tr td{
+							padding:5px 5px;
+							font-size:15px;
+						}
+						ul {margin:0px;}
+						
+						ul {
+						padding:0;
+						margin:0;
+						list-style-type:none;
+						}
+						li {
+						float:left; /*pour IE*/
+						border:1px solid black;
+						height:40px;
+						padding:5px 5px;
+						margin:0px;
+						font-size:18px;
+						}
+					</style>
+                <div style="margin-top:40px;">
+                    <center><h4><strong>FICHE D’APPROBATION DE MONNAIE ELECTRONIQUE N° <span t-field='doc.num_demande' ></span></strong></h4></center>
+                </div>
+                <div class="row" style="margin-bottom:200px;">
+                    <div style="width:100%;margin-bottom:50px;">
+                    <div class="col-xs-6" style="width:60%;padding:5px;">
+                        <table class="table_info_tres">
+                            <tr>
+                                <td><strong><span t-field='doc.tresorier.access.company_id.name' ></span></strong></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Adresse :</strong></td>
+                                <td><span t-field='doc.tresorier.access.company_id.street' ></span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Code postal, ville :</strong></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Téléphone : </strong></td>
+                                <td><span t-field='doc.tresorier.access.company_id.phone' ></span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>RC :</strong></td>
+                                <td><span t-field='doc.tresorier.access.company_id.company_registry' ></span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>IFU :</strong></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Contact :</strong></td>
+                                <td><span t-field='doc.tresorier.access.name' ></span></td>
+                            </tr>
+                        </table>
+                        
+                        
+                    </div>
+                    <div class="col-xs-6"  style="width:40%;padding:5px;">
+                        <table  class="table_info_tres">
+                            <tr>
+                                <td><strong>A : Monsieur le GOUVERNEUR</strong></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Adresse :</strong></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Téléphone :</strong></td>
+                                <td></td>
+                            </tr>
+
+                        </table>
+                    
+                    </div>
+                    </div>
+                   <div  style="width:50%;margin-top:150px;padding-left:5px;padding-top:40px;">
+                        <span><strong>Date : </strong><span t-field='doc.create_date' ></span></span>
+                    </div>
+
+                     <div class="col-xs-12" style="width:100%;margin-top:40px;">
+                        <table class="table_info" style="width:100%">
+                            <tr>
+                                <th><strong>Désignation</strong></th>
+                                <th>Montant</th>
+                                <th>Remarques</th>
+                            </tr>
+                            <tr t-if="doc.type_credit == 'Sublim carte'" >
+                                <td>Mise à disposition de fonds recharge Carte Sublime</td>
+                                <td><span t-field='doc.montant' ></span></td>
+                                <td></td>
+                            </tr>
+                            <tr t-if="doc.type_credit == 'TV'" >
+                                <td>Mise à disposition de fonds Ticket valeur</td>
+                                <td><span t-field='doc.montant' ></span></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div style="width:50%;height:30px;border:1px solid black;margin:140px auto;margin-bottom:60px;line-height:25px;text-align:center;padding:5px;">
+                        <strong>TOTAL FCFA :    <span t-field='doc.montant' ></span></strong>
+                    </div>
+                    <div style="width:100%;">
+                        <table class="table_infa" width="width:100%;">
+                            <tr>
+                                <td style="width:100%;"><strong>Conditions de paiement :</strong></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td style="width:100%;"><strong>Date de livraison souhaitée :</strong></td>
+                                <td></td>
+                            </tr>
+
+                        </table>
+                    </div>
+                    <table style="width:100%;margin-top:30px">
+                        <tr>
+                            <td style="width:30%;"><strong>Trésorier</strong></td>
+                            <td  style="width:40%;"><strong>RCF</strong></td>
+                            <td style="width:30%;"><strong>DG</strong></td>
+                        </tr>
+
+                    </table>
+
+                    <table style="width:100%;margin-top:170px;" >
+                        <tr>
+                            <td style="width:30%;"><strong></strong></td>
+                            <td  style="width:30%;"><strong></strong></td>
+                            <td style="width:40%;"><strong>Date d'édition : <span t-esc="doc.getDate()"></span></strong></td>
+                        </tr>
+
+                    </table>
+                </div>
+            </t>
+                <div class="footer" style="width:100%;min-height:80px;margin-top:-120px;">
+                        <img class="img img-responsive" src="/benin_petro/static/img/pied.jpg"  />
+                </div>
+            </div>
+            </t>
+        </template>
+
+        <report
+        id="report_bon_commande"
+        string="Bon de commande monnaie"
+        model="benin_petro.demande_credit_par_treso"
+        report_type="qweb-pdf"
+        file="benin_petro.bon_commande_monaie_report"
+        name="benin_petro.bon_commande_monaie_report"
+        paperformat="paperformat_euro_landscape"
+        groups="group_benin_petro_adminn,group_benin_petro_chargeur,group_benin_petro_sous_chargeur"
+        />
+
+
+
+
+
+
+
+
+
+
+
+        <template id="bon_commande_agent_monaie_report">
+            <t t-call="report.html_container">
+                <div class="page" style="padding: 25px;height:1000px;padding-top: 5px;">
+                
+                <div  style="width:100%;min-height:100px;margin-top:0px;;padding:0;">
+                    <img class="img img-responsive" src="/benin_petro/static/img/entete.jpg" />
+                </div>
+                <t t-foreach="docs" t-as="doc">
+                <style>
+                        .table_info_tres tr td{
+                            padding-top:15px;
+							font-size:13px;
+                        }
+						.table_infoo tr td{
+							padding:5px 5px;
+							font-size:15px;
+						}
+                        .table_info tr th{
+							border:1px solid black;
+							padding:5px 5px;
+							font-size:15px;
+						}
+                        .table_info tr td{
+							border:1px solid black;
+							padding:5px 5px;
+							font-size:15px;
+						}
+                        .table_infa tr td{
+							padding:5px 5px;
+							font-size:15px;
+						}
+						ul {margin:0px;}
+						
+						ul {
+						padding:0;
+						margin:0;
+						list-style-type:none;
+						}
+						li {
+						float:left; /*pour IE*/
+						border:1px solid black;
+						height:40px;
+						padding:5px 5px;
+						margin:0px;
+						font-size:18px;
+						}
+					</style>
+                <div style="margin-top:40px;">
+                    <center><h4><strong>FICHE D’APPROBATION DE MONNAIE ELECTRONIQUE N° <span t-field='doc.num_demande' ></span></strong></h4></center>
+                </div>
+                <div class="row" style="margin-bottom:200px;">
+                    <div style="width:100%;margin-bottom:50px;">
+                    <div class="col-xs-6" style="width:60%;padding:5px;">
+                        <table class="table_info_tres">
+                            <tr>
+                                <td><strong><span t-field='doc.agent_monetique.access.company_id.name' ></span></strong></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Adresse :</strong></td>
+                                <td><span t-field='doc.agent_monetique.access.company_id.street' ></span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Code postal, ville :</strong></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Téléphone : </strong></td>
+                                <td><span t-field='doc.agent_monetique.access.company_id.phone' ></span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>RC :</strong></td>
+                                <td><span t-field='doc.agent_monetique.access.company_id.company_registry' ></span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>IFU :</strong></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Contact :</strong></td>
+                                <td><span t-field='doc.agent_monetique.access.name' ></span></td>
+                            </tr>
+                        </table>
+                        
+                        
+                    </div>
+                    <div class="col-xs-6"  style="width:40%;padding:5px;">
+                        <table  class="table_info_tres">
+                            <tr>
+                                <td><strong>A : Monsieur le TRESORIER</strong></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Adresse :</strong></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Téléphone :</strong></td>
+                                <td></td>
+                            </tr>
+
+                        </table>
+                    
+                    </div>
+                    </div>
+                   <div  style="width:50%;margin-top:150px;padding-left:5px;padding-top:40px;">
+                        <span><strong>Date : </strong>       <span t-field='doc.create_date' ></span></span>
+                    </div>
+
+                     <div class="col-xs-12" style="width:100%;margin-top:40px;">
+                        <table class="table_info" style="width:100%">
+                            <tr>
+                                <th><strong>Désignation</strong></th>
+                                <th>Montant</th>
+                                <th>Remarques</th>
+                            </tr>
+                            <tr t-if="doc.type_credit == 'Sublim carte'" >
+                                <td>Mise à disposition de fonds recharge Carte Sublime</td>
+                                <td><span t-field='doc.montant' ></span></td>
+                                <td></td>
+                            </tr>
+                            <tr t-if="doc.type_credit == 'TV'" >
+                                <td>Mise à disposition de fonds Ticket valeur</td>
+                                <td><span t-field='doc.montant' ></span></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div style="width:50%;height:30px;border:1px solid black;margin:140px auto;margin-bottom:60px;line-height:25px;text-align:center;padding:5px;">
+                        <strong>TOTAL FCFA :    <span t-field='doc.montant' ></span></strong>
+                    </div>
+                    <div style="width:100%;">
+                        <table class="table_infa" width="width:100%;">
+                            <tr>
+                                <td style="width:100%;"><strong>Conditions de paiement :</strong></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td style="width:100%;"><strong>Date de livraison souhaitée :</strong></td>
+                                <td></td>
+                            </tr>
+
+                        </table>
+                    </div>
+                    <table style="width:100%;margin-top:40px">
+                        <tr>
+                            <td style="width:25%;"><strong>AGENT MONETIQUE</strong></td>
+                            <td style="width:25%;"><strong>Trésorier</strong></td>
+                            <td  style="width:25%;"><strong>RCF</strong></td>
+                            <td style="width:25%;"><strong>DG</strong></td>
+                        </tr>
+
+                    </table>
+
+                    <table style="width:100%;margin-top:160px;">
+                        <tr>
+                            <td style="width:30%;"><strong></strong></td>
+                            <td  style="width:30%;"><strong></strong></td>
+                            <td style="width:40%;"><strong>Date d'édition : <span t-esc="doc.getDate()"></span></strong></td>
+                        </tr>
+
+                    </table>
+                
+                </div>
+            </t>
+                <div class="footer" style="width:100%;min-height:80px;margin-top:-140px;">
+                        <img class="img img-responsive" src="/benin_petro/static/img/pied.jpg"  />
+                </div>
+            </div>
+            </t>
+        </template>
+
+        <report
+        id="report_bon_commande_agent"
+        string="Bon de commande monnaie"
+        model="benin_petro.demande_credit"
+        report_type="qweb-pdf"
+        file="benin_petro.bon_commande_agent_monaie_report"
+        name="benin_petro.bon_commande_agent_monaie_report"
+        paperformat="paperformat_euro_landscape"
+        groups="group_benin_petro_adminn,group_benin_petro_chargeur,group_benin_petro_sous_chargeur"
+        />
+    </data>
+</odoo>

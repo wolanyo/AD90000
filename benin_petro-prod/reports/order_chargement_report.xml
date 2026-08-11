@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+ 
+
+        <template id="benin_petro_chargement_report">
+         <t t-call="report.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-if="o.transfer_type == 'a'" >
+                    <t t-if="o.typeDesProuduit == 'blanch'" >
+            <t t-foreach='o.move_lines' t-as='v'>
+                <div class="header" style="min-height:100px;margin:0;padding:0;">
+               
+               <img class="img img-responsive" src="/benin_petro/static/img/ent.jpg"/>
+                </div>
+                        <div class="page" style="padding:15px;padding-top:40px">
+                    <style>
+                        td
+                        {
+                            text-align:left;
+                            border : 30px solid #fff
+                        }
+                        table
+                        {
+                            border : 5px solid #fff
+                        }
+                        .table-bordered td, .table-bordered th {
+                            border: 2px solid #000 !important;
+                            border-color:#000;
+                            text-align : center
+                        }
+                    </style>
+                <div class="container">
+                <div class="row" >
+                   <div>
+                        <h2 class="text-center" style="font-weight:bold">ORDER DE CHARGEMENT</h2><br/><br/>
+                        <span class="lead" style="font-weight:bold">DEPOT : </span><span t-field="o.location_id" /><br/><br/>
+                        <span class="lead" style="font-weight:bold">PRODUIT : </span><span t-field="v.product_id" /><br/><br/>
+                        <p>Veuillez charger le camion dont les renseignements si trouvent dans le tableau ci dessus : </p><br/>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th  scope="col" >NOM DU CHAUFFEUR</th>
+                                    <th  scope="col">REF DU PERMIS DU CHAUFFEUR</th>
+                                    <th scope="col">№ DE CAMION</th>
+                                    <th scope="col">VOLUME DU PRODUIT A CHARGER</th>
+                                    <th scope="col">№ TELEPHONE DU CHAUFFEUR </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    <tr>
+                                        <td ><span t-field="o.camion_id.employee_id"></span></td>
+                                        <td ><span t-field="o.camion_id.employee_id.driver_license"></span></td>
+                                        <td ><span t-field="o.camion_id.license_plate"></span></td>
+                                        <td ><span t-field="v.qty"></span></td>
+                                        <td ><span t-field="o.camion_id.employee_id.mobile_phone"></span></td>
+                                    </tr>
+                            </tbody>
+                        </table>
+                        <p style="text-align : right" >Le chargée de Suivi de stock et de chargement : </p>
+                   </div>
+                  </div>
+                </div>
+                <div>
+                </div>
+                </div>
+                <div class="footer" style="min-height:300px;">
+
+                    <img class="img img-responsive" src="/benin_petro/static/img/pd3.jpg"  /> 
+                   
+                </div>
+                        </t>
+                        </t>
+                <t t-if="o.typeDesProuduit == 'autre'" >
+                     <div class="header" style="min-height:100px;margin:0;padding:0;">
+               
+               <img class="img img-responsive" src="/benin_petro/static/img/ent.jpg"/>
+                </div>
+                        <div class="page" style="padding:15px;padding-top:40px">
+                    <style>
+                        td
+                        {
+                            text-align:left;
+                            border : 30px solid #fff
+                        }
+                        table
+                        {
+                            border : 5px solid #fff
+                        }
+                        .table-bordered td, .table-bordered th {
+                            border: 2px solid #000 !important;
+                            border-color:#000;
+                            text-align : center
+                        }
+                    </style>
+                <div class="container">
+                <div class="row" >
+                   <div>
+                        <h2 class="text-center" style="font-weight:bold">ORDER DE CHARGEMENT</h2>
+                        <span class="lead" style="font-weight:bold">DEPOT : </span><span t-field="o.location_id" /><br/>
+                        <span class="lead" style="font-weight:bold">TYPE DE PRODUIT : </span><span t-field="o.typeDesProuduit" /><br/>
+                        <span class="lead" style="font-weight:bold"  >№ DE CAMION - № MATRICULE :</span><span class="lead" t-field="o.camion_id" /> - <span class="lead" t-field="o.camion_id.license_plate" /><br/>
+                        <span class="lead" style="font-weight:bold"  >NOM DU CHAUFFEUR - № TELEPHONE :</span>
+                                <span class="lead" t-field="o.camion_id.employee_id" /> - <span class="lead" t-field="o.camion_id.employee_id.mobile_phone" /><br/>
+                        <p>Veuillez charger le camion dont les renseignements si trouvent dans le tableau ci dessus : </p>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th  scope="col" colspan="3">DESIGNATION</th>
+                                    <th  scope="col">QUANTTIE</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach='o.move_lines' t-as='v'>
+                                    <tr>
+                                        <td colspan="3"><span t-field="v.product_id"></span></td>
+                                        <td ><span t-field="v.qty"></span></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                        <p style="text-align : right" >Le chargée de Suivi de stock et de chargement : </p>
+                   </div>
+                  </div>
+                </div>
+                <div>
+                </div>
+                </div>
+                <div class="footer" style="min-height:300px;">
+
+                    <img class="img img-responsive" src="/benin_petro/static/img/pd3.jpg"  /> 
+                   
+                </div>
+                </t>
+
+                    </t>
+               
+<!--staart-->
+<t t-if="o.transfer_type == 'b' or o.transfer_type == 'd'" >
+                    <t t-if="o.typeDesProuduit == 'blanch'" >
+                        <t t-foreach='o.stock_picking_id.move_lines' t-as='v'>
+                <div class="header" style="min-height:100px;margin:0;padding:0;">
+               
+               <img class="img img-responsive" src="/benin_petro/static/img/ent.jpg"/>
+                </div>
+                        <div class="page" style="padding:15px;padding-top:40px">
+                    <style>
+                        td
+                        {
+                            text-align:left;
+                            border : 30px solid #fff
+                        }
+                        table
+                        {
+                            border : 5px solid #fff
+                        }
+                        .table-bordered td, .table-bordered th {
+                            border: 2px solid #000 !important;
+                            border-color:#000;
+                            text-align : center
+                        }
+                    </style>
+                <div class="container">
+                <div class="row" >
+                   <div>
+                        <h2 class="text-center" style="font-weight:bold">ORDER DE CHARGEMENT</h2><br/><br/>
+                        <span class="lead" style="font-weight:bold">DEPOT : </span><span t-field="o.location_id" /><br/><br/>
+                        <span class="lead" style="font-weight:bold">PRODUIT : </span><span t-field="v.product_id" /><br/><br/>
+                        <p>Veuillez charger le camion dont les renseignements si trouvent dans le tableau ci dessus : </p><br/>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th  scope="col" >NOM DU CHAUFFEUR</th>
+                                    <th  scope="col">REF DU PERMIS DU CHAUFFEUR</th>
+                                    <th scope="col">№ DE CAMION</th>
+                                    <th scope="col">VOLUME DU PRODUIT A CHARGER</th>
+                                    <th scope="col">№ TELEPHONE DU CHAUFFEUR </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    <tr>
+                                        <td ><span t-field="o.camion_id.employee_id"></span></td>
+                                        <td ><span t-field="o.camion_id.employee_id.driver_license"></span></td>
+                                        <td ><span t-field="o.camion_id.license_plate"></span></td>
+                                        <td ><span t-field="v.product_uom_qty"></span></td>
+                                        <td ><span t-field="o.camion_id.employee_id.mobile_phone"></span></td>
+                                    </tr>
+                            </tbody>
+                        </table>
+                        <p style="text-align : right" >Le chargée de Suivi de stock et de chargement : </p>
+                   </div>
+                  </div>
+                </div>
+                <div>
+                </div>
+                </div>
+                <div class="footer" style="min-height:300px;">
+
+                    <img class="img img-responsive" src="/benin_petro/static/img/pd3.jpg"  /> 
+                   
+                </div>
+                        </t>
+                        </t>
+                <t t-if="o.typeDesProuduit == 'autre'" >
+                     <div class="header" style="min-height:100px;margin:0;padding:0;">
+               
+               <img class="img img-responsive" src="/benin_petro/static/img/ent.jpg"/>
+                </div>
+                        <div class="page" style="padding:15px;padding-top:40px">
+                    <style>
+                        td
+                        {
+                            text-align:left;
+                            border : 30px solid #fff
+                        }
+                        table
+                        {
+                            border : 5px solid #fff
+                        }
+                        .table-bordered td, .table-bordered th {
+                            border: 2px solid #000 !important;
+                            border-color:#000;
+                            text-align : center
+                        }
+                    </style>
+                <div class="container">
+                <div class="row" >
+                   <div>
+                        <h2 class="text-center" style="font-weight:bold">ORDER DE CHARGEMENT</h2>
+                        <span class="lead" style="font-weight:bold">DEPOT : </span><span t-field="o.location_id" /><br/>
+                        <span class="lead" style="font-weight:bold">TYPE DE PRODUIT : </span><span t-field="o.typeDesProuduit" /><br/>
+                        <span class="lead" style="font-weight:bold"  >№ DE CAMION - № MATRICULE :</span><span class="lead" t-field="o.camion_id" /> - <span class="lead" t-field="o.camion_id.license_plate" /><br/>
+                        <span class="lead" style="font-weight:bold"  >NOM DU CHAUFFEUR - № TELEPHONE :</span>
+                                <span class="lead" t-field="o.camion_id.employee_id" /> - <span class="lead" t-field="o.camion_id.employee_id.mobile_phone" /><br/>
+                        <p>Veuillez charger le camion dont les renseignements si trouvent dans le tableau ci dessus : </p>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th  scope="col" colspan="3">DESIGNATION</th>
+                                    <th  scope="col">QUANTTIE</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach='o.stock_picking_id.move_lines' t-as='v'>
+                                    <tr>
+                                        <td colspan="3"><span t-field="v.product_id"></span></td>
+                                        <td ><span t-field="v.product_uom_qty"></span></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                        <p style="text-align : right" >Le chargée de Suivi de stock et de chargement : </p>
+                   </div>
+                  </div>
+                </div>
+                <div>
+                </div>
+                </div>
+                <div class="footer" style="min-height:300px;">
+
+                    <img class="img img-responsive" src="/benin_petro/static/img/pd3.jpg"  /> 
+                   
+                </div>
+                </t>
+
+                    </t>
+                </t>
+                 </t>
+
+<!--end-->
+
+
+        </template>
+    <report
+        id="report_charggement_benin_petro"
+        string="Order de chargement"
+        model="benin_petro.transfert"
+        report_type="qweb-pdf"
+        file="benin_petro_chargement_report"
+        name="benin_petro.benin_petro_chargement_report"
+        paperformat="paperformat_euro_landscape"
+        menu="False"
+        />
+    </data>
+</odoo>

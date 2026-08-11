@@ -1,0 +1,181 @@
+<openerp>
+    <data>
+
+<!-- //////////////////////////////////////////////////////////////////////////////////  -->
+	<record id="accueil_index" model="ir.ui.view" >
+            <field name="name">Accueil</field>
+            <field name="model">benin_petro.statistique</field>
+            <field name="arch" type="xml">
+		 <form string="" version="7.0">
+			<field name="call_statistique_widget" widget="statistique_total_vente" class="oe_highlight" />
+			
+			<fieldset style="border: 1px solid #008cba;padding: 10px;padding-top: 3px;margin-bottom:15px;">
+			<legend style="margin-bottom: 0px;border: none;text-align: center;width: 220px;padding-bottom: 5px;color:#008cba;">
+				<span valeur='nombre'  class='modeGraph'>Critères de recherches</span>
+			</legend>
+			<div id="test">
+			<table class="table_critere" style='width: 100%%;min-width: 700px;margin:0px auto;'>
+				<tr style="text-align: center;">
+					<td>Points de ventes</td>
+					<td style='border-bottom: 1px solid #d2caca;'>
+						<select id='pointVente' class= "select_consommation" style="padding: 5px;width: 150px;margin: 5px;height: 30px;padding-bottom: 3px;">
+						 
+						</select>
+					</td>
+					<td style='text-align: center;padding: 10px;font-size: 16px;border-radius:5px 0 0 5px;border-bottom: 1px solid #d2caca;padding-bottom: 3px;'>Clients</td>
+					<td style='border-bottom: 1px solid #d2caca;'>
+						<select id='clients' class= "select_consommation" style="padding: 5px;width: 150px;margin: 5px;height: 30px;padding-bottom: 3px;">
+
+						</select>
+					</td>
+					<td class="resultat_by"><span for="pr">Résultat par produit</span><input type="radio" checked="checked"  value="par produit" name="bb" id="pr"/></td>
+					<td  class="resultat_by"><span for="crt">Résultat par carte</span><input type="radio" value="par carte" name="bb" id="crt"/></td>
+					<td  class="resultat_bya"><span for="crt">Résultat par point de vente</span><input type="radio" value="par point de vente" name="bb" id="par_point_vente" checked="True"/></td>
+					<td  class="resultat_bya"><span for="crt">Résultat par client</span><input type="radio" value="par client" name="bb" id="par_client"/></td>
+					
+				</tr>
+				<tr style="text-align: center;">
+					<td style='text-align: center;padding: 10px;font-size: 16px;border-radius:5px 0 0 5px;border-bottom: 1px solid #d2caca;padding-bottom: 3px;'>Année</td>
+					<td style='border-bottom: 1px solid #d2caca;'>
+						<select id='yearValue' class= "select_consommation" style="padding: 5px;width: 150px;margin: 5px;height: 30px;padding-bottom: 3px;">
+						  <option value='All' selected='true'>Tous</option>
+						</select>
+					</td>
+					<td style='text-align: center;padding: 10px;font-size: 16px;border-radius:5px 0 0 5px;border-bottom: 1px solid #d2caca;padding-bottom: 3px;'>Mois</td>
+					<td style='border-bottom: 1px solid #d2caca;'>
+						<select id='monthValue' class= "select_consommation" style="padding: 5px;width: 150px;margin: 5px;height: 30px;padding-bottom: 3px;">
+						  <option value='All' selected='true'>Tous</option>
+						</select>
+					</td>
+					<td style='text-align: center;padding: 10px;font-size: 16px;border-radius:5px 0 0 5px;border-bottom: 1px solid #d2caca;padding-bottom: 3px;'>Date début</td>
+					<td style='border-bottom: 1px solid #d2caca;'>
+						<input type="date" id="datedebut"  />
+					</td>
+					<td style='text-align: center;padding: 10px;font-size: 16px;border-radius:5px 0 0 5px;border-bottom: 1px solid #d2caca;padding-bottom: 3px;'>Date fin</td>
+					<td style='border-bottom: 1px solid #d2caca;'>
+						<input type="date" id="datefin" />
+					</td>
+				</tr>
+				<tr style="text-align: center;">
+					<td style='text-align: center;padding: 10px;font-size: 16px;border-radius:5px 0 0 5px;border-bottom: 1px solid #d2caca;padding-bottom: 3px;'>Type de vente</td>
+					<td style='border-bottom: 1px solid #d2caca;'>
+						<select id='type_vente' class= "select_type_vente" style="padding: 5px;width: 150px;margin: 5px;height: 30px;padding-bottom: 3px;">    
+								<option value='All' selected='true'>Tous</option>
+								<option value='Vente par TV' >Vente par TV</option>
+								<option value='Vente par SUBLIME CARTE' >Vente par SUBLIME CARTE</option>
+						</select>
+					</td>
+				</tr>
+			</table>
+			</div>
+
+</fieldset>
+		<div id="table_result"></div>
+
+
+
+
+
+
+		</form>
+           </field>
+        </record>
+
+
+	<record id="accueil_index_action" model="ir.actions.act_window">
+            <field name="name">Tableau de bord</field>
+            <field name="res_model">benin_petro.statistique</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="accueil_index"></field>
+			<field name="target">inline</field>
+	    <field name="context">{}</field>
+	</record>
+
+<!-- //////////////////////////////////////////////////////////////////////////////////  -->
+
+
+	<record id="accueil_index_recharge" model="ir.ui.view" >
+            <field name="name">Accueil</field>
+            <field name="model">benin_petro.statistique</field>
+            <field name="arch" type="xml">
+		 <form string="" version="7.0">
+			<field name="call_statistique_widget" widget="statistique_recharge_client" class="oe_highlight" />
+			<fieldset style="border: 1px solid #008cba;padding: 10px;padding-top: 3px;margin-bottom:15px;">
+			<legend style="margin-bottom: 0px;border: none;text-align: center;width: 220px;padding-bottom: 5px;color:#008cba;">
+				<span valeur='nombre'  class='modeGraph'>Critères de recherches</span>
+			</legend>
+			<div id="test">
+			<table class="table_critere_recharge" style='width: 100%%;min-width: 700px;margin:0px auto;'>
+				<tr style="text-align: center;">
+					<td style='text-align: center;padding: 10px;font-size: 16px;border-radius:5px 0 0 5px;border-bottom: 1px solid #d2caca;padding-bottom: 3px;'>Clients</td>
+					<td style='border-bottom: 1px solid #d2caca;'>
+						<select id='clients_recharge' class= "select_recharge" style="padding: 5px;width: 150px;margin: 5px;height: 30px;padding-bottom: 3px;">
+
+						</select>
+					</td>
+					<td style='text-align: center;padding: 10px;font-size: 16px;border-radius:5px 0 0 5px;border-bottom: 1px solid #d2caca;padding-bottom: 3px;'>Date début</td>
+					<td style='border-bottom: 1px solid #d2caca;'>
+						<input type="date" id="datedebut"  />
+					</td>
+					<td style='text-align: center;padding: 10px;font-size: 16px;border-radius:5px 0 0 5px;border-bottom: 1px solid #d2caca;padding-bottom: 3px;'>Date fin</td>
+					<td style='border-bottom: 1px solid #d2caca;'>
+						<input type="date" id="datefin" />
+					</td>
+				</tr>
+				<tr style="text-align: center;">
+					<!-- <td style='text-align: center;padding: 10px;font-size: 16px;border-radius:5px 0 0 5px;border-bottom: 1px solid #d2caca;padding-bottom: 3px;'>Type de paiement</td>
+					<td style='border-bottom: 1px solid #d2caca;'>
+						<select id='typePaiement' class= "select_recharge"  style="padding: 5px;width: 150px;margin: 5px;height: 30px;padding-bottom: 3px;">
+						  <option value='All' selected='true'>Tous</option>
+						  <option value='cheque' >Chèque</option>
+						  <option value='especes' >Espèces</option>
+						  <option value='versement' >Versement</option>
+						  <option value='A credit'>A crédit</option>
+						</select>
+					</td> -->
+					<td style='text-align: center;padding: 10px;font-size: 16px;border-radius:5px 0 0 5px;border-bottom: 1px solid #d2caca;padding-bottom: 3px;'>Année</td>
+					<td style='border-bottom: 1px solid #d2caca;'>
+						<select id='yearValue' class= "select_recharge"  style="padding: 5px;width: 150px;margin: 5px;height: 30px;padding-bottom: 3px;">
+						  <option value='All' selected='true'>Tous</option>
+						</select>
+					</td>
+					<td style='text-align: center;padding: 10px;font-size: 16px;border-radius:5px 0 0 5px;border-bottom: 1px solid #d2caca;padding-bottom: 3px;'>Mois</td>
+					<td style='border-bottom: 1px solid #d2caca;'>
+						<select id='monthValue' class= "select_recharge"  style="padding: 5px;width: 150px;margin: 5px;height: 30px;padding-bottom: 3px;">
+						  <option value='All' selected='true'>Tous</option>
+						</select>
+					</td>
+				</tr>
+			</table>
+			</div>
+
+</fieldset>
+			<div id="table_result_recharge"></div>
+
+
+
+
+
+
+		</form>
+           </field>
+        </record>
+
+
+	<record id="accueil_index_recharge_action" model="ir.actions.act_window">
+            <field name="name">Tableau de bord</field>
+            <field name="res_model">benin_petro.statistique</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="accueil_index_recharge"></field>
+			<field name="target">inline</field>
+	    <field name="context">{}</field>
+	</record>
+
+<!-- //////////////////////////////////////////////////////////////////////////////////  -->
+
+    </data>
+</openerp>

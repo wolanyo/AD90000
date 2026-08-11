@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+       
+        <report
+            id="report_trans_xlsx"
+            model="benin_petro.carte.consommation"
+            string="xls"
+            report_type="xlsx"
+            name="benin_petro.carte.consommation.xlsx"
+            file="benin_petro.carte.consommation.xlsx"
+            attachment_use="False"
+        />
+
+    </data>
+</odoo>

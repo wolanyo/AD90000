@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+<!-- client ************************************************************************************** -->
+<!-- Solde compte -->
+        <record id="benin_petro_partner_solde_compte_graph" model="ir.ui.view">
+            <field name="name">Solde du compte</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <graph string="Solde du compte" stacked="True">
+			<field name="solde_compte" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="benin_petro_partner_solde_compte_action_graph" model="ir.actions.act_window">
+            <field name="name">Solde du compte</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="benin_petro_partner_solde_compte_graph"></field>
+            <field name="help">Solde du compte ...</field>
+        </record>
+
+<!-- solde au carte -->
+        <record id="benin_petro_partner_solde_carte_graph" model="ir.ui.view">
+            <field name="name">Solde affecté aux cartes</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <graph string="Solde affecté aux cartes" stacked="True">
+			<field name="solde_carte" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+
+
+        <record id="benin_petro_partner_solde_carte_action_graph" model="ir.actions.act_window">
+            <field name="name">Solde affecté aux cartes</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="benin_petro_partner_solde_carte_graph"></field>
+            <field name="help">Solde affecté aux cartes ...</field>
+        </record>
+
+<!-- Carte ************************************************************************** -->
+<!-- type carte -->
+        <record id="benin_petro_type_carte_graph" model="ir.ui.view">
+            <field name="name">Type de carte</field>
+            <field name="model">benin_petro.carte</field>
+            <field name="arch" type="xml">
+                <graph string="Type de carte" stacked="False">
+			<field name="type_carte_id" type="row"/>
+			<field name="create_date" interval="year"  />
+			
+                </graph>
+            </field>
+        </record>
+
+
+
+        <record id="benin_petro_type_carte_action_graph" model="ir.actions.act_window">
+            <field name="name">Type de carte</field>
+            <field name="res_model">benin_petro.carte</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="benin_petro_type_carte_graph"></field>
+            <field name="help">Type de carte ...</field>
+        </record>
+
+<!-- consommation -->
+        <record id="benin_petro_consommation_graph" model="ir.ui.view">
+            <field name="name">Transaction</field>
+            <field name="model">benin_petro.carte.consommation</field>
+            <field name="arch" type="xml">
+                <graph string="Transaction" stacked="True">
+			<field name="montant" type="measure"/>
+			<field name="create_date" interval="month"  type="row"/>
+			
+                </graph>
+            </field>
+        </record>
+
+
+
+        <record id="benin_petro_consommation_action_graph" model="ir.actions.act_window">
+            <field name="name">Transaction</field>
+            <field name="res_model">benin_petro.carte.consommation</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="benin_petro_consommation_graph"></field>
+            <field name="help">Transaction ...</field>
+        </record>
+
+<!-- consommation product -->
+
+        <record id="benin_petro_consommation_product_graph" model="ir.ui.view">
+            <field name="name">Consommation par produit</field>
+            <field name="model">benin_petro.carte.consommation</field>
+            <field name="arch" type="xml">
+                <graph string="Consommation par produit" stacked="False">
+			<field name="product_ids" type="row"/>
+			<field name="montant" type="measure"/>
+			<field name="create_date" interval="year"  />
+                </graph>
+            </field>
+        </record>
+
+
+
+        <record id="benin_petro_consommation_product_action_graph" model="ir.actions.act_window">
+            <field name="name">Consommation par produit</field>
+            <field name="res_model">benin_petro.carte.consommation</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="benin_petro_consommation_product_graph"></field>
+            <field name="help">Consommation par produit ...</field>
+        </record>
+
+<!-- consommation point de vente -->
+
+        <record id="benin_petro_consommation_point_vente_graph" model="ir.ui.view">
+            <field name="name">Consommation par point de vente</field>
+            <field name="model">benin_petro.carte.consommation</field>
+            <field name="arch" type="xml">
+                <graph string="Consommation par point de vente" stacked="False">
+			<field name="point_vente_id" type="row"/>
+			<field name="montant" type="measure"/>
+			<field name="create_date" interval="year"  />
+                </graph>
+            </field>
+        </record>
+
+
+
+        <record id="benin_petro_consommation_point_vente_action_graph" model="ir.actions.act_window">
+            <field name="name">Consommation par point de vente</field>
+            <field name="res_model">benin_petro.carte.consommation</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="benin_petro_consommation_point_vente_graph"></field>
+            <field name="help">Consommation par point de vente ...</field>
+        </record>
+
+
+
+
+
+    </data>
+</odoo>

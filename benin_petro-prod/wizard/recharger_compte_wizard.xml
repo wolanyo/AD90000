@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Form -->
+        <record id="wizard_recharger_compte_client_form" model="ir.ui.view">
+            <field name="name">recharge Wizard</field>
+            <field name="model">benin_petro.wizard.recharger.compte.client</field>
+            <field name="arch" type="xml">
+                <form string="Recharge">
+                    <group col="2">
+                        <group><field name="solde_m" readonly='1'/></group>
+                        <group><field name="client_id" readonly='1'/></group>
+                        <!--<field name="client_type" widget="radio"   required='1' />-->
+                        <group><field name="journal_id" domain="[('type','=','cash')]"  /></group>
+                        <group><field name="moyen_de_paiement"  /></group>
+                        <group><field name="quitance_tva"  /></group>
+                        <group><field name="numero_cheque"  attrs="{'invisible':[('moyen_de_paiement','!=','cheque')]}"/></group>
+                        <group><field name="numero_quitance_tva" attrs="{'invisible':[('quitance_tva','=','NON')],'required':[('quitance_tva','=','OUI')]}" /></group>
+                        <group><field name="solde"  /></group>
+                        <group><field name="montant"  /></group>
+                        <group><field name="montant_remise"  /></group>
+                        <group><field name="type_de_recharge"  /></group>
+                        <group><field name="document"  /></group>
+                        <!--<group><field name="demande"  /></group>-->
+                    </group>
+
+                    <footer>
+                        <button name="save_recharger" string="Enregister" type="object" class="oe_highlight"/>
+                        <button string="Annuler" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+
+            </field>
+        </record>
+
+
+        <act_window id="wizard_recharge_compte_client_action"
+                    name="Recharge compte client"
+                    res_model="benin_petro.wizard.recharger.compte.client"
+                    src_model="res.partner"
+                    key2="client_action_multi"
+                    view_mode="form"
+                    target="new"
+                    view_type="form"
+		    groups="group_benin_petro_sous_chargeur"
+			/>
+
+
+    </data>
+</odoo>
+    

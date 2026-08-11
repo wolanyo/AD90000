@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    <!-- form view -->
+        <record id="benin_petro_historique_carte_validate_view_form" model="ir.ui.view">
+            <field name="name">Historique de validation des cartes</field>
+            <field name="model">benin_petro.carte.preimprime.validate</field>
+            <field name="arch" type="xml">
+                <form string="Historique de validation des cartess">
+                    <sheet>
+                        <group col="2">
+                            <field name="carte"/>
+                            <field name="agent"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- tree view -->
+        <record id="benin_petro_historique_carte_validate_view_treeee" model="ir.ui.view">
+            <field name="name">Historique de validation des cartes</field>
+            <field name="model">benin_petro.carte.preimprime.validate</field>
+            <field name="arch" type="xml">
+                <tree create='true'>
+                    <field name="carte"/>
+                    <field name="agent"/>
+                    <field name="create_date" string='Date de Création' />
+                </tree>
+            </field>
+        </record>
+        <!-- action window -->
+        <record id="benin_petro_historique_carte_validate_action" model="ir.actions.act_window">
+            <field name="name">Liste des Historique de validation des cartes</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">benin_petro.carte.preimprime.validate</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_type">form</field>
+        </record>
+
+    </data>
+</odoo>

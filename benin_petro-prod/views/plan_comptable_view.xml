@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    <record id="account_account_view_id" model="ir.ui.view">
+        <field name="name">account.account.inherit.view.form</field>
+        <field name="model">account.account</field>
+        <field name="inherit_id" ref="account.view_account_form"/>
+        <field name="arch" type="xml">
+            <!-- Add your xpath here -->
+              <xpath expr="//field[@name='user_type_id']" position="attributes">
+                    
+                 <attribute name="widget"> </attribute>
+                 
+                </xpath>
+        </field>
+    </record>
+
+    </data>
+</odoo>

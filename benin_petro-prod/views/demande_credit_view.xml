@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+        <!-- Form -->
+        <record id="form_benin_petro_demande_credit" model="ir.ui.view">
+            <field name="name">Demande de crédit</field>
+            <field name="model">benin_petro.demande_credit</field>
+            <field name="arch" type="xml">
+
+                <form string="Point vente" >
+            <header>
+                <button name="setToValide"  confirm="Vous voulez vraiment confirmer cette demande"  string="Validé"  class="oe_highlight" type="object" attrs="{'invisible':[('state','!=','Brouillon')]}" groups="benin_petro.group_benin_petro_chargeur"/>
+                
+                <button name="setToAnnule"  confirm="Vous voulez vraiment annulé cette demande"   string="Annulé"  class="oe_highlight" type="object" attrs="{'invisible':[('state','!=','Brouillon')]}" groups="benin_petro.group_benin_petro_chargeur"/>
+            <field name="state" widget="statusbar"/>
+            </header>
+
+                <field name="id" invisible="1"/>
+                    <group col="2">
+                        <group><h1><field name="num_demande"/></h1></group>
+                        <group></group>
+                        <group>
+                            <field name="type_credit"/>
+                        </group>
+                        <group>
+                            <field name="montant"/>
+                        </group>
+                        <group>
+                            <field name="agent_monetique"/>
+                        </group>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- tree -->
+        <record id="tree_benin_petro_demande_credit" model="ir.ui.view">
+            <field name="name">Liste des demandes de crédit</field>
+            <field name="model">benin_petro.demande_credit</field>
+            <field name="arch" type="xml">
+                <tree string="Demande de crédit" colors="FireBrick:state=='Annule';Navy:state=='Brouillon';ForestGreen:state=='Valide'">
+                   <field name="num_demande"/>
+                   <field name="type_credit"/>
+                    <field name="montant" sum='Totale montant'/>
+                    <field name="agent_monetique" />
+                    <field name="create_date" string="Date de création"  />
+                    <field name="state" />
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="benin_petro_demande_credit_action_tree" model="ir.actions.act_window">
+            <field name="name">Demande de crédit</field>
+            <field name="res_model">benin_petro.demande_credit</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help">Demande de crédit ...</field>
+        </record>
+
+
+
+
+        <!-- //////////////////////////////////////////////////////////////////-->
+
+                <!-- Form -->
+        <record id="form_benin_petro_demande_credit_par_treso" model="ir.ui.view">
+            <field name="name">Demande de crédit</field>
+            <field name="model">benin_petro.demande_credit_par_treso</field>
+            <field name="arch" type="xml">
+
+                <form string="Point vente" >
+            <header>
+                <button name="setToValide"  confirm="Vous voulez vraiment confirmer cette demande"  string="Validé"  class="oe_highlight" type="object" attrs="{'invisible':[('state','=','Valide')]}" groups="benin_petro.group_benin_petro_president"/>
+                
+                <button name="setToAnnule"  confirm="Vous voulez vraiment annulé cette demande"  string="Annulé"  class="oe_highlight" type="object" attrs="{'invisible':[('state','=','Valide')]}" groups="benin_petro.group_benin_petro_president"/>
+            <field name="state" widget="statusbar"/>
+            </header>
+
+            <field name="id" invisible="1"/>
+            <field name="compute_field" invisible="1"/>
+                    <field name="id" invisible="1"/>
+                    <group col="2">
+                        <group><h1><field name="num_demande"/></h1></group>
+                        <group></group>
+                        <group>
+                            <field name="type_credit" attrs="{'readonly': ['|',('compute_field', '=', True),('state','=','Valide')]}"/>
+                        </group>
+                        <group>
+                            <field name="montant" attrs="{'readonly': ['|',('compute_field', '=', True),('state','=','Valide')]}"/>
+                        </group>
+                        <group>
+                            <field name="tresorier" attrs="{'readonly': ['|',('compute_field', '=', True),('state','=','Valide')]}"/>
+                        </group>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- tree -->
+        <record id="tree_benin_petro_demande_credit_par_treso" model="ir.ui.view">
+            <field name="name">Liste des demandes de crédit</field>
+            <field name="model">benin_petro.demande_credit_par_treso</field>
+            <field name="arch" type="xml">
+                <tree string="Demande de crédit" colors="FireBrick:state=='Annule';Navy:state=='Brouillon';ForestGreen:state=='Valide'">
+                    <field name="num_demande"/>
+                    <field name="type_credit"/>
+                    <field name="montant" sum='Totale montant'/>
+                    <field name="tresorier" />
+                    <field name="create_date" string="Date de création"  />
+                    <field name="state" />
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="benin_petro_demande_credit_par_treso_action_tree" model="ir.actions.act_window">
+            <field name="name">Demande de crédit</field>
+            <field name="res_model">benin_petro.demande_credit_par_treso</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help">Demande de crédit ...</field>
+            <field name="view_id" ref="tree_benin_petro_demande_credit_par_treso" />
+        </record>
+
+        <!-- <record id="benin_petro_demande_credit_par_treso_action_tree2" model="ir.actions.act_window">
+            <field name="name">Demande de crédit</field>
+            <field name="res_model">benin_petro.demande_credit_par_treso</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help">Demande de crédit ...</field>
+             <field name="domain">[('type_credit','=','TV')]</field>
+            <field name="view_id" ref="tree_benin_petro_demande_credit_par_treso" />
+        </record> -->
+                <!-- //////////////////// Agent monétique   /////////////////////////////////////-->
+
+        <record id="agent_creation_credit_historique_form" model="ir.ui.view">
+            <field name="name">Liste des recharges</field>
+            <field name="model">benin_petro.historique</field>
+            <field name="arch" type="xml">
+                <tree string="Recharges" create='false' edit="false">
+                    <field name="sous_chargeur" string='Agent monétique'/>                
+                    <field name="type_op" string="Type d'epération"/>       
+                    <field name="type_af" string="Type de crédit"/> 
+                    <!-- <field name="montant_init" widget='monetary' /> -->
+                    <field name="diff" widget='monetary' sum='Totale montant'/>
+                    <!-- <field name="montant_fin" widget='monetary'/> -->
+                    <field name="create_date" string="Date de recharge"/>
+                </tree>
+            </field>
+           
+        </record>
+
+        <record id="agent_creation_credit_historique_tree2" model="ir.actions.act_window">
+            <field name="name">Liste des recharges</field>
+            <field name="res_model">benin_petro.historique</field>
+            <field name="domain">[('sous_chargeur','!=',False),('type_af','=','sublime carte'),('type_op','=','RECHARGE MONETIQUE')]</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="agent_creation_credit_historique_form" />
+        </record>
+
+        <record id="agent_creation_credit_historique_tree3" model="ir.actions.act_window">
+            <field name="name">Liste des recharges</field>
+            <field name="res_model">benin_petro.historique</field>
+            <field name="domain">[('sous_chargeur','!=',False),('type_af','=','TV'),('type_op','=','RECHARGE MONETIQUE')]</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="agent_creation_credit_historique_form" />
+        </record>
+
+        <!-- //////////////////////////////////////////////////////////////////-->
+
+        <record id="creation_credit_historique_form" model="ir.ui.view">
+            <field name="name">Liste des recharges</field>
+            <field name="model">benin_petro.historique</field>
+            <field name="arch" type="xml">
+                <tree string="Recharges" create='false' edit="false">
+                    <field name="chargeur" string='Trésorier'/>                
+                    <field name="type_op" string="Type d'epération"/>       
+                    <field name="type_af" string="Type de crédit"/> 
+                    <!-- <field name="montant_init" widget='monetary' /> -->
+                    <field name="diff" widget='monetary' sum='Totale montant'/>
+                    <!-- <field name="montant_fin" widget='monetary'/> -->
+                    <field name="create_date" string="Date de recharge"/>
+                </tree>
+            </field>
+           
+        </record>
+
+        <record id="creation_credit_historique_tree2" model="ir.actions.act_window">
+            <field name="name">Liste des recharges</field>
+            <field name="res_model">benin_petro.historique</field>
+            <field name="domain">[('chargeur','!=',False),('type_af','=','sublime carte'),('type_op','=','Approvisionnement')]</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="creation_credit_historique_form" />
+        </record>
+
+        <record id="creation_credit_historique_tree3" model="ir.actions.act_window">
+            <field name="name">Liste des recharges</field>
+            <field name="res_model">benin_petro.historique</field>
+            <field name="domain">[('chargeur','!=',False),('type_af','=','TV'),('type_op','=','Approvisionnement')]</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="creation_credit_historique_form" />
+        </record>
+
+
+    <!-- ////////////////////// Vente de crédit /////////////////////////////-->
+
+        <record id="vente_credit_historique_form" model="ir.ui.view">
+            <field name="name">Liste des recharges</field>
+            <field name="model">benin_petro.historique</field>
+            <field name="arch" type="xml">
+                <tree string="Recharges" create='false'  edit="false">
+                    <field name="num_recharge" />      
+                    <field name="moyen_de_paiement"/>  
+                    <field name="sous_chargeur" string='Agent monétique'/>
+                    <field name="client_id" string='Client'/>            
+                    <field name="type_op" string="Type d'epération"/>       
+                    <field name="type_af" string="Type de crédit"/> 
+                    <field name="diff" widget='monetary' sum='Totale montant' />
+                    <field name="create_date" string="Date de recharge"/>
+                </tree>
+            </field>
+           
+        </record>
+
+        <record id="vente_credit_historique_tree2" model="ir.actions.act_window">
+            <field name="name">Liste des recharges</field>
+            <field name="res_model">benin_petro.historique</field>
+            <field name="domain">[('sous_chargeur','!=',False),('type_af','=','sublime carte'),('type_op','=','Recharge compte client')]</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="vente_credit_historique_form" />
+        </record>
+
+        <record id="vente_credit_historique_tree3" model="ir.actions.act_window">
+            <field name="name">Liste des recharges</field>
+            <field name="res_model">benin_petro.historique</field>
+            <field name="domain">[('sous_chargeur','!=',False),('type_af','=','TV'),('type_op','=','Vente de tv')]</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="vente_credit_historique_form" />
+        </record>
+
+
+        <record id="vente_credit_historique_client_tv_tree3" model="ir.actions.act_window">
+            <field name="name">Liste des recharges</field>
+            <field name="res_model">benin_petro.historique</field>
+            <field name="domain">[('client_id','!=',False),('sous_chargeur','!=',False),('type_af','=','TV'),('type_op','=','Vente de tv')]</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="vente_credit_historique_form" />
+        </record>
+        <record id="vente_credit_historique_client_sublim_tree3" model="ir.actions.act_window">
+            <field name="name">Liste des recharges</field>
+            <field name="res_model">benin_petro.historique</field>
+            <field name="domain">[('client_id','!=',False),('sous_chargeur','!=',False),('type_af','=','sublime carte'),('type_op','=','Recharge compte client')]</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="vente_credit_historique_form" />
+        </record>
+
+
+
+
+
+                    <!-- tree -->
+        <record id="tree_benin_petro_point_vente_consommation_carts" model="ir.ui.view">
+            <field name="name">Liste des demandes de consommation</field>
+            <field name="model">benin_petro.tv_station_hestory</field>
+            <field name="arch" type="xml">
+                <tree decoration-danger="state in ('cancel')" create='false'>
+                    <field name="type_payment"/>
+                    <field name="type_vente"/>
+                    <field name="montant"/>
+                    <field name="create_date" string='Date de création'/>
+                    <field name="state" invisible="1"/>  
+                    <button type='object' name='print_report' string='Imprimer la facture'
+                    attrs="{'invisible':[('state','=','cancel')]}"/>
+            </tree>
+            </field>
+        </record>
+
+
+        <record id="benin_petro_point_vente_action_tree_consommation_carte" model="ir.actions.act_window">
+            <field name="name">Liste des demandes de consommation</field>
+            <field name="res_model">benin_petro.tv_station_hestory</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('type_vente','!=','Vente par SUBLIME CARTE')]</field>
+            <field name="help">Demandes de consommation ...</field>
+            <field name="view_id" ref="tree_benin_petro_point_vente_consommation_carts" />
+        </record>
+        <record id="benin_petro_point_vente_action_tree_consommation_tv" model="ir.actions.act_window">
+            <field name="name">Liste des demandes de consommation</field>
+            <field name="res_model">benin_petro.tv_station_hestory</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('type_vente','!=','Vente par TV')]</field>
+            <field name="help">Demandes de consommation ...</field>
+            <field name="view_id" ref="tree_benin_petro_point_vente_consommation_carts" />
+        </record>
+
+
+    </data>
+</odoo>

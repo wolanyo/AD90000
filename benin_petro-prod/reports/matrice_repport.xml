@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="repport_template_matrice">
+			<t t-call="report.html_container">
+				<t t-foreach="docs" t-as="doc">
+					<div class="page" >
+						<style>
+							.header{
+							    margin-left: 29px;
+							}
+						</style>
+						<div class="header">
+							<h1><b>BORDEREAU DE CHARGEMENT POUR PARAKOU ?</b></h1>
+							<h2>PARAKOU LE <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y')"/>    </h2>			
+							<!-- %H:%M		 -->
+						</div>
+						
+
+						<table class="table table-bordered">
+                            <thead>
+                                <tr>
+									
+                                    <th  scope="col" colspan="2">DESTINATION</th>
+                                    <th t-foreach='doc.station_move_lines' t-as='v'>
+									<span t-field="v.point_vente_id"/>
+									</th>
+									<th></th>
+                                </tr>
+								
+                            </thead>
+							<tbody>
+							<tr>
+								<td>N°</td>
+								<td>PRODUITS</td>
+								<td t-foreach='doc.station_move_lines' t-as='v'><span>QTE</span></td>
+								<td>QTE TOTAL</td>
+							</tr><t t-set="i" t-value="1"/>
+							<tr t-foreach='doc.prod_report_id' t-as='vv'  >
+							 
+								<td><span t-esc="i"/> </td>
+								<td><span t-field="vv.name"></span></td>
+								<t t-foreach='doc.products_report' t-as='v'>
+									<td  t-if=" v.id_prod==vv.id_prod  ">
+										<span t-field="v.qte" t-if="not v.qte==0" ></span>
+									</td>
+								</t>
+								<!--Total-->
+								<td><span t-field="vv.qte"></span></td>
+								<t t-set="i" t-value="i+1"/>
+							</tr>
+							
+							</tbody>
+						</table>
+					</div>
+				</t>
+			</t>
+		</template>
+		<report
+                id="report_matrice"
+                string="Matrice"
+                model="benin_petro.transfert"
+                report_type="qweb-pdf"
+                file="repport_template_matrice"
+                name="benin_petro.repport_template_matrice"
+		paperformat="paysage_euro_lowmargin"
+		groups="group_benin_petro_stock"
+        />
+	</data>
+</odoo>

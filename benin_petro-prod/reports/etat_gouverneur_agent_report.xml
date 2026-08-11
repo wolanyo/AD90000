@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="benin_petro.etat_gouverneur_agent_report">
+           <t t-call="report.html_container">
+					
+							
+					<div class="page" style="position:relative;height:850px;">
+					<div class="header" style="width:100%;min-height:100px;margin-top:0px;;padding:0;">
+						<img class="img img-responsive" src="/benin_petro/static/img/entete.jpg" />
+					</div>
+					<style>
+						.table_info tr th{
+							font-size:12px;
+							border:1px solid black;
+							padding:5px 5px;
+						}
+						.table_info tr td{
+							border:1px solid black;
+							padding:5px 5px;
+							font-size:14px;
+						}
+
+					</style>
+					<div style="width:100%;text-align:center;font-size:20px;"><strong>Flux des agents monétique</strong></div>
+					<table style="width:100%;margin-top:40px;font-size:18px;" >
+							<tr>
+								<td><strong>Date début :</strong></td>
+								<td><span t-esc="data['form']['date_debut']" /></td>
+								<td><strong>Date Fin :</strong></td>
+								<td><span t-esc="data['form']['date_fin']" /></td>
+							</tr>
+						</table>
+					<div class="row" style="margin-top:40px;">
+						<div class="col-xs-12" style="height:730px;">
+						<table style="width:100%;margin-top:10px;" class="table_info">
+							<tr>
+								<td colspan="6" style="text-align:center"><strong>AGENTS MONETIQUES </strong></td>
+							</tr>
+							<tr>
+								<th><strong>NON DE l'AGENT</strong></th>
+								<th><strong>TYPE DE RECHARGE</strong></th>
+								<th><strong>SOLDE INITIAL</strong></th>
+								<th><strong>MONTANT RECU</strong></th>
+								<th><strong>VENTE</strong></th>
+								<th><strong>SOLDE FINAL</strong></th>
+							</tr>
+							<t t-foreach="data['form']['transactions']" t-as="line">
+							<tr>
+								<td><span t-esc="line"></span></td>
+							</tr>
+							<t t-foreach="line_value" t-as="v">
+								<tr>
+									<td></td>
+									<t t-if="v == 'Approvisionnement SUBLIME CARTE'">
+										<td>Approvisionnement SBC</td>
+										<td><span t-esc="v_value['solde_initial']"></span></td>
+										<td><span t-esc="v_value['montant_recu']"></span></td>
+										<td><span t-esc="v_value['montant_transferer']"></span></td>
+										<td><span t-esc="v_value['sold_final']"></span></td>
+									</t>
+									<t t-if="v == 'Approvisionnement TV'">
+										<td>Approvisionnement TV</td>
+										<td><span t-esc="v_value['solde_initial']"></span></td>
+										<td><span t-esc="v_value['montant_recu']"></span></td>
+										<td><span t-esc="v_value['montant_transferer']"></span></td>
+										<td><span t-esc="v_value['sold_final']"></span></td>
+									</t>
+									<t t-if="v == '1'">
+										<td><strong></strong></td>
+										<td><strong><span t-esc="v_value['solde_initial']"></span></strong></td>
+										<td><strong><span t-esc="v_value['montant_recu']"></span></strong></td>
+										<td><strong><span t-esc="v_value['montant_transferer']"></span></strong></td>
+										<td><strong><span t-esc="v_value['sold_final']"></span></strong></td>
+										
+									</t>
+									
+								</tr>
+							</t>
+							</t>
+						</table>
+						</div>
+					</div>
+						
+
+					<div class="footer" style="width:100%;min-height:80px;margin-top:60px;">
+                        <img class="img img-responsive" src="/benin_petro/static/img/pied.jpg"  />
+                    </div>
+
+                    </div>
+                    
+                
+                
+					
+			</t>
+		
+		</template>
+		<report
+			id="etat_gouverneur_agent_report_form"
+			string="FLUX DES AGENTS MONÉTIQUE"
+			model="benin_petro.wizard.etat_gouverneur_agent"
+			report_type="qweb-pdf"
+			file="benin_petro.etat_gouverneur_agent_report"
+			name="benin_petro.etat_gouverneur_agent_report"
+			paperformat="paperformat_euro_landscape"/>
+    </data>
+</odoo>

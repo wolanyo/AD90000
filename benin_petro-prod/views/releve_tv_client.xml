@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+         <record id="form_releve_tv_client" model="ir.ui.view">
+            <field name="name">Consultation</field>
+            <field name="model">benin_petro.releve_tv_client</field>
+            <field name="arch" type="xml">
+                <form string="Consultation"  create="false" edit="false">
+                <center ><h1 style="color:red">Relevé des tickets valeurs par période</h1></center>
+                    <group col="2">
+                        <group>
+                            <field name="start_date" />
+                        </group>
+                        <group>
+                            <field name="end_date" />
+                        </group>
+                    </group>
+                 
+                    <group col="2">
+                        <group>
+                            <field name="coupure"/>
+                        </group>
+                        <group>
+                            <field name="client"/>
+                        </group>
+                        <!-- <group>
+                            <button name="changeCompte" string="Imprimer en PDF"  class="oe_highlight" type="object" />
+                            <button name="changeCompte" string="Imprimer en EXCEL"  class="oe_highlight" type="object" />
+                        </group> -->
+                    </group>
+
+                    
+                    <field name="list_releve_client" readonly="1">
+                    <tree limit="15">
+                            <field name="date_consomation" />
+                            <field name="numSerie" />
+                            <field name="solde" /> 
+                            <field name="state" /> 
+                        </tree>
+                    </field>
+                </form>
+            </field>
+        </record>
+        <record id="releve_tv_client_action_form" model="ir.actions.act_window">
+            <field name="name">Consultation des recharges</field>
+            <field name="res_model">benin_petro.releve_tv_client</field>
+            <field name="view_mode">form</field>
+            <field name="help">Recharge ...</field>
+            <field name="target">inline</field>
+        </record>
+
+        <menuitem action="releve_tv_client_action_form" id="menu_releve_tv_client_form"
+            parent="menu_tabeal_bord_client" sequence="2"
+            name="Relevé des tickets valeurs par période" groups="group_benin_petro_manager,group_benin_petro_adminn,base.group_system"/>
+    </data>
+</odoo>

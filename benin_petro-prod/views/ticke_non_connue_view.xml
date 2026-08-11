@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+<!-- ticke_non_connue form view -->
+<record id="ticke_non_connue_view_form" model="ir.ui.view">
+    <field name="name">ticke_non_connue.view.form</field>
+    <field name="model">benin_petro.ticke_non_connue</field>
+    <field name="arch" type="xml">
+        <form string="">
+           <header>
+                <field  name="etat" widget="statusbar" statusbar_visible="" statusbar_colors="{'KEY_IS_STATE':'VALUE_IS_COLOR'}"/>
+                </header>
+                    <sheet>
+                       
+                        <group>
+                            <group>
+                                <field name="montant"/>
+                                <field name="point_vente_id"/>
+                                <field name="agent_id"/>
+                                
+                            </group>
+                            <group>
+                                <field name="date_dt"/>
+                                <field name="codebre" />
+                            </group>
+                        </group>
+                    </sheet>
+        </form>
+    </field>
+</record>
+<!-- ticke_non_connue tree view -->
+<record id="ticke_non_connue_view_tree" model="ir.ui.view">
+    <field name="name">ticke_non_connue.view.tree</field>
+    <field name="model">benin_petro.ticke_non_connue</field>
+    <field name="arch" type="xml">
+        <tree >
+                   
+                    <field name="montant"/>
+                    <field name="date_dt"  />
+                    <field name="etat"/>
+                </tree>
+    </field>
+</record>
+ <record id="benin_petro_ticke_non_connue" model="ir.actions.act_window">
+            <field name="name">Liste des ticke non connues</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">benin_petro.ticke_non_connue</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_type">form</field>
+ </record>
+ <menuitem id="menu_benin_petro_ticke_non_connue"
+		parent="menu_gestion_partenair"
+		name="Liste des tickes non connues"
+		action="benin_petro_ticke_non_connue" sequence="1"/>
+    </data>
+</odoo>

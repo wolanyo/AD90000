@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+	<record id="base.action_partner_supplier_form" model="ir.actions.act_window">
+			<field name="domain">[('supplier','=',1), ('parent_id', '=', False)]</field>
+		</record>
+
+        <menuitem id="menu_outils_parent" name="SUBLIME CARTE" sequence="3" action="base.action_partner_form" groups="group_benin_petro_manager,group_benin_petro_adminn,base.group_system,group_benin_petro_president,group_benin_petro_chargeur,group_benin_petro_sous_chargeur" />
+	
+		
+<!-- clients -->
+        <menuitem id="menu_gestion_partenair"
+		parent="menu_outils_parent"
+		name="Gestion des clients"
+		groups="group_benin_petro_manager,group_benin_petro_sous_chargeur"
+		action="base.action_partner_form" sequence="18"/>
+
+        <menuitem id="menu_liste_partenair"
+		parent="menu_gestion_partenair"
+		name="Liste des clients"
+		groups="group_benin_petro_manager,group_benin_petro_sous_chargeur"
+		action="base.action_partner_form" sequence="16"/>
+<!-- Recharge -->
+
+		<menuitem id="menu_gestion_service_agent"
+		parent="menu_outils_parent"
+		name="Gestion du département Monétique"
+		groups="group_benin_petro_chargeur"
+		action="benin_petro_chargeur_tree" sequence="61"/>
+
+		<menuitem id="menu_gestion_service_agent_monetique"
+		parent="menu_gestion_service_agent"
+		name="Liste des agents monétiques"
+		groups="group_benin_petro_chargeur"
+		action="benin_petro_sous_chargeur_tree1" sequence="1"/>
+
+
+
+		<!-- <menuitem id="menu_liste_sous_chargeur"
+		parent="menu_gestion_service_commercial"
+		name="Liste des agents monétique "
+		groups="group_benin_petro_manager"
+		action="benin_petro_sous_chargeur_tree1" sequence="2"/> -->
+<!-- cartes -->
+        <menuitem id="menu_gestion_cartes"
+		parent="menu_outils_parent"
+		name="Gestion des Cartes"
+		groups="group_benin_petro_manager"
+		action="carte_action_tree" sequence="20"/>
+
+        <menuitem id="menu_liste_cartes"
+		parent="menu_gestion_cartes"
+		name="Liste des cartes par clients"
+		action="carte_action_tree" sequence="1"/>
+
+		<menuitem id="menu_liste_cartes_preimprime"
+		parent="menu_gestion_cartes"
+		name="Liste des cartes Pré imprimées"
+		action="benin_petro_carte_preimprime_action" sequence="2"/>
+
+        <menuitem id="menu_liste_type_cartes"
+		parent="menu_gestion_cartes"
+		name="Liste des cartes par typologie"
+		action="benin_petro_type_carte_action_tree" sequence="3"/>
+
+		<menuitem id="menu_liste_validate_carte"
+		parent="menu_gestion_cartes"
+		name="Historique de validation des cartes"
+		action="benin_petro_historique_carte_validate_action" sequence="4"/>
+
+
+<!-- transaction -->
+        <menuitem id="menu_gestion_transaction"
+		parent="menu_outils_parent"
+		name="Gestion des transactions"
+		groups="group_benin_petro_manager"
+		action="carte_transaction_action_tree" sequence="30"/>
+
+        <menuitem id="menu_liste_transaction"
+		parent="menu_gestion_transaction"
+		name="Liste des Transactions"
+		action="carte_transaction_action_tree" sequence="1"/>
+		
+
+
+
+
+<!-- produits -->
+        <menuitem id="menu_gestion_produits"
+		parent="menu_outils_parent"
+		name="Gestion des produits"
+		groups="group_benin_petro_manager"
+		action="benin_petro_product_product_action_tree" sequence="40"/>
+
+        <menuitem id="menu_liste_produits"
+		parent="menu_gestion_produits"
+		name="Liste des produits"
+		action="benin_petro_product_product_action_tree" sequence="1"
+		/>
+
+
+<!-- Point de vente -->
+        <menuitem id="menu_gestion_point_vente"
+		parent="menu_outils_parent"
+		name="Gestion des points de ventes"
+		groups="group_benin_petro_manager"
+		action="benin_petro_point_vente_action_tree" sequence="50"/>
+
+        <menuitem id="menu_liste_point_vente"
+		parent="menu_gestion_point_vente"
+		name="Liste des points de ventes"
+		action="benin_petro_point_vente_action_tree" sequence="1"/>
+
+
+
+<!-- Agent -->
+        <menuitem id="menu_gestion_agent"
+		parent="menu_outils_parent"
+		name="Gestion des points des agents"
+		groups="group_benin_petro_manager"
+		action="benin_petro_agent_action_tree" sequence="59"/>
+
+        <menuitem id="menu_liste_agent"
+		parent="menu_gestion_agent"
+		name="Liste des agents"
+		action="benin_petro_agent_action_tree" sequence="1"/>
+<!-- Commercial -->
+	<menuitem id="menu_gestion_commercial"
+		parent="menu_outils_parent"
+		name="Gestion Commerciale"
+		groups="group_benin_petro_manager"
+		action="benin_petro_commercial_action_tree" sequence="59"/>
+
+        <menuitem id="menu_liste_commercial"
+		parent="menu_gestion_commercial"
+		name="Liste des agents commerciaux"
+		action="benin_petro_commercial_action_tree" sequence="1"/>
+<!-- tableau de bord -->
+
+
+        <menuitem id="menu_tabeal_bord" name="Tableau de bord" sequence="4" groups="group_benin_petro_manager,group_benin_petro_adminn,base.group_system,group_benin_petro_president" />
+		<menuitem id="menu_tabeal_bord_promoteur" name="Tableau de bord promoteur" sequence="4" groups="base.group_system,benin_petro.group_benin_petro_promoteur" />
+
+
+<!-- par client ****************************************************** 
+        <menuitem id="menu_tabeal_bord_client"
+		parent="menu_tabeal_bord"
+		name="Clients"
+		action="benin_petro_partner_solde_compte_action_graph" sequence="1"/>
+
+ par client solde compte 
+        <menuitem id="menu_tabeal_bord_solde_compte_client"
+		parent="menu_tabeal_bord_client"
+		name="Solde non affecté"
+		action="benin_petro_partner_solde_compte_action_graph" sequence="1"/>
+
+
+ par client solde carte 
+        <menuitem id="menu_tabeal_bord_solde_carte_client"
+		parent="menu_tabeal_bord_client"
+		name="Solde affecté aux catres"
+		action="benin_petro_partner_solde_carte_action_graph" sequence="2"/> -->
+
+
+
+<!-- par client ****************************************************** -->
+<!-- par carte 
+        <menuitem id="menu_tabeal_bord_carte"
+		parent="menu_tabeal_bord"
+		name="Cartes"
+		action="benin_petro_consommation_action_graph" sequence="5"/>
+
+
+
+        <menuitem id="menu_tabeal_bord_type_carte"
+		parent="menu_tabeal_bord_carte"
+		name="Type de carte"
+		action="benin_petro_type_carte_action_graph" sequence="1"/>
+
+
+        <menuitem id="menu_tabeal_bord_consommation"
+		parent="menu_tabeal_bord_carte"
+		name="Transaction par période"
+		action="benin_petro_consommation_action_graph" sequence="2"/>
+
+
+
+        <menuitem id="menu_tabeal_bord_consommation_product"
+		parent="menu_tabeal_bord_carte"
+		name="Transaction par produit"
+		action="benin_petro_consommation_product_action_graph" sequence="3"/>
+
+
+
+
+        <menuitem id="menu_tabeal_bord_consommation_product"
+		parent="menu_tabeal_bord_carte"
+		name="Transaction par point de vente"
+		action="benin_petro_consommation_point_vente_action_graph" sequence="4"/>
+
+
+
+ 		<menuitem id="menu_liste_shift"
+		parent="menu_gestion_transaction"
+		name="Liste des shift"
+		action="carte_shift_action_tree" sequence="1"/>-->
+
+
+<!-- par client ****************************************************** -->
+        <menuitem id="menu_statistique_promoteur"
+		parent="menu_tabeal_bord_promoteur"
+		name="Statistiques"
+		action="retour_bon_consommation_wizard_form" sequence="3" groups="benin_petro.group_benin_petro_manager,base.group_system,benin_petro.group_benin_petro_promoteur"/>
+		
+		<menuitem id="menu_tabeal_bord_client"
+		parent="menu_tabeal_bord"
+		name="Statistiques"
+		action="accueil_index_action" sequence="3" groups="benin_petro.group_benin_petro_manager,base.group_system,benin_petro.group_benin_petro_president"/>
+        
+		<menuitem id="menu_tabeal_bord_client_consomation"
+		parent="menu_tabeal_bord_client"
+		name="Liste des consommations" groups="group_benin_petro_manager,group_benin_petro_adminn,base.group_system"
+		action="accueil_index_action" sequence="1"/>
+        
+		<menuitem id="menu_tabeal_bord_client_recharge"
+		parent="menu_tabeal_bord_client"
+		name="Liste des recharges des comptes clients " groups="group_benin_petro_manager,group_benin_petro_adminn,base.group_system"
+		action="accueil_index_recharge_action" sequence="2"/>
+
+
+        <menuitem id="menu_gestion_transerf_client" 
+		name="Gestion des Transferts" 
+		action="benin_petro_sold_transfert_action_tree" 
+		groups="benin_petro.group_benin_petro_client,base.group_system,benin_petro.group_benin_petro_stock"/>
+
+		<menuitem id="menu_list_transfert"
+		parent="menu_gestion_transerf_client"
+		name="Liste des Transferts"
+		action="benin_petro_sold_transfert_action_tree" sequence="1"/>
+
+		<menuitem id="menu_add_transfert"
+		parent="menu_list_transfert"
+		name="Ajouter un transfert"
+		action="benin_petro_sold_transfert_action_form" sequence="2"/>
+
+   <!-- This Menus blow for model Transfer-->
+
+		<!-- <menuitem id="stock_transfer_action_menu_act" name="Transferts" 
+		parent="menu_outils_parent" action="stock_transfer_action" 
+		sequence="1" groups="benin_petro.group_benin_petro_stock" />
+		<menuitem id="sub_stock_transfer_menu_act" name="Liste des transferts"
+		parent="stock_transfer_action_menu_act" action="stock_transfer_action"
+		sequence="1"   groups="benin_petro.group_benin_petro_stock" /> -->
+
+
+		<!--<menuitem id="menu_stock_consultation" action="consulte_action_form" sequence="2"/>-->
+    
+
+		<!-- <menuitem id="benin_petro_versement" 
+		name="Versements" parent="menu_outils_parent" 
+		action="benin_petro_versement_action" sequence="30"
+		groups="benin_petro.group_benin_petro_sous_chargeur,benin_petro.group_benin_petro_chargeur"
+		/>
+		<menuitem id="benin_petro_liste_versement" 
+		name="Liste des versement" parent="benin_petro_versement" 
+		action="benin_petro_versement_action" sequence="31"
+		groups="benin_petro.group_benin_petro_sous_chargeur,benin_petro.group_benin_petro_chargeur"
+		/> -->
+
+
+		<menuitem id="benin_petro_recharges_menu1" 
+			name="Gestion des recharges" parent="menu_outils_parent" 
+			action="benin_petro_recharges_tree" sequence="13"
+			groups="benin_petro.group_benin_petro_auditeur,group_benin_petro_president"
+			/>
+		<menuitem id="benin_petro_recharges" 
+		name="Liste des recharges" parent="benin_petro_recharges_menu1" 
+		action="benin_petro_recharges_tree" sequence="1"
+		groups="benin_petro.group_benin_petro_auditeur,group_benin_petro_president"
+			/>
+		
+	<!-- <record model="ir.ui.menu" id="account.menu_finance">
+		<field name="groups_id" eval="[(6,0,[ref('benin_petro.group_benin_petro_sous_chargeur')])]"/>
+	</record> 
+	<menuitem id="benin_petro_liste_fournisseur" 
+		name="Liste des fournisseur" parent="menu_outils_parent" 
+		action="base.action_partner_supplier_form" sequence="4"
+		groups="benin_petro.group_benin_petro_adminn"
+		/>
+
+	<menuitem id="menu_account_supplier" name="Fournisseurs"
+            parent="benin_petro_liste_fournisseur"
+            action="base.action_partner_supplier_form" sequence="1"
+			groups="benin_petro.group_benin_petro_adminn"/>-->
+
+
+
+	<menuitem id="benin_petro_tv" 	name="Tickets Valeurs" sequence="3"	 groups="benin_petro.group_benin_petro_manager,benin_petro.group_benin_petro_adminn,group_benin_petro_chargeur,group_benin_petro_sous_chargeur,group_benin_petro_president"/>
+
+	<menuitem id="benin_petro_tv_menu" name="Tickets Valeurs" sequence="1"	 parent="benin_petro_tv"/>
+
+	<!-- <menuitem id="benin_petro_tv_type_menu_act" name="Gestion des types"  action="benin_petro_tv_type_action" sequence="4" parent='benin_petro_tv'/> -->
+	
+	<!-- <menuitem id="benin_petro_tv_print_menu_act" name="Gestion des Impressions" action="benin_petro_tv_prints_action" sequence="4" parent='benin_petro_tv'/> -->
+	<menuitem id="benin_petro_tv_print_liste_menu_act" name="Achat de T.V" action="benin_petro_tv_prints_action" sequence="1" parent='benin_petro_tv_menu'/>
+	
+	<!-- <menuitem id="benin_petro_tv_menu_act" name="Gestion des tickets valeur"  action="benin_petro_tv_action" sequence="4" parent='benin_petro_tv'/> -->
+	<menuitem id="benin_petro_tv_list_menu_act" name="Liste des T.V" parent="benin_petro_tv_menu"  action="benin_petro_tv_action" sequence="2"/>
+
+	<!-- <menuitem id="benin_petro_tv_print_list_clienta" name="Gestion des clients"  action="benin_petro_res_partne_action_ticket" sequence="4" parent='benin_petro_tv'/> -->
+	<menuitem id="benin_petro_tv_print_list_client" name="Liste des Clients T.V" action="benin_petro_res_partne_action_ticket" sequence="3" parent='benin_petro_tv_menu'/
+
+
+
+		<menuitem id="menu_gestion_service_commerciale"
+		parent="menu_outils_parent"
+		name="Liste des agents monétique"
+		groups="group_benin_petro_manager"
+		action="benin_petro_sous_chargeur_tree1" sequence="30"/>
+
+		<!-- <menuitem id="menu_gestion_service_tresorier"
+		parent="menu_outils_parent"
+		name="La trésorerie"
+		action="benin_petro_chargeur_tree" sequence="60"/> -->
+
+
+		<!-- <menuitem id="menu_liste_caissier"
+		parent="menu_gestion_service_commerciale"
+		name="Liste caissiers"
+		action="benin_petro_sous_chargeur_tree1" sequence="1"/>
+
+		<menuitem id="menu_liste_tresorier"
+		parent="menu_gestion_service_commerciale"
+		name="La trésorerie"
+		action="benin_petro_chargeur_tree" sequence="1"/> -->
+
+
+
+<!-- wizaaaaaaaaaaard repport -->
+		<menuitem action="chiffre_affaire_wizard_form" id="menu_etat_chiffre_affaire_form"
+            parent="menu_tabeal_bord_client" sequence="2"
+            name="Chiffre d’affaires par points de vente" groups="group_benin_petro_manager,group_benin_petro_adminn,base.group_system"
+ 
+            />
+		<menuitem action="chiffre_affaire_wizard_form" id="menu_etat_chiffre_affaire_promoteur_form"
+            parent="menu_statistique_promoteur" 
+            name="Chiffre d’affaires par points de vente" groups="group_benin_petro_manager,group_benin_petro_adminn,base.group_system,group_benin_petro_promoteur"
+ 
+            />
+		<menuitem action="point_jour_wizard_form" id="menu_etat_point_jour_form"
+            parent="menu_tabeal_bord_client" sequence="2"
+            name="Point du jour" groups="group_benin_petro_manager,group_benin_petro_adminn,base.group_system"
+ 
+            />
+
+		<menuitem action="retour_bon_consommation_wizard_form" id="menu_etat_retour_bon_consommation_form"
+            parent="menu_tabeal_bord_client" sequence="2"
+            name="Retour des Bons de consommation" groups="group_benin_petro_manager,group_benin_petro_adminn,base.group_system,group_benin_petro_promoteur"
+ 
+            />
+		<menuitem action="retour_bon_consommation_wizard_form" id="menu_etat_retour_bon_consommation_promoteur_form"
+            parent="menu_statistique_promoteur" sequence="2"
+            name="Retour des Bons de consommation" groups="group_benin_petro_manager,group_benin_petro_adminn,base.group_system,group_benin_petro_promoteur"
+ 
+            />
+
+		 <menuitem action="detail_consommation_par_carte_wizard_form" id="menu_etat_detail_consommation_par_carte_form"
+            parent="menu_tabeal_bord_client" sequence="2"
+            name="Détail des consommations par carte" groups="group_benin_petro_manager,group_benin_petro_adminn,base.group_system"
+ 
+            />
+
+		<menuitem action="etat_tv_wizard_form" id="menu_etat_tv_form"
+				  parent="menu_tabeal_bord_client" sequence="2"
+				  name="Etat de l’utilisation des tickets valeurs par client" groups="group_benin_petro_manager,group_benin_petro_adminn,base.group_system"
+
+		/>
+
+		<menuitem action="detail_retour_tv_wizard_form" id="menu_detail_retour_tv_form"
+				  parent="menu_tabeal_bord_client" sequence="2"
+				  name="Détails retour tv" groups="group_benin_petro_manager,group_benin_petro_adminn,base.group_system"
+		/>
+		<menuitem action="etat_gouverneur_agent_wizard_form" id="menu_etat_etat_gouverneur_agent_form"
+            parent="menu_tabeal_bord_client" sequence="2"
+            name="Flux des agents monétique" groups="group_benin_petro_manager,group_benin_petro_adminn,base.group_system"
+ 
+            />
+
+	<menuitem action="achat_easy_par_jour_wizard_form" id="menu_etat_achat_easy_par_jour_form"
+            parent="menu_tabeal_bord_client" sequence="2"
+            name="Achats de sublime carte sur une période" groups="group_benin_petro_manager,group_benin_petro_adminn,base.group_system"
+ 
+            />
+		<menuitem action="achat_tv_par_jour_wizard_form" id="menu_etat_achat_tv_par_jour_form"
+            parent="menu_tabeal_bord_client" sequence="2"
+            name="Achats de tickets valeurs sur une période" groups="group_benin_petro_manager,group_benin_petro_adminn,base.group_system"
+ 
+            />
+
+
+
+<!--		<menuitem action="chiffre_affaire_par_client_wizard_form" id="menu_chiffre_affaire_par_client_form"-->
+<!--				  parent="menu_tabeal_bord_client" sequence="2"-->
+<!--				  name="Chiffre affaire par client" groups="group_benin_petro_manager,group_benin_petro_adminn,base.group_system"-->
+<!--		/>-->
+
+
+
+<!-- wizaaaaaaaaaaard repport -->
+			
+	</data>
+</odoo>

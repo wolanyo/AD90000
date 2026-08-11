@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+		
+		
+		 <record model="ir.ui.menu" id="account.menu_finance">
+			<field name="groups_id" eval="[(6,0,[ref('benin_petro.group_benin_petro_comptable')])]"/>
+		</record>	
+
+		<record model="ir.ui.menu" id="account.menu_finance">
+			<field name="groups_id" eval="[(4,[ref('benin_petro.group_benin_petro_facture_client')])]"/>
+		</record>
+		<record model="ir.ui.menu" id="account.menu_finance">
+			<field name="groups_id" eval="[(4,[ref('benin_petro.group_benin_petro_facture_fournis')])]"/>
+		</record>	
+
+
+		<record model="ir.ui.menu" id="account_budget.menu_act_crossovered_budget_view">
+			<field name="groups_id" eval="[(6,0,[ref('base.group_system')])]"/>
+		</record>
+		<record model="ir.ui.menu" id="account_asset.menu_asset_depreciation_confirmation_wizard">
+			<field name="groups_id" eval="[(6,0,[ref('base.group_system')])]"/>
+		</record>	
+		<record model="ir.ui.menu" id="account_asset.menu_action_account_asset_asset_form">
+			<field name="groups_id" eval="[(6,0,[ref('base.group_system')])]"/>
+		</record>
+
+		<record model="ir.ui.menu" id="account.account_reports_management_menu">
+			<field name="groups_id" eval="[(6,0,[ref('base.group_system')])]"/>
+		</record>
+		<record model="ir.ui.menu" id="account.account_management_menu">
+			<field name="groups_id" eval="[(6,0,[ref('base.group_system')])]"/>
+		</record>
+		<record model="ir.ui.menu" id="account.menu_config_multi_currency">
+			<field name="groups_id" eval="[(6,0,[ref('base.group_system')])]"/>
+		</record>
+		<record model="ir.ui.menu" id="payment.root_payment_menu">
+			<field name="groups_id" eval="[(6,0,[ref('base.group_system')])]"/>
+		</record>
+		<record model="ir.ui.menu" id="stock.menu_stock_config_settings">
+			<field name="groups_id" eval="[(6,0,[ref('base.group_system')])]"/>
+		</record>
+		<record model="ir.ui.menu" id="stock.menu_stock_root">
+			<field name="groups_id" eval="[(6,0,[ref('benin_petro.group_benin_petro_stock')])]"/>
+		</record>
+
+		<record model="ir.ui.menu" id="sales_team.menu_base_partner">
+			<field name="groups_id" eval="[(6,0,[ref('group_benin_petro_commercial')])]"/>
+		</record>  
+		<!-- achat -->
+		<record model="ir.ui.menu" id="purchase.menu_purchase_root">
+			<field name="groups_id" eval="[(6,0,[ref('group_benin_petro_commercial')])]"/>
+		</record> 
+		<!-- vente -->
+		<record model="ir.ui.menu" id="point_of_sale.menu_point_root">
+			<field name="groups_id" eval="[(6,0,[ref('base.group_system')])]"/>
+		</record>
+		<!-- transport -->
+		<record model="ir.ui.menu" id="tms.menu_tms">
+			<field name="groups_id" eval="[(6,0,[ref('base.group_system')])]"/>
+		</record>
+		<!-- employe -->
+		<record model="ir.ui.menu" id="hr.menu_hr_root">
+			<field name="groups_id" eval="[(6,0,[ref('group_benin_petro_adminn')])]"/>
+		</record>
+		<!-- parc auto  -->
+		<record model="ir.ui.menu" id="fleet.menu_root">
+			<field name="groups_id" eval="[(6,0,[ref('group_benin_petro_adminn')])]"/>
+		</record>
+		
+
+
+		<record model="ir.ui.menu" id="account.menu_finance_entries">
+			<field name="groups_id" eval="[(6,0,[ref('group_benin_petro_comptable')])]"/>
+		</record>
+		<record model="ir.ui.menu" id="account.menu_finance_reports">
+			<field name="groups_id" eval="[(6,0,[ref('group_benin_petro_comptable')])]"/>
+		</record>
+		<record model="ir.ui.menu" id="account.menu_finance_configuration">
+			<field name="groups_id" eval="[(6,0,[ref('group_benin_petro_comptable')])]"/>
+		</record> 
+
+		<!-- Vente compta -->
+		
+		<record model="ir.ui.menu" id="account.menu_finance_receivables">
+			<field name="groups_id" eval="[(4,[ref('benin_petro.group_benin_petro_facture_client')])]"/>
+		</record>
+		
+
+		
+		
+		
+	</data>
+</odoo>

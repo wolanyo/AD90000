@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="benin_petro.kilometrage_report">
+           <t t-call="report.html_container">
+							
+					<div class="page" style="position:relative;height:900px;">
+					<style>
+
+						.table_info tr td{
+							border:1px solid black;
+							padding:5px 5px;
+							font-size:14px;
+						}
+
+					</style>
+					<div class="header" style="width:100%;min-height:100px;margin-top:0px;;padding:0;">
+						<img class="img img-responsive" src="/benin_petro/static/img/entete.jpg" />
+					</div>
+						<table style="width:100%;margin-top:15px;" >
+							<tr style="text-align:center">
+								<td><h3 style="margin:5px;">Rapport de kilometrage</h3></td>
+							</tr>
+						</table>
+						<table style="width:100%;margin-top:15px;font-size:16px;" >
+							<tr>
+								<td><strong>Date début :</strong></td>
+								<td><span t-esc="data['form']['date_debut']" /></td>
+								<td><strong>Date Fin :</strong></td>
+								<td><span t-esc="data['form']['date_fin']" /></td>
+							</tr>
+						</table>
+					<div class="row" style="margin-top:40px;margin-bottom:20px;padding-left:20px;">
+						<div class="col-xs-12" style="height:730px;">
+                        <table  class="table table-condensed">
+                            <tr>
+                                <th style="width:150px">Date</th>
+                                <th style="width:220px"><strong>PDV </strong></th>
+                                <th style="width:70px"><strong>Operation</strong></th>
+                                <th style="width:70px"><strong>Service</strong></th>
+                                <th style="width:60px"><strong>Kilometrage</strong></th>
+                                <th style="width:60px"><strong>Quantite</strong></th>
+                            </tr>
+                            <tbody>
+                                <t t-foreach="data['form']['transactions']" t-as="line">
+                                    <tr style="width:100%">
+                                        <td colspan="5" style="width:620px"><strong><span t-esc="line"></span></strong></td>
+                                    </tr>
+									<t t-foreach="line_value" t-as="v">
+										<tr style="width:100%">
+											<td></td>
+											<td colspan="2" ><strong><span t-esc="v"></span></strong></td>
+											<td colspan="3" ><strong><span t-esc="v_value['porteur']"></span></strong></td>
+										</tr>
+										<t t-foreach="v_value['transcation']" t-as="v_s">
+											<tr>
+												<td style="width:150px"><span t-esc="v_s['date_kilometrage']"></span></td>
+												<td style="width:220px"><span t-esc="v_s['point_vente']"></span></td>
+												<td style="width:70px"><span t-esc="v_s['type_operation']"></span></td>
+												<td style="width:70px"><span t-esc="v_s['produit']"></span></td>
+												<td style="width:60px"><span t-esc="v_s['kilometrage']"></span></td>
+												<td style="width:60px"><span t-esc="v_s['quantite']"></span></td>
+											</tr>
+										</t>
+									</t>
+									
+								</t>
+
+
+
+                              
+                            </tbody>          
+                         </table>
+						 </div>
+                    </div>
+					<div style="margin-top:10px"><strong>Date d'édition : <span t-esc="data['form']['print_date']"></span></strong></div>
+					<div class="footer" style="width:100%;min-height:80px;margin-top:30px;">
+                        <img class="img img-responsive" src="/benin_petro/static/img/pied.jpg"  />
+                    </div>
+
+                    </div>
+                    
+                
+                
+					
+			</t>
+		
+		</template>
+		<report
+			id="kilometrage_report_form"
+			string="Rapport de kilometrage"
+			model="benin_petro.rapport_kilometrage"
+			report_type="qweb-pdf"
+			file="benin_petro.kilometrage_report"
+			name="benin_petro.kilometrage_report"
+			paperformat="paperformat_euro_landscape"/>
+    </data>
+</odoo>

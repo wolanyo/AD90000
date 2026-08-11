@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Form -->
+        <record id="wizard_versement111" model="ir.ui.view">
+            <field name="name">Difference </field>
+            <field name="model">benin_petro.wizard.valider.client</field>
+            <field name="arch" type="xml">
+                <form string="Valider les Calculs">
+                    <group>
+                       <h1>--</h1>
+                    </group>
+
+                    <footer>
+                        <button name="get_report" string="Calc" type="object" class="oe_highlight"
+                       
+                        />
+                        <button string="Annuler" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+
+            </field>
+        </record>
+
+
+        <act_window id="wizard_valider_client_action11"
+                    name="Valider les Calculs"
+                    res_model="benin_petro.wizard.valider.client"
+                    src_model="res.partner"
+                    key2="client_action_multi"
+                    view_mode="form"
+                    target="new"
+                    view_type="form"
+                    groups="base.group_system"
+			/>
+
+
+    </data>
+</odoo>
+    

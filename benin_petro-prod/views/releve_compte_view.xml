@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+         <record id="form_releve_compte" model="ir.ui.view">
+            <field name="name">Consultation</field>
+            <field name="model">benin_petro.releve_compte</field>
+            <field name="arch" type="xml">
+                <form string="Consultation"  create="false" edit="false">
+                <center ><h1 style="color:red">Relevé des comptes clients</h1></center>
+                    <group col="2">
+                        <group>
+                            <field name="start_date" />
+                        </group>
+                        <group>
+                            <field name="end_date" />
+                        </group>
+                    </group>
+                    <notebook>
+                    <page string="Par carte">
+                 
+                        <group col="2">
+                            <group>
+                                <field name="consommateur"/>
+                            </group>
+                            <group>
+                                <button name="print_report_carte_pdf" string="Imprimer en PDF"  class="oe_highlight" type="object" />
+                                <button name="print_excel_carte_report" string="Imprimer en EXCEL"  class="oe_highlight" type="object" />
+                            </group>
+                        </group>
+
+                        
+                        <field name="list_releve" readonly="1">
+                        <tree limit="15">
+                                <field name="date_releve" />
+                                <field name="libelle" />
+                                <field name="debit" sum="Total"/>
+                                <field name="credit" sum="Total"/> 
+                                <field name="solde" sum="Solde"/> 
+                            </tree>
+                        </field>
+                    </page>
+                    <page string="Par client">
+                 
+                        <group col="2">
+                            <group>
+                                <field name="client_id"/>
+                            </group>
+                            <group>
+                                <button name="print_report_client_pdf" string="Imprimer en PDF"  class="oe_highlight" type="object" />
+                                <button name="print_excel_client_report" string="Imprimer en EXCEL"  class="oe_highlight" type="object" />
+                            </group>
+                        </group>
+
+                        
+                        <field name="list_releve_client" readonly="1">
+                        <tree limit="15">
+                                <field name="date_releve" />
+                                <field name="libelle" />
+                                <field name="debit" sum="Total"/>
+                                <field name="credit" sum="Total"/> 
+                                <field name="solde" sum="Solde"/> 
+                            </tree>
+                        </field>
+                    </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+        <record id="releve_compte_action_form" model="ir.actions.act_window">
+            <field name="name">Consultation des recharges</field>
+            <field name="res_model">benin_petro.releve_compte</field>
+            <field name="view_mode">form</field>
+            <field name="help">Recharge ...</field>
+            <field name="target">inline</field>
+        </record>
+
+        <menuitem action="releve_compte_action_form" id="menu_releve_compte_form"
+            parent="menu_tabeal_bord_client" sequence="2"
+            name="Relevé des comptes clients" groups="group_benin_petro_manager,group_benin_petro_adminn,base.group_system"/>
+    </data>
+</odoo>

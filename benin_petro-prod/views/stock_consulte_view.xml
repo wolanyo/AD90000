@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="model_etat_form" model="ir.ui.view">
+            <field name="name">Consultation de stock</field>
+            <field name="model">benin_petro.stock_consult</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="product_id"/>
+                                <field name="emplacement_id"/>
+                            </group>
+                            <group>
+                                <field name="date_s"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Detail">
+                                <field name="detail" readonly="1" >
+                                    <tree>
+                                        <field name="emplacment_name"/>
+                                        <field name="qty"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="model_stock_consultation_action" model="ir.actions.act_window">
+            <field name="name">Consultation de stock</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">benin_petro.stock_consult</field>
+            <field name="target" >inline</field>
+            <field name="view_mode">form</field>
+            <field name="view_type">form</field>
+        </record>
+        <menuitem id="menu_stock_consultation"
+            name="Consultation de stock"
+            action="model_stock_consultation_action" sequence="1"/>
+    </data>
+</odoo>

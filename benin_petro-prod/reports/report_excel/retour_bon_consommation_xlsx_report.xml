@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    <report
+    id="retour_bon_consommation_xlsx"
+    model="benin_petro.wizard.retour_bon_consommation"
+    string="Retour des bons de consommation"
+    report_type="xlsx"
+    name="retour_bon_consommation.xlsx"
+    file="retour_bon_consommation.xlsx"
+    attachment_use="False"
+/>
+          </data>
+</odoo>

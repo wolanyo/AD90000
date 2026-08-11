@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="stock_move_report_template">
+            <t t-call="report.html_container">
+                <t t-foreach="docs" t-as="doc">
+                   
+                    <div class="page">
+                   
+                        <table class="table table-bordered">
+                            <thead>
+                                
+                            </thead>
+                            <tbody>
+                                <t t-foreach="doc.get_data()" t-as="d">
+                                    <t t-foreach="d_value" t-as="line">
+                                    <tr>
+                                        <td><span t-esc="d.name" ></span></td>
+                                        <td><span t-field="line.product_id" ></span></td>
+                                        <td><span t-field="line.product_uom_qty" ></span></td>
+                                        <td><span t-field="line.name" ></span></td>
+                                        <td><span t-field="line.date" ></span></td>
+                                    </tr>
+                                    </t>
+                                </t>
+                            </tbody>
+                            
+                        </table>
+                    </div>
+                    
+                </t>
+            </t>
+        </template>
+        <report
+        id="report_stock_move"
+        string="Facture"
+        model="stock.move"
+        report_type="qweb-pdf"
+        file="stock_move_report_template"
+        name="benin_petro.stock_move_report_template"
+        paperformat="paperformat_euro_landscape"
+        
+        />
+
+        <report
+            id="report_crm_xlsx"
+            model="stock.move"
+            string="xls"
+            report_type="xlsx"
+            name="benin_petro.report_name.xlsx"
+            file="benin_petro.report_name.xlsx"
+            attachment_use="False"
+        />
+
+    </data>
+</odoo>

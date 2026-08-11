@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+                id="releve_caissier_xlsx_report_xlsx"
+                model="benin_petro.releve_cassier_tresorier"
+                string="Relevé des opérations par cassier"
+                report_type="xlsx"
+                name="releve_caissier.xlsx"
+                file="releve_caissier.xlsx"
+                attachment_use="False"
+        />
+    </data>
+</odoo>

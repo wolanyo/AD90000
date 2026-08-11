@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+                id="releve_kilometrage_xlsx"
+                model="benin_petro.rapport_kilometrage"
+                string="Rapport de kilometrage"
+                report_type="xlsx"
+                name="releve_kilometrage.xlsx"
+                file="releve_kilometrage.xlsx"
+                attachment_use="False"
+        />
+    </data>
+</odoo>

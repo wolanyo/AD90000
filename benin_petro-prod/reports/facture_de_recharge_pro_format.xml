@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="repport_template_facture_recharge_pro_format">
+            <t t-call="report.html_container">
+				<t t-foreach="docs" t-as="doc">
+					<div class="header" style="min-height:100px;margin:0;padding:0;">
+						<!--<img class="img img-responsive" src="/benin_petro/static/img/ent.jpg"/>-->
+					</div>						
+					<div class="page" >
+					<br/><br/><br/>
+								<div class='row'>
+									<div class='col-xs-6' >
+										<h2 class='text-left' >Facture Pro-Forma N  DU <span t-field='doc.create_date' t-options='{"widget": "date"}' ></span> </h2>
+										<br/><br/>
+										<p>PRIX A LA POMPE : <span t-field='doc.detail_id.prix_init' ></span> </p>
+										<strong><p>PRODUIT : <span t-field='doc.detail_id.type_de_recharge' ></span></p></strong>
+									</div>
+									<div class='col-xs-6'  >
+										<table class='table table-bordered' >
+											
+											<tr>
+												<td>Nom:</td>
+												<td><span t-field='doc.client_id' ></span></td>
+											</tr>
+											<tr>
+												<td>Adresse</td>
+												<td><span t-field='doc.client_id.street' ></span></td>
+											</tr>
+											<tr>
+												<td>Tel:</td>
+												<td><span t-field='doc.client_id.mobile' ></span></td>
+											</tr>
+										</table>
+									</div>
+								</div>
+								<div class='row'>
+									<div calss='col-xs-12' style='margin:10px' >
+										<table class='table table-bordered'>
+											<thead>
+												<tr>
+													<th class='text-center'>Designation</th>
+													<th class='text-center'>Qte</th>
+													<th class='text-center'>PU HT</th>
+													<th class='text-center'>Montant</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td> <span t-field='doc.detail_id.type_de_recharge' ></span> </td>
+													<td> <span t-field='doc.detail_id.qte' ></span> </td>
+													<td> <span t-field='doc.detail_id.prix_ht' ></span> </td>
+													<td> <span t-field='doc.detail_id.montant_hor_taxes' ></span> </td>
+												</tr>
+											</tbody>
+										</table>
+									</div>	
+								</div>
+								<div class='row' >
+									
+									<div class='col-xs-6'  >
+										<table class='table table-bordered' >
+											<tr>
+												<td>Total Hors Taxes</td>
+												<td><span t-field='doc.detail_id.montant_hor_taxes'/></td>
+											</tr>
+											<tr>
+												<td>TVA(84,0463F/L)</td>
+												<td><span t-field='doc.detail_id.tva' ></span></td>
+											</tr>
+											<tr>
+												<td>Total TTC</td>
+												<td><span t-field='doc.detail_id.montant_ttc' ></span></td>
+											</tr>
+											<tr>
+												<td class='text-center'>Montant en ticket Valeur a remettre</td>
+												<td><span t-field='doc.detail_id.montant_ttc' /></td>
+											</tr>
+										</table>
+										<strong>
+											<p>Arretee la presente Facture a la somme TTC de francs CFA :</p>
+										</strong>
+										<p>Un milion cinq cent mile</p>
+									</div>
+									<div class='col-xs-6' >
+										
+										<table class='table table-bordered' >
+											<tr>
+												<td>Total Hors Taxes</td>
+												<td><span t-field='doc.detail_id.montant_hor_taxes' /></td>
+											</tr>
+										</table>
+									</div>
+								</div>
+								<p><i>NB</i></p>
+								<p><i>  -le prix a la prompe est susceptible d'etre chnage lorsqu'il y a changement de structure</i></p>
+								<h5 class='text-right'>Direction Commerciale et Marketing</h5>
+								<br/><br/><br/><br/><br/><br/>
+
+						</div>
+						<div class="footer" style="min-height:300px;">
+                    		<!--<img class="img img-responsive" src="/benin_petro/static/img/pd3.jpg"  /> -->
+                		</div>
+					</t>
+			</t>
+		</template>
+		<report
+			id="report_facture_de_recharge_pro_forma"
+			string="Générer Facture Pro-Forma"
+			model="benin_petro.historique"
+			report_type="qweb-pdf"
+			file="repport_template_facture_recharge_pro_format"
+			name="benin_petro.repport_template_facture_recharge_pro_format"
+			paperformat="paperformat_euro_landscape"/>
+    </data>
+</odoo>

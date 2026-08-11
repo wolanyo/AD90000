@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+        <!-- Form -->
+        <record id="form_benin_petro_vesement" model="ir.ui.view">
+            <field name="name">Versement</field>
+            <field name="model">benin_petro.versement</field>
+            <field name="arch" type="xml">
+                <form string="Versement" >
+                <header>
+                <!-- <button name="valider_versement" string="Valider le versement" class="oe_highlight" type="object" -->
+                    <button name="%(wizard_versement_action)d" string="Valider le versement" class="oe_highlight" type="action"
+                            groups="benin_petro.group_benin_petro_chargeur"
+                            attrs="{'invisible':['|',('state','=','valide'),'|',('state','=','annule'),('id','=',False)]}"
+                            />
+                    <button name="annuler" string="Annuler le versement" class="oe_highlight" type="object"
+                            confirm="Vous être sûr que vous voulez annuler ce versement"
+                            groups="benin_petro.group_benin_petro_chargeur,benin_petro.group_benin_petro_sous_chargeur"
+                            attrs="{'invisible':['|',('state','=','valide'),'|',('state','=','annule'),('id','=',False)]}"
+                            />                             
+                    <field name="state" widget="statusbar" />
+                </header>
+                    <group>
+                        <field name="id" invisible="1"/>
+                            <field name="tresorier_acc" invisible='1'/>
+                            <!-- attrs="{'readonly':[('tresorier_acc', '=', False)]}" -->
+                            <field name="vers_par" groups='benin_petro.group_benin_petro_chargeur' />
+                            <!-- <field name="num_versement" required='1' attrs="{'readonly':[('tresorier_acc', '=', False)]}" /> -->
+                            <!-- <field name="journal_id"  domain="[('type','=','bank')]" attrs="{'readonly':[('tresorier_acc', '=', False)]}"/> -->
+                            <field name="type_versement" attrs="{'required':[('vers_par', '=', 'gerant')],'invisible':[('vers_par', '!=', 'gerant')],'readonly':[('tresorier_acc', '=', False)]}"/>
+                            <field name="point_vente_id" attrs="{'required':[('vers_par', '=', 'gerant')],'invisible':[('vers_par', '!=', 'gerant')],'readonly':[('tresorier_acc', '=', False)]}"/>
+                            
+                            <field name="access" string='Caissier'  groups='benin_petro.group_benin_petro_chargeur'  readonly='1' attrs="{'invisible':['|',('id', '=', False),('vers_par','!=','caissier')]}"/>
+                            <field name="moyen_de_paiement" attrs="{'required':[('vers_par', '=', 'caissier')]}"/>
+                            <field name="montant" readonly='1'/>
+                            <field name="montant_saisie" widget='monetary'/>
+                            
+                        <field name="versement_line" widget='one2many_list'>
+                            <form>
+                                <group>
+                                    <field name="journal_id" domain="[('type','=','bank')]" />
+                                    <field name="num_versement"/>
+                                    <field name="montant"/>
+                                </group>
+                            </form>
+                            <tree>
+                                <field name="journal_id"/>
+                                <field name="num_versement"/>
+                                <field name="montant"/>
+                            </tree>
+                        </field>
+
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="tree_benin_petro_versement" model="ir.ui.view">
+            <field name="name">Liste des Versement</field>
+            <field name="model">benin_petro.versement</field>
+            <field name="arch" type="xml">
+                <tree string="Versements" colors="#31708f:state=='valide';#919191:state=='annule'" >
+                    <field name="point_vente_id" />
+                    <!-- <field name="journal_id"/> -->
+                    <field name="create_date" string="Date du versement"/>
+                    <field name="montant"/>
+                    <field name="moyen_de_paiement"/>
+                    <field name="state" invisible='1'/>
+                </tree>
+            </field>
+        </record>
+        <record id="Versemen_search_view" model="ir.ui.view">
+            <field name="name">Versement</field>
+            <field name="model">benin_petro.versement</field>
+            <field name="arch" type="xml">
+                <search string="Versement ">
+                    <field name="point_vente_id" />
+                    <!-- <field name="journal_id"/> -->
+                    
+                    <group  string="Group By">
+                   <filter string="Point de vente" domain="[]" context="{'group_by':'point_vente_id'}"/>
+                  
+                         <filter string="Gérant/Caissier"  domain="[]" context="{'group_by':'vers_par'}"/>
+                        
+                        <filter name="groupby_year" context="{'group_by': 'create_date:year'}" string="année"
+                            help="Group Students by Year" />
+                        <filter name="groupby_month" context="{'group_by': 'create_date:month'}" string="Mois"/>
+                          <filter name="groupby_month" context="{'group_by': 'create_date:day'}" string="Jour"/>
+                    </group>
+                    
+                </search>
+            </field>
+        </record>
+
+        <record id="benin_petro_versement_action" model="ir.actions.act_window">
+        <field name="name">Versement</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">benin_petro.versement</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                <!-- Add Text Here -->
+            </p><p>
+                <!-- More details about what a user can do with this object will be OK --> 
+            </p>
+        </field>
+    </record>
+    </data>
+    </odoo>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Form -->
+        <record id="retour_bon_consommation_wizard_formm" model="ir.ui.view">
+            <field name="name">Retour bon de consommation</field>
+            <field name="model">benin_petro.wizard.retour_bon_consommation</field>
+            <field name="arch" type="xml">
+                <form string="Etat">
+                    <group col="3">
+                    
+                        <field name="compute_field" invisible='1'/>
+                        <group string="Point de vente">
+                            <field name="point_vente_id"/>
+                        </group>
+                        <group string="Produit">
+                            <field name="product_id" />
+                        </group>
+                        <group string="Type de vente">
+                            <field name="type_vente" />
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Date début">
+                            <field name="start_date" />
+                        </group>
+                        <group string="Date fin">
+                            <field name="end_date" />
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="print_report" string="PDF" type="object" class="oe_highlight"/>
+                        <button name="print_excel_report" string="EXCEL" type="object" class="oe_highlight"/>
+                        <button string="Annuler" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+
+            </field>
+        </record>
+
+
+       <record model="ir.actions.act_window" id="retour_bon_consommation_wizard_form">
+            <field name="name">Retour des bons de consommation</field>
+            <field name="res_model">benin_petro.wizard.retour_bon_consommation</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="retour_bon_consommation_wizard_formm" />
+            <field name="target">new</field>
+        </record>
+
+         
+        
+</data>
+</odoo>

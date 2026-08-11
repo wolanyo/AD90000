@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="benin_petro.retour_bon_consommation_report">
+           <t t-call="report.html_container">
+							
+					<div class="page" style="position:relative;height:900px;">
+					<style>
+
+						.table_info tr td{
+							border:1px solid black;
+							padding:5px 5px;
+							font-size:14px;
+						}
+
+					</style>
+					<div class="header" style="width:100%;min-height:100px;margin-top:0px;;padding:0;">
+						<img class="img img-responsive" src="/benin_petro/static/img/entete.jpg" />
+					</div>
+						<table style="width:100%;margin-top:15px;" >
+							<tr style="text-align:center">
+								<td><h3 style="margin:5px;">Etat recapitulatif de retour des bons de consommation de Produit</h3></td>
+							</tr>
+							<tr style="text-align:center">
+								<td><h3  style="margin:5px;" t-esc="data['form']['point_vente']" ></h3></td>
+							</tr>
+							<tr style="text-align:center">
+								<td><h3  style="margin:5px;" t-esc="data['form']['type_vente']" ></h3></td>
+							</tr>
+						</table>
+						<table style="width:100%;margin-top:15px;font-size:16px;" >
+							<tr>
+								<td><strong>Date début :</strong></td>
+								<td><span t-esc="data['form']['date_debut']" /></td>
+								<td><strong>Date Fin :</strong></td>
+								<td><span t-esc="data['form']['date_fin']" /></td>
+							</tr>
+						</table>
+						<div class="row" style="margin-top:15px;">
+							<div class="col-xs-6">
+								<table style="width:100%" class="table_info">
+
+								<tr >
+									<td><strong>GERANT</strong></td>
+									<td><span t-esc="data['form']['promoteur']" /></td>
+								</tr>
+								<tr >
+									<td><strong>ADRESSE</strong></td>
+									<td><span t-esc="data['form']['adresse']" /></td>
+								</tr>
+								<tr >
+									<td><strong>Référence</strong></td>
+									<td><span t-esc="data['form']['point_vente']" /></td>
+								</tr>
+								<tr >
+									<td><strong>PRODUIT</strong></td>
+									<td><span t-esc="data['form']['produit']" /></td>
+								</tr>
+							</table>
+							</div>
+							<div class="col-xs-2">
+							
+							</div>
+							<div class="col-xs-4">
+								<table style="width:100%" class="table_info">
+
+								<tr >
+									<td><strong>Email</strong></td>
+									<td><span t-esc="data['form']['email']" /></td>
+								</tr>
+								<tr >
+									<td><strong>Telephone</strong></td>
+									<td><span t-esc="data['form']['telephone']" /></td>
+								</tr>
+							</table>
+							</div>
+						</div>
+						<div class="row" style="margin-top:15px;">
+							<div class="col-xs-12" style="height:340px;">
+								<table style="width:100%;" class="table_info">
+
+								<tr >
+									<t t-if="data['form']['type_vente'] == 'TV'">
+										<td><strong>Types de bons</strong></td>
+									</t>
+									<t t-if="data['form']['type_vente'] == 'SUBLIME CARTE'">
+										<td><strong>CLIENT</strong></td>
+									</t>
+									
+									<t t-if="data['form']['type_vente'] == ''">
+										<td><strong>CLIENT</strong></td>
+									</t>
+									<td><strong>Nombre de bon </strong></td>
+									<td><strong>Quantité</strong></td>
+									<td><strong>Prix  hHT</strong></td>
+									<td><strong>TVA</strong></td>
+									<td><strong>MONTANT TTC</strong></td>
+								</tr>
+								<t t-foreach="data['form']['transactions']" t-as="line">
+									<tr >
+										<td><span t-esc="line_value['type']"></span></td>
+										<td><span t-esc="line_value['nombre_tv']"></span></td>
+										<td><span t-esc="line_value['qte']"></span></td>
+										<td><span t-esc="line_value['montant_horstaxe']"  t-field-options="{'widget':'False'}"></span></td>
+										<td><span t-esc="line_value['tva']"></span></td>
+										<td><span t-esc="line_value['montant_ttc']"></span></td>
+									</tr>
+                                </t>
+								<tr>
+									<td><strong>Total</strong></td>
+									<td><strong><span t-esc="data['form']['test']['sum_nombre_tv']"></span></strong></td>
+									<td><strong><span t-esc="data['form']['test']['qte']"></span></strong></td>
+									<td><strong><span t-esc="data['form']['test']['sum_montant_horstaxe']" ></span></strong></td>
+									<td><strong><span t-esc="data['form']['test']['sum_tva']"></span></strong></td>
+									<td><strong><span t-esc="data['form']['test']['sum_montant_ttc']"></span></strong></td>
+								</tr>
+								</table>
+							</div>
+
+						</div>
+						<div class="row" style="margin-top:10px;">
+							<div class="col-xs-5">
+								<table style="width:100%;font-size:14px;" class="table_info">
+									<tr>
+										<td colspan="2" style="text-align:center"><strong>GERANT DE LA STATION</strong></td>
+									</tr>
+									<tr>
+										<td><strong>DATE DE  DEPOT </strong></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td><strong>NOM ET PRENOM</strong></td>
+										<td></td>
+									</tr>
+									<tr style="height:70px;line-height:70px;">
+										<td style="width:50px;"><strong>Signature</strong></td>
+										<td style="width:200px;"></td>
+									</tr>
+								</table>
+							</div>
+							<div class="col-xs-7">
+								<table style="width:100%;font-size:14px;" class="table_info">
+									<tr>
+										<td colspan="3" style="text-align:center"><strong>GERANT DE LA STATION</strong></td>
+									</tr>
+									<tr>
+										<td><strong></strong></td>
+										<td style="width:100px;"><strong>DATE</strong></td>
+										<td><strong>EFFECTUE PAR</strong></td>
+									</tr>
+									<tr>
+										<td><strong>RÉCEPTION</strong></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td><strong>CONTRÔLE</strong></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td><strong>VALIDATION</strong></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td><strong>MONTANT VALIDE / </strong></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td><strong>ECART REGLEMENT</strong></td>
+										<td></td>
+										<td></td>
+									</tr>
+								</table>
+							
+							</div>
+						
+
+						</div>
+					<div style="margin-top:10px"><strong>Date d'édition : <span t-esc="data['form']['print_date']"></span></strong></div>
+					<div class="footer" style="width:100%;min-height:80px;margin-top:30px;">
+                        <img class="img img-responsive" src="/benin_petro/static/img/pied.jpg"  />
+                    </div>
+
+                    </div>
+                    
+                
+                
+					
+			</t>
+		
+		</template>
+		<report
+			id="retour_bon_consommation_report_form"
+			string="Retour des bons de consommation"
+			model="benin_petro.wizard.retour_bon_consommation"
+			report_type="qweb-pdf"
+			file="benin_petro.retour_bon_consommation_report"
+			name="benin_petro.retour_bon_consommation_report"
+			paperformat="paperformat_euro_landscape"/>
+    </data>
+</odoo>
